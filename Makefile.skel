@@ -1,0 +1,61 @@
+# TODO debug/release builds
+NAME := libft.a
+NAME_SHARED := libft.so
+
+BUILD := build
+INCLUDE := include
+
+SRC := %C_FILES%
+OBJ := $(SRC:%.c=$(BUILD)/%.o)
+DEP := $(OBJ:%.o=%.d)
+
+AR := llvm-ar
+RANLIB := llvm-ranlib
+
+CC := clang
+WFLAGS := -Wall -Wextra
+# WFLAGS += -Wpedantic
+# WFLAGS += -Werror
+OFLAGS := -O2 -march=native
+OFLAGS += -ftree-vectorize
+OFLAGS += -flto=thin
+CFLAGS := $(WFLAGS) $(OFLAGS) -fPIC -MMD -I./$(INCLUDE)
+
+vpath %.c %SRC_DIRS%
+
+.PHONY: all clean fclean re test love debug
+
+$(NAME): $(OBJ)
+	@echo "Linking static library '$@'..."
+	@$(AR) rcs $@ $?
+	@$(RANLIB) $@
+
+-include $(DEP)
+$(BUILD)/%.o: %.c
+	@mkdir -p $(@D)
+	@echo "Building object '$@'"
+	@$(CC) $(CFLAGS) -o $@ -c $<
+
+$(NAME_SHARED): $(OBJ)
+	@$(CC) $(CFLAGS) -shared -o $@ $^
+
+all: $(NAME)
+
+clean:
+	@rm -rf $(BUILD)
+
+fclean: clean
+	@rm -f $(NAME)
+	@rm -f $(NAME_SHARED)
+
+re: fclean all
+
+test: all
+	@test/test.sh "$(CC)" "$(CFLAGS)" "-L./ $(NAME)"
+
+love:
+	@echo 'not war'
+	@sh util/genmake.sh > Makefile
+
+debug:
+	@echo 'nope'
