@@ -22,8 +22,8 @@
 
 void	*tolist(const t_obj *obj);
 void	*list(ssize_t size, size_t itemsize);
-// void	*wrap(void *data, ssize_t size, size_t itemsize);
-// void	*unwrap(t_obj *list);
+void	*wrap(void *data, ssize_t size, size_t itemsize);
+void	*unwrap(t_obj *list);
 void	parse(t_obj *dst, const char *s, int delim,
 			void (*f)(void *, const char *, const char *));
 void	*emplace(t_obj *list, const void *arg,
@@ -38,7 +38,7 @@ void	*stepby(t_obj *list, ssize_t index, ssize_t step, ssize_t size);
 void	*slice(t_obj *list, ssize_t low, ssize_t high);
 void	*take(t_obj *list, ssize_t size);
 void	*drop(t_obj *list, ssize_t size);
-// void	*takewhile(t_obj *list, bool (*p)(const void *));
-// void	*dropwhile(t_obj *list, bool (*p)(const void *));
+void	*takewhile(t_obj *list, bool (*p)(const void *));
+void	*dropwhile(t_obj *list, bool (*p)(const void *));
 
 #endif

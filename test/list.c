@@ -22,6 +22,11 @@ bool	num_filter(const void *item)
 	return (*(int *)item % 7 == 0);
 }
 
+bool	num_pos(const void *item)
+{
+	return (*(int *)item >= 0);
+}
+
 void	num_mul1000(void *item)
 {
 	*(int *)item *= 1000;
@@ -102,13 +107,13 @@ int		obj_cmp(void *item1, void *item2)
 	return (memcmp(item1, item2, sizeof(t_struct)));
 }
 
-__attribute__((noinline))
-void	mt()
-{
-	void *p1 = gc_malloc(10);
-	void *p3 = gc_malloc(10);
-	void *p4 = gc_malloc(10);
-}
+// __attribute__((noinline))
+// void	mt()
+// {
+// 	void *p1 = gc_malloc(10);
+// 	void *p3 = gc_malloc(10);
+// 	void *p4 = gc_malloc(10);
+// }
 
 #define TIME_DIFF(a,b) ((double)(b - a) / CLOCKS_PER_SEC)
 
@@ -233,6 +238,9 @@ int		main(void)
 	foreach(num, num_print);
 	printf("num ints parsed\n");
 	printf("num ratio: %ld/%ld\n", size(num), ((t_list *)num)->capacity);
+
+	it = dropwhile(num, num_pos);
+	foreach(it, num_print);
 
 	it = iter(num);
 	void *mpn = map(it, num_mul1000);
