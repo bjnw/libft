@@ -19,7 +19,7 @@
 
 # include "libft.h"
 
-typedef int64_t	t_chunk;
+typedef uint64_t	t_chunk;
 
 # define CHUNK_EXP	6
 # define CHUNK_MASK	(sizeof(t_chunk) * CHAR_BIT - 1)
