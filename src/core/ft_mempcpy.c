@@ -12,50 +12,9 @@
 
 #include <stddef.h>
 
-#if defined(MEMWORD)
-#include <stdint.h>
-
-#include "memword.h"
+#include "libft.h"
 
 void	*ft_mempcpy(void *dst, const void *src, size_t n)
 {
-	unsigned char		*pd;
-	const unsigned char	*ps;
-	uintptr_t			*wd;
-	const uintptr_t		*ws;
-
-	if (dst == src)
-		return (dst);
-	pd = dst;
-	ps = src;
-	if (n >= WSIZE && ((uintptr_t)dst & ~WMASK) && ((uintptr_t)src & ~WMASK))
-	{
-		wd = dst;
-		ws = src;
-		while (n >= WSIZE)
-		{
-			*wd++ = *ws++;
-			n -= WSIZE;
-		}
-		pd = (unsigned char *)wd;
-		ps = (const unsigned char *)ws;
-	}
-	while (n--)
-		*pd++ = *ps++;
-	return (pd);
+	return (ft_memcpy(dst, src, n) + n);
 }
-#else
-void	*ft_mempcpy(void *dst, const void *src, size_t n)
-{
-	unsigned char		*pd;
-	const unsigned char	*ps;
-
-	if (dst == src)
-		return (dst);
-	pd = dst;
-	ps = src;
-	while (n--)
-		*pd++ = *ps++;
-	return (pd);
-}
-#endif
