@@ -12,13 +12,13 @@
 
 #include "bitset.h"
 
-void	bs_set(void *data, size_t idx, int val)
+void	bs_set(void *data, size_t index, int val)
 {
 	t_chunk *chunk;
 
-	chunk = (t_chunk *)data + (idx >> CHUNK_EXP);
+	chunk = (t_chunk *)data + (index >> CHUNK_EXP);
 	if (val)
-		*chunk |= 1 << (idx & CHUNK_MASK);
+		asm_bts(chunk, index & CHUNK_MASK);
 	else
-		*chunk &= ~(1 << (idx & CHUNK_MASK));
+		asm_btr(chunk, index & CHUNK_MASK);
 }

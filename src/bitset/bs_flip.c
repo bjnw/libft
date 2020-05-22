@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bs_get.c                                           :+:      :+:    :+:   */
+/*   bs_flip.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,10 @@
 
 #include "bitset.h"
 
-int		bs_get(void *data, size_t index)
+void	bs_flip(void *data, size_t index)
 {
 	t_chunk *chunk;
 
 	chunk = (t_chunk *)data + (index >> CHUNK_EXP);
-	return (*chunk & (1 << (index & CHUNK_MASK)));
+	asm_btc(chunk, index & CHUNK_MASK);
 }

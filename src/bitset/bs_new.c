@@ -13,10 +13,10 @@
 #include "bitset.h"
 #include "libft.h"
 
-void	*bs_new(size_t len)
+void	*bs_new(size_t size)
 {
 	void *data;
 
-	data = xcalloc(1, ((len >> CHUNK_EXP) + 1) << 3);
+	data = xcalloc(1, ((size >> CHUNK_EXP) + 1) << 3);
 	return (data);
 }
