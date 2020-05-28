@@ -61,7 +61,7 @@ void	*filter(const t_obj *obj, bool (*p)(const void *));
 void	*fold(const t_obj *obj, void *(*op)(void *, void *), void *init);
 void	foreach_r(t_obj *obj, void *ctx, void (*f)(void *, void *));
 void	*map_r(const t_obj *obj, void *ctx, void (*f)(void *, void *));
-void	*filter_r(const t_obj *obj, void *ctx, bool (*p)(const void *, void *));
+void	*filter_r(const t_obj *obj, void *ctx, bool (*p)(void *, const void *));
 void	*fold_r(const t_obj *obj, void *ctx,
 			void *(*op)(void *, void *, void *), void *init);
 

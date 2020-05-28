@@ -13,7 +13,7 @@
 #include "collection/generic.h"
 
 void	*filter_r(const t_obj *obj, void *ctx,
-			bool (*p)(const void *, void *))
+			bool (*p)(void *, const void *))
 {
 	void	*ret;
 	void	*it;
@@ -23,7 +23,7 @@ void	*filter_r(const t_obj *obj, void *ctx,
 	it = iter(obj);
 	while ((item = next(it)))
 	{
-		if ((*p)(item, ctx))
+		if ((*p)(ctx, item))
 			add(ret, item);
 	}
 	return (ret);

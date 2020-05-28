@@ -12,8 +12,8 @@
 
 #include "listobj.h"
 
-void	*emplace(t_obj *list, const void *arg,
-			void (*f)(void *, const void *))
+void	*emplace(t_obj *list, void *ctx,
+			void (*f)(void *, void *))
 {
 	void	*item;
 	ssize_t	n;
@@ -21,6 +21,6 @@ void	*emplace(t_obj *list, const void *arg,
 	n = list->size;
 	list_resize(list, n + 1);
 	item = list_getitem(list, n);
-	(*f)(item, arg);
+	(*f)(ctx, item);
 	return (item);
 }

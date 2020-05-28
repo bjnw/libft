@@ -20,5 +20,5 @@ void	foreach_r(t_obj *obj, void *ctx,
 
 	it = iter(obj);
 	while ((item = next(it)))
-		(*f)(item, ctx);
+		(*f)(ctx, item);
 }

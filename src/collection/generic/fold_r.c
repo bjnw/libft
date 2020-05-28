@@ -25,6 +25,6 @@ void	*fold_r(const t_obj *obj, void *ctx,
 	else
 		ret = next(it);
 	while ((item = next(it)))
-		ret = (*op)(ret, item, ctx);
+		ret = (*op)(ctx, ret, item);
 	return (ret);
 }

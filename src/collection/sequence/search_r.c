@@ -15,7 +15,7 @@
 #include "collection/generic.h"
 
 void	*search_r(const t_obj *obj, const void *val, void *ctx,
-			int (*cmp)(const void *, const void *, void *))
+			int (*cmp)(void *, const void *, const void *))
 {
 	void	*it;
 	void	*item;
@@ -23,7 +23,7 @@ void	*search_r(const t_obj *obj, const void *val, void *ctx,
 	it = iter(obj);
 	while ((item = next(it)))
 	{
-		if ((*cmp)(item, val, ctx) == 0)
+		if ((*cmp)(ctx, item, val) == 0)
 		{
 			free(it);
 			return (item);

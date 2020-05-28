@@ -21,8 +21,7 @@ void	*wrap(void *data, ssize_t size, size_t itemsize);
 void	*unwrap(t_obj *list);
 void	parse(t_obj *dst, const char *s, int delim,
 			void (*f)(void *, const char *, const char *));
-void	*emplace(t_obj *list, const void *arg,
-			void (*f)(void *, const void *));
+void	*emplace(t_obj *list, void *ctx, void (*f)(void *, void *));
 void	*insert(t_obj *list, ssize_t index, const void *val);
 void	*pop(t_obj *list, ssize_t index, void *out);
 void	sort(t_obj *list, int (*cmp)(const void *, const void *));

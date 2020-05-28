@@ -15,7 +15,7 @@
 #include "collection/generic.h"
 
 ssize_t	locate_r(const t_obj *obj, const void *val, void *ctx,
-			int (*cmp)(const void *, const void *, void *))
+			int (*cmp)(void *, const void *, const void *))
 {
 	ssize_t	ret;
 	void	*it;
@@ -25,7 +25,7 @@ ssize_t	locate_r(const t_obj *obj, const void *val, void *ctx,
 	it = iter(obj);
 	while ((item = next(it)))
 	{
-		if ((*cmp)(item, val, ctx) == 0)
+		if ((*cmp)(ctx, item, val) == 0)
 		{
 			free(it);
 			return (ret);
