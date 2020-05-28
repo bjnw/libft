@@ -13,7 +13,7 @@
 #ifndef DEQUEOBJ_H
 # define DEQUEOBJ_H
 
-# include "collection/sequence.h"
+# include "collection/deque.h"
 
 typedef struct s_node	t_node;
 struct s_node {
@@ -30,14 +30,6 @@ typedef struct {
 	t_deque	deque;
 	t_node	*current;
 }	t_iter;
-
-void		*todeque(const t_obj *obj);
-void		*deque(size_t itemsize);
-void		*addfirst(t_obj *deque, const void *val);
-void		*popfirst(t_obj *deque, void *out);
-void		*poplast(t_obj *deque, void *out);
-void		*first(const t_obj *deque);
-void		*last(const t_obj *deque);
 
 void		*deque_add(t_obj *deque, va_list ap);
 void		*deque_get(const t_obj *deque, va_list ap);

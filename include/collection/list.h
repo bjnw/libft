@@ -13,11 +13,6 @@
 #ifndef LIST_H
 # define LIST_H
 
-# include <sys/types.h>
-# include <stdarg.h>
-# include <stdbool.h>
-# include <stddef.h>
-
 # include "collection/sequence.h"
 
 void	*tolist(const t_obj *obj);
