@@ -16,10 +16,19 @@
 
 void	list_clear(t_obj *list)
 {
-	if (list->erase)
-		foreach(list, list->erase);
-	free(list->data);
+	t_node	*node;
+	t_node	*tmp;
+
+	node = list->data;
+	while (node)
+	{
+		tmp = node;
+		node = node->next;
+		if (list->dtor)
+			list->dtor(list_getitem(tmp));
+		free(tmp);
+	}
 	list->data = NULL;
 	list->size = 0;
-	((t_list *)list)->capacity = 0;
+	((t_list *)list)->last = NULL;
 }

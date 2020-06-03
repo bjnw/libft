@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tolist.c                                           :+:      :+:    :+:   */
+/*   tolist.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "listobj.h"
 
 void	*tolist(const t_obj *obj)
 {
 	t_obj *ret;
 
-	ret = list(obj->size, obj->itemsize);
+	ret = list(obj->itemsize);
 	extend(ret, obj);
 	return (ret);
 }

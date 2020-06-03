@@ -14,12 +14,16 @@
 
 void	*list_get(const t_obj *list, va_list ap)
 {
-	ssize_t index;
+	ssize_t	index;
+	t_node	*node;
 
 	index = va_arg(ap, ssize_t);
 	if (index < 0)
 		index += list->size;
 	if (list_exists(list, index))
-		return (list_getitem(list, index));
+	{
+		node = list_getnode(list, index);
+		return (list_getitem(node));
+	}
 	return (NULL);
 }

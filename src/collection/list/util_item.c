@@ -18,15 +18,12 @@ bool	list_exists(const t_obj *list, ssize_t index)
     return ((size_t)index < (size_t)list->size);
 }
 
-void	*list_getitem(const t_obj *list, ssize_t index)
+void	*list_getitem(void *node)
 {
-	return (list->data + index * list->itemsize);
+	return (node + sizeof(t_node));
 }
 
-void	*list_setitem(t_obj *list, ssize_t index, const void *val)
+void	*list_setitem(t_obj *list, void *node, const void *val)
 {
-	return (ft_memcpy(
-				list_getitem(list, index),
-				val,
-				list->itemsize));
+	return (ft_memcpy(node + sizeof(t_node), val, list->itemsize));
 }

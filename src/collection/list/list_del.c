@@ -10,23 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 #include "listobj.h"
 
 bool	list_del(t_obj *list, va_list ap)
 {
 	ssize_t	index;
-	ssize_t	n;
+	t_node	*node;
 
 	index = va_arg(ap, ssize_t);
-	n = list->size;
 	if (index < 0)
-		index += n;
+		index += list->size;
 	if (!list_exists(list, index))
 		return (false);
-	if (list->erase)
-		list->erase(list_getitem(list, index));
-	if (index + 1 < n)
-		list_lshitems(list, index);
-	list_resize(list, n - 1);
+	node = list_popnode(list, index);
+	if (list->dtor)
+		list->dtor(list_getitem(node));
+	free(node);
 	return (true);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/generic.h"
+#include "collection/abstract.h"
 
 ssize_t	count_r(const t_obj *obj, const void *val, void *ctx,
 			int (*cmp)(void *, const void *, const void *))

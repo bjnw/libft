@@ -15,16 +15,20 @@
 
 # include "collection/list.h"
 
+typedef struct s_node	t_node;
+struct s_node {
+	t_node	*prev;
+	t_node	*next;
+};
+
 typedef struct {
 	t_obj	object;
-	ssize_t	capacity;
+	t_node	*last;
 }	t_list;
 
 typedef struct {
 	t_list	list;
-	ssize_t	index;
-	ssize_t	step;
-	ssize_t	size;
+	t_node	*current;
 }	t_iter;
 
 void		*list_add(t_obj *list, va_list ap);
@@ -39,12 +43,10 @@ void		list_clear(t_obj *list);
 
 void		list_init(t_obj *obj);
 bool		list_exists(const t_obj *list, ssize_t index);
-void		*list_getitem(const t_obj *list, ssize_t index);
-void		*list_setitem(t_obj *list, ssize_t index, const void *val);
-void		list_copyitems(t_obj *dst, const t_obj *src);
-void		list_lshitems(t_obj *list, ssize_t index);
-void		list_rshitems(t_obj *list, ssize_t index);
-void		list_reserve(t_obj *list, ssize_t capacity);
-void		list_resize(t_obj *list, ssize_t size);
+void		*list_getitem(void *node);
+void		*list_setitem(t_obj *list, void *node, const void *val);
+void		*list_newnode(const t_obj *list, const void *val);
+void		*list_getnode(const t_obj *list, ssize_t index);
+void		*list_popnode(t_obj *list, ssize_t index);
 
 #endif

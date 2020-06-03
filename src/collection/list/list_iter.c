@@ -20,7 +20,6 @@ void	*list_iter(const t_obj *list)
 	ret = xcalloc(1, sizeof(t_iter));
 	ft_memcpy(ret, list, sizeof(t_list));
 	((t_obj *)ret)->iter = NULL;
-	ret->step = 1;
-	ret->size = list->size;
+	ret->current = list->data;
 	return (ret);
 }

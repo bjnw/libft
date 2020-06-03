@@ -16,15 +16,17 @@ bool	list_set(t_obj *list, va_list ap)
 {
 	ssize_t		index;
 	const void	*val;
+	t_node		*node;
 
 	index = va_arg(ap, ssize_t);
 	if (index < 0)
 		index += list->size;
 	if (!list_exists(list, index))
 		return (false);
-	if (list->erase)
-		list->erase(list_getitem(list, index));
+	node = list_getnode(list, index);
+	if (list->dtor)
+		list->dtor(list_getitem(node));
 	val = va_arg(ap, const void *);
-	list_setitem(list, index, val);
+	list_setitem(list, node, val);
 	return (true);
 }

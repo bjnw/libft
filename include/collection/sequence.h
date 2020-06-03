@@ -13,7 +13,7 @@
 #ifndef SEQUENCE_H
 # define SEQUENCE_H
 
-#include "collection/generic.h"
+#include "collection/abstract.h"
 
 void	*search(const t_obj *obj, const void *val,
 			int (*cmp)(const void *, const void *));

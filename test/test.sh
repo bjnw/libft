@@ -10,6 +10,7 @@ cc=$1
 cflags=$2
 lib=$3
 
-$cc $cflags test/list.c $lib -o test/list.out
+find test -name '*.out' -delete
+find test -name '*.c' -exec $cc $cflags {} $lib -o {}.out \;
 cd test
-./list.out
+find . -name '*.out' -print -exec {} \;

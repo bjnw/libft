@@ -17,7 +17,7 @@ void	*list_copy(const t_obj *src)
 {
 	t_obj *ret;
 
-	ret = list(0, src->itemsize);
-	ret->erase = src->erase;
+	ret = list(src->itemsize);
+	ret->dtor = src->dtor;
 	return (ret);
 }

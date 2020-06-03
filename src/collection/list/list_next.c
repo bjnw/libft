@@ -20,11 +20,10 @@ void	*list_next(t_obj *iterobj)
 	void	*item;
 
 	it = (t_iter *)iterobj;
-	if (it->size && list_exists(iterobj, it->index))
+	if (it->current)
 	{
-		item = list_getitem(iterobj, it->index);
-		it->index += it->step;
-		it->size--;
+		item = list_getitem(it->current);
+		it->current = it->current->next;
 		return (item);
 	}
 	free(it);
