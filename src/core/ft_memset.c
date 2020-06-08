@@ -19,17 +19,17 @@
 void	*ft_memset(void *s, int c, size_t n)
 {
 	unsigned char	*p;
-	size_t			bytes;
+	size_t			word;
 
 	p = s;
 	if (n >= BYTES_MIN)
 	{
 		while (((size_t)p & WMASK) && n--)
 			*p++ = (unsigned char)c;
-		bytes = mw_pack(c);
+		word = (unsigned char)c * MASK01;
 		while (n >= WSIZE)
 		{
-			*(size_t *)p = bytes;
+			*(size_t *)p = word;
 			p += WSIZE;
 			n -= WSIZE;
 		}
@@ -38,7 +38,9 @@ void	*ft_memset(void *s, int c, size_t n)
 		*p++ = (unsigned char)c;
 	return (s);
 }
+
 #else
+
 void	*ft_memset(void *s, int c, size_t n)
 {
 	unsigned char *p;
@@ -48,4 +50,5 @@ void	*ft_memset(void *s, int c, size_t n)
 		*p++ = (unsigned char)c;
 	return (s);
 }
+
 #endif

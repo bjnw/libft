@@ -43,7 +43,9 @@ void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 		*pd++ = *ps++;
 	return (dst);
 }
+
 #else
+
 void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 {
 	unsigned char		*pd;
@@ -57,4 +59,5 @@ void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 		*pd++ = *ps++;
 	return (dst);
 }
+
 #endif

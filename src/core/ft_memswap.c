@@ -14,9 +14,9 @@
 
 void	ft_memswap(void *restrict s1, void *restrict s2, size_t size)
 {
-	unsigned char *p1;
-	unsigned char *p2;
-	unsigned char c;
+	unsigned char	*p1;
+	unsigned char	*p2;
+	unsigned char	c;
 
 	p1 = s1;
 	p2 = s2;

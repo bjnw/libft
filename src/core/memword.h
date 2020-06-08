@@ -28,8 +28,7 @@
 # define MASK01		0x0101010101010101ULL
 # define MASK80		0x8080808080808080ULL
 
-size_t	mw_pack(int c);
-bool	mw_testnull(size_t bytes);
+bool	mw_testnull(size_t word);
 bool	mw_testchar(size_t haystack, size_t needle);
 
 #endif

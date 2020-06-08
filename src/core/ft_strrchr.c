@@ -13,6 +13,7 @@
 #include <stddef.h>
 
 #include "libft.h"
+
 #if defined(MEMWORD)
 
 #include "memword.h"
@@ -20,7 +21,7 @@
 char	*ft_strrchr(const char *s, int c)
 {
 	const char	*p;
-	size_t		bytes;
+	size_t		word;
 
 	p = s + ft_strlen(s);
 	if (c == '\0')
@@ -30,8 +31,8 @@ char	*ft_strrchr(const char *s, int c)
 		while ((size_t)p & WMASK)
 			if (*--p == (unsigned char)c)
 				return ((char *)p);
-		bytes = mw_pack(c);
-		while (!mw_testchar(*(size_t *)(p - WSIZE), bytes))
+		word = (unsigned char)c * MASK01;
+		while (!mw_testchar(*(size_t *)(p - WSIZE), word))
 			if ((p -= WSIZE) <= s)
 				return (NULL);
 	}
@@ -40,7 +41,9 @@ char	*ft_strrchr(const char *s, int c)
 			return ((char *)p);
 	return (NULL);
 }
+
 #else
+
 char	*ft_strrchr(const char *s, int c)
 {
 	const char *p;
@@ -53,4 +56,5 @@ char	*ft_strrchr(const char *s, int c)
 			return ((char *)p);
 	return (NULL);
 }
+
 #endif

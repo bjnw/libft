@@ -22,7 +22,7 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 	const unsigned char	*ps;
 	size_t				*wd;
 	const size_t		*ws;
-	size_t				bytes;
+	size_t				word;
 
 	pd = dst;
 	ps = src;
@@ -30,8 +30,8 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 	{
 		wd = dst;
 		ws = src;
-		bytes = mw_pack(c);
-		while (n >= WSIZE && !mw_testchar(*ws, bytes))
+		word = (unsigned char)c * MASK01;
+		while (n >= WSIZE && !mw_testchar(*ws, word))
 		{
 			*wd++ = *ws++;
 			n -= WSIZE;
@@ -44,7 +44,9 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 			return (pd);
 	return (NULL);
 }
+
 #else
+
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
 	unsigned char		*pd;
@@ -57,4 +59,5 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 			return (pd);
 	return (NULL);
 }
+
 #endif

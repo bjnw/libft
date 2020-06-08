@@ -47,7 +47,6 @@ char		*ft_itoa(char *s, intmax_t n);
 char		*ft_utoa(char *s, uintmax_t n);
 unsigned	ft_intlen(intmax_t n);
 
-uint32_t	ft_hash(uint32_t data);
 void		ft_srand(int seed);
 int			ft_rand(void);
 

@@ -19,7 +19,7 @@
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	const unsigned char	*p;
-	size_t				bytes;
+	size_t				word;
 
 	p = s;
 	if (n >= BYTES_MIN)
@@ -29,8 +29,8 @@ void	*ft_memchr(const void *s, int c, size_t n)
 				return ((void *)--p);
 			else if (n-- == 0)
 				return (NULL);
-		bytes = mw_pack(c);
-		while (n >= WSIZE && !mw_testchar(*(size_t *)p, bytes))
+		word = (unsigned char)c * MASK01;
+		while (n >= WSIZE && !mw_testchar(*(size_t *)p, word))
 		{
 			p += WSIZE;
 			n -= WSIZE;
@@ -41,7 +41,9 @@ void	*ft_memchr(const void *s, int c, size_t n)
 			return ((void *)--p);
 	return (NULL);
 }
+
 #else
+
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	const unsigned char	*p;
@@ -52,4 +54,5 @@ void	*ft_memchr(const void *s, int c, size_t n)
 			return ((void *)--p);
 	return (NULL);
 }
+
 #endif

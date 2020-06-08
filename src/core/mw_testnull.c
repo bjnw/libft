@@ -15,7 +15,7 @@
 
 #include "memword.h"
 
-bool	mw_testnull(size_t bytes)
+bool	mw_testnull(size_t word)
 {
-	return ((bytes - MASK01) & ~bytes & MASK80);
+	return ((word - MASK01) & ~word & MASK80);
 }
