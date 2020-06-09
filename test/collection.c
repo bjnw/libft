@@ -257,12 +257,12 @@ int		main(void)
 	printf("num added %ld items,  %fs\n", n, TIME_DIFF(begin, end));
 	printf("num ratio: %ld/%ld\n", size(num), ((t_vector *)num)->capacity);
 
-	val = fold(num, num_min, NULL);
+	val = reduce(num, num_min);
 	printf("num min=%d\n", *val);
-	val = fold(num, num_max, NULL);
+	val = reduce(num, num_max);
 	printf("num max=%d\n", *val);
 	intmax_t sum = 0;
-	sum = *(intmax_t *)fold(num, num_sum, &sum);
+	sum = *(intmax_t *)fold(num, &sum, num_sum);
 	printf("num sum=%ld\n", sum);
 
 	begin = clock();
@@ -389,7 +389,7 @@ int		main(void)
 	// for (ssize_t i = 0; i < size(num); i += 100000) {
 	// 	intmax_t maxsum = 0;
 	// 	it = sliding(num, i, 1, 100);
-	// 	fold(it, num_sum, &maxsum);
+	// 	fold(it, &maxsum, num_sum);
 	// 	num_print(&maxsum);
 	// }
 

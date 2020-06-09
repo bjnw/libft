@@ -58,12 +58,15 @@ void	delete(t_obj *obj);
 void	foreach(t_obj *obj, void (*f)(void *));
 void	*map(const t_obj *obj, void (*f)(void *));
 void	*filter(const t_obj *obj, bool (*p)(const void *));
-void	*fold(const t_obj *obj, void *(*op)(void *, void *), void *init);
+void	*reduce(const t_obj *obj, void *(*op)(void *, void *));
+void	*fold(const t_obj *obj, void *init, void *(*op)(void *, void *));
 void	foreach_r(t_obj *obj, void *ctx, void (*f)(void *, void *));
 void	*map_r(const t_obj *obj, void *ctx, void (*f)(void *, void *));
 void	*filter_r(const t_obj *obj, void *ctx, bool (*p)(void *, const void *));
-void	*fold_r(const t_obj *obj, void *ctx,
-			void *(*op)(void *, void *, void *), void *init);
+void	*reduce_r(const t_obj *obj, void *ctx,
+			void *(*op)(void *, void *, void *));
+void	*fold_r(const t_obj *obj, void *ctx, void *init,
+			void *(*op)(void *, void *, void *));
 
 ssize_t	size(const t_obj *obj);
 bool	isempty(const t_obj *obj);

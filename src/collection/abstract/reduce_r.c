@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fold.c                                             :+:      :+:    :+:   */
+/*   reduce_r.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,16 +12,16 @@
 
 #include "collection/abstractobj.h"
 
-void	*fold(const t_obj *obj, void *init,
-			void *(*op)(void *, void *))
+void	*reduce_r(const t_obj *obj, void *ctx,
+			void *(*op)(void *, void *, void *))
 {
 	void	*ret;
 	void	*it;
 	void	*item;
 
 	it = iter(obj);
-	ret = init;
+	ret = next(it);
 	while ((item = next(it)))
-		ret = (*op)(ret, item);
+		ret = (*op)(ctx, ret, item);
 	return (ret);
 }

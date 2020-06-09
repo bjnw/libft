@@ -12,18 +12,15 @@
 
 #include "collection/abstractobj.h"
 
-void	*fold_r(const t_obj *obj, void *ctx,
-			void *(*op)(void *, void *, void *), void *init)
+void	*fold_r(const t_obj *obj, void *ctx, void *init,
+			void *(*op)(void *, void *, void *))
 {
 	void	*ret;
 	void	*it;
 	void	*item;
 
 	it = iter(obj);
-	if (init)
-		ret = init;
-	else
-		ret = next(it);
+	ret = init;
 	while ((item = next(it)))
 		ret = (*op)(ctx, ret, item);
 	return (ret);
