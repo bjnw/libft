@@ -22,6 +22,6 @@ void	*drop(t_obj *vector, ssize_t size)
 		size = n;
 	else if (size < 0)
 		size = 0;
-	ret = stepby(vector, size, 1, n - size);
+	ret = view(vector, size, n - size, 1);
 	return (ret);
 }

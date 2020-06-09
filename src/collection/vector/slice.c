@@ -28,6 +28,6 @@ void	*slice(t_obj *vector, ssize_t low, ssize_t high)
 	else if (high > n)
 		high = n;
 	size = high - low;
-	ret = stepby(vector, low, 1, size);
+	ret = view(vector, low, size, 1);
 	return (ret);
 }

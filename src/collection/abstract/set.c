@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstract.h"
+#include "collection/abstractobj.h"
 
 bool	set(t_obj *obj, ...)
 {

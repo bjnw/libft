@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstract.h"
+#include "collection/abstractobj.h"
 
 bool	del(t_obj *obj, ...)
 {

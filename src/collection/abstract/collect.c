@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstract.h"
+#include "collection/abstractobj.h"
 
 void	*collect(t_obj *iterobj)
 {

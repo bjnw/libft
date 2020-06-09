@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   abstract.h                                         :+:      :+:    :+:   */
+/*   abstractobj.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ABSTRACT_H
-# define ABSTRACT_H
+#ifndef ABSTRACTOBJ_H
+# define ABSTRACTOBJ_H
 
 # include <sys/types.h>
 # include <stdarg.h>
 # include <stdbool.h>
 # include <stddef.h>
 
-typedef struct s_collection_tag	t_obj;
-struct s_collection_tag {
+typedef struct s_object_trait	t_obj;
+struct s_object_trait {
 	void	*(*add)(t_obj *, va_list);
 	void	*(*get)(const t_obj *, va_list);
 	bool	(*set)(t_obj *, va_list);
@@ -66,9 +66,9 @@ void	*fold_r(const t_obj *obj, void *ctx,
 			void *(*op)(void *, void *, void *), void *init);
 
 ssize_t	size(const t_obj *obj);
-bool	empty(const t_obj *obj);
+bool	isempty(const t_obj *obj);
 
-// void	setattr_dtor(t_obj *obj, void (*dtor)(void *));
+void	setattr_dtor(t_obj *obj, void (*dtor)(void *));
 // void	setattr_default(t_obj *obj, void *default);
 
 #endif

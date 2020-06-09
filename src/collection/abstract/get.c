@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstract.h"
+#include "collection/abstractobj.h"
 
 void	*get(const t_obj *obj, ...)
 {

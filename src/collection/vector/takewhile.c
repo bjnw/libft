@@ -24,9 +24,9 @@ void	*takewhile(t_obj *vector, bool (*p)(const void *))
 	while ((item = next(it)))
 	{
 		if (!(*p)(item))
-			return (stepby(it, 0, 1, n));
+			return (view(it, 0, n, 1));
 		n++;
 	}
-	ret = stepby(vector, 0, 0, 0);
+	ret = view(vector, 0, 0, 0);
 	return (ret);
 }

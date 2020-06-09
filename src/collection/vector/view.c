@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stepby.c                                           :+:      :+:    :+:   */
+/*   view.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,28 +12,28 @@
 
 #include "vectorobj.h"
 
-void	*stepby(t_obj *vector, ssize_t index,
-			ssize_t step, ssize_t size)
+void	*view(t_obj *vector, ssize_t from,
+			ssize_t size, ssize_t step)
 {
 	t_iter	*ret;
 	ssize_t	n;
 
 	n = vector->size;
-	if (index < 0)
+	if (from < 0)
 	{
-		index += n;
-		if (index < 0)
-			index = 0;
+		from += n;
+		if (from < 0)
+			from = 0;
 	}
-	else if (index > n)
-		index = n;
+	else if (from > n)
+		from = n;
 	if (size < 0)
 		size = 0;
-	else if (step > n - index)
+	else if (step > n - from)
 		size = 1;
 	ret = iter(vector);
-	ret->index = index;
-	ret->step = step;
+	ret->index = from;
 	ret->size = size;
+	ret->step = step;
 	return (ret);
 }

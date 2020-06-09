@@ -23,8 +23,8 @@ typedef struct {
 typedef struct {
 	t_vector	vector;
 	ssize_t		index;
-	ssize_t		step;
 	ssize_t		size;
+	ssize_t		step;
 }	t_iter;
 
 void		*vector_add(t_obj *vector, va_list ap);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   empty.c                                            :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstract.h"
+#include "libft.h"
+#include "vectorobj.h"
 
-bool	empty(const t_obj *obj)
+void	*split(const char *s, int delim, size_t itemsize,
+			void (*f)(void *, const char *, const char *))
 {
-	return (obj->size == 0);
+	t_obj	*ret;
+	void	*item;
+	ssize_t	n;
+	char	*s0;
+
+	n = ft_strelems(s, delim);
+	ret = vector(n, itemsize);
+	while (n--)
+	{
+		item = vector_getitem(ret, ret->size);
+		s0 = ft_strjmp(&s, delim);
+		(*f)(item, s0, s);
+		ret->size++;
+	}
+	return (ret);
 }

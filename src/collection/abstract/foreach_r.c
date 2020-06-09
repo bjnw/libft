@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstract.h"
+#include "collection/abstractobj.h"
 
 void	foreach_r(t_obj *obj, void *ctx,
 			void (*f)(void *, void *))

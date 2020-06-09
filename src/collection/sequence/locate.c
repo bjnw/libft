@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 
-#include "collection/abstract.h"
+#include "collection/abstractobj.h"
 
 ssize_t	locate(const t_obj *obj, const void *val,
 			int (*cmp)(const void *, const void *))

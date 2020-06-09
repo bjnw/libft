@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 
-#include "collection/abstract.h"
+#include "collection/abstractobj.h"
 
 void	delete(t_obj *obj)
 {

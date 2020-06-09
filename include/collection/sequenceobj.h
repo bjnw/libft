@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   sequenceobj.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,25 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "vectorobj.h"
+#ifndef SEQUENCEOBJ_H
+# define SEQUENCEOBJ_H
 
-void	parse(t_obj *dst, const char *s, int delim,
-			void (*f)(void *, const char *, const char *))
-{
-	void	*item;
-	ssize_t	size;
-	ssize_t	n;
-	char	*s0;
+#include "collection/abstractobj.h"
 
-	n = ft_strelems(s, delim);
-	size = dst->size;
-	vector_resize(dst, size + n);
-	while (n--)
-	{
-		item = vector_getitem(dst, size);
-		s0 = ft_strjmp(&s, delim);
-		(*f)(item, s0, s);
-		size++;
-	}
-}
+void	*search(const t_obj *obj, const void *val,
+			int (*cmp)(const void *, const void *));
+ssize_t	count(const t_obj *obj, const void *val,
+			int (*cmp)(const void *, const void *));
+ssize_t	locate(const t_obj *obj, const void *val,
+			int (*cmp)(const void *, const void *));
+void	*search_r(const t_obj *obj, const void *val, void *ctx,
+			int (*cmp)(void *, const void *, const void *));
+ssize_t	count_r(const t_obj *obj, const void *val, void *ctx,
+			int (*cmp)(void *, const void *, const void *));
+ssize_t	locate_r(const t_obj *obj, const void *val, void *ctx,
+			int (*cmp)(void *, const void *, const void *));
+
+#endif

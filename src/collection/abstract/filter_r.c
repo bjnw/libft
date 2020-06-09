@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstract.h"
+#include "collection/abstractobj.h"
 
 void	*filter_r(const t_obj *obj, void *ctx,
 			bool (*p)(void *, const void *))

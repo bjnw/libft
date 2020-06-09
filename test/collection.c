@@ -4,8 +4,8 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "collection/abstract.h"
 #include "libft.h"
+#include "collection/abstractobj.h"
 #include "collection/vector.h"
 #include "collection/list.h"
 
@@ -129,12 +129,12 @@ int		main(void)
 	// void *p4 = gc_malloc(100);
 	// gc_finalize();
 /*
-	// void *num = vector(0, sizeof(int));
-	// parse(num,
+	// void *num = split(num,
 	// 	"42,000,1,2,3,4,     5,6,7,8  ,9,    10"
 	// 	",,,,  00123,  +456   ,7890  ,-_-, zzz,"
 	// 	"-666,     1234567890,  ,,NaN,,-10000,,",
 	// 	',',
+	// 	sizeof(int),
 	// 	myatoi
 	// );
 
@@ -222,16 +222,16 @@ int		main(void)
 
 // */
 // /**
-	void *num = vector(0, sizeof(int));
-	parse(num,
+	void *num = split(
 		"42,000,1,2,3,4,     5,6,7,8  ,9,    10"
 		",,,,  00123,  +456   ,7890  ,-_-, zzz,"
 		"-666,     1234567890,  ,,NaN,,-10000,,",
 		',',
+		sizeof(int),
 		myatoi
 	);
 	foreach(num, num_print);
-	printf("num ints parsed\n");
+	printf("num ints splitted\n");
 	printf("num ratio: %ld/%ld\n", size(num), ((t_vector *)num)->capacity);
 
 	it = takewhile(num, num_pos);
@@ -412,15 +412,14 @@ int		main(void)
 	delete(num);
 // **/
 /**
-	void *str = vector(10, sizeof(char *));
-	parse(
-		str,
+	void *str = split(
 		"and  again and |again!|    ..   yoji  |"
 		"146%|-- @|flamingos/zakatos |(Y)_zzzz_|"
 		"GORT!\nKLAATU  BARADA nikto||||!??\v  |"
 		"lorem ipsum dolor sit down and shut up "
 		"   ooooooo   |    leeeee      |    fin.",
 		'|',
+		sizeof(char *)
 		str_cut
 	);
 	// setprop_dtor(str, str_free);

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "collection/abstract.h"
+#include "collection/abstractobj.h"
 
 void	*toarray(const t_obj *obj)
 {

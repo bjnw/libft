@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drop.c                                             :+:      :+:    :+:   */
+/*   dropwhile.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -24,9 +24,9 @@ void	*dropwhile(t_obj *vector, bool (*p)(const void *))
 	while ((item = next(it)))
 	{
 		if (!(*p)(item))
-			return (stepby(it, n, 1, vector->size - n));
+			return (view(it, n, vector->size - n, 1));
 		n++;
 	}
-	ret = stepby(vector, 0, 0, 0);
+	ret = view(vector, 0, 0, 0);
 	return (ret);
 }

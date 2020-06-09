@@ -22,6 +22,6 @@ void	*take(t_obj *vector, ssize_t size)
 		size = n;
 	else if (size < 0)
 		size = 0;
-	ret = stepby(vector, 0, 1, size);
+	ret = view(vector, 0, size, 1);
 	return (ret);
 }

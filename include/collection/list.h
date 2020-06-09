@@ -13,7 +13,7 @@
 #ifndef LIST_H
 # define LIST_H
 
-# include "collection/sequence.h"
+# include "collection/sequenceobj.h"
 
 void	*tolist(const t_obj *obj);
 void	*list(size_t itemsize);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstract.h"
+#include "collection/abstractobj.h"
 
 void	*fold_r(const t_obj *obj, void *ctx,
 			void *(*op)(void *, void *, void *), void *init)

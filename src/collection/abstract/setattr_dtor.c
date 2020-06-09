@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_r.c                                            :+:      :+:    :+:   */
+/*   isempty.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,12 +12,7 @@
 
 #include "collection/abstractobj.h"
 
-void	*map_r(const t_obj *obj, void *ctx,
-			void (*f)(void *, void *))
+void	setattr_dtor(t_obj *obj, void (*dtor)(void *))
 {
-	t_obj *ret;
-
-	ret = clone(obj);
-	foreach_r(ret, ctx, f);
-	return (ret);
+	obj->dtor = dtor;
 }
