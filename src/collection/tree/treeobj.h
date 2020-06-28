@@ -16,7 +16,7 @@
 # include "collection/generic.h"
 
 typedef struct s_node	t_node;
-struct s_node {
+struct		s_node {
 	t_node	*left;
 	t_node	*right;
 };

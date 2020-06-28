@@ -23,7 +23,7 @@ static int	bi_cmp_magnitude(const t_bigint *a, const t_bigint *b)
 	if (a->size > b->size)
 		return (BI_GREATER);
 	if (a->size < b->size)
-		return  (BI_LOWER);
+		return (BI_LOWER);
 	size = a->size;
 	comp_a = a->comps + size;
 	comp_b = b->comps + size;

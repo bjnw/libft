@@ -14,7 +14,7 @@
 
 #if defined(MEMWORD)
 
-#include "memword.h"
+# include "memword.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -30,7 +30,9 @@ size_t	ft_strlen(const char *s)
 		p++;
 	return (p - s);
 }
+
 #else
+
 size_t	ft_strlen(const char *s)
 {
 	const char *p;
@@ -40,4 +42,5 @@ size_t	ft_strlen(const char *s)
 		p++;
 	return (p - s);
 }
+
 #endif

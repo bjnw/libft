@@ -56,6 +56,7 @@ static void	quicksort(void *left, void *right, size_t size,
 ** @size: element's sizeof
 ** @cmp:  compare function
 */
+
 void		ft_qsort(void *data, size_t len, size_t size,
 		int (*cmp)(const void *, const void *))
 {

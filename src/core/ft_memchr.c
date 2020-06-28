@@ -14,7 +14,7 @@
 
 #if defined(MEMWORD)
 
-#include "memword.h"
+# include "memword.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {

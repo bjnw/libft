@@ -15,6 +15,7 @@
 /*
 ** return (a ^ ((a ^ b) & -(a < b)));
 */
+
 intmax_t	ft_imax(intmax_t a, intmax_t b)
 {
 	return (a >= b ? a : b);

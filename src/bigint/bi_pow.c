@@ -14,7 +14,10 @@
 
 #include "bigint.h"
 
-// FIXME wtf
+/*
+** FIXME wtf
+*/
+
 void	bi_pow(const t_bigint *a, const t_bigint *b, t_bigint *c)
 {
 	t_bigint *tmp;

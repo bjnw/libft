@@ -15,6 +15,7 @@
 /*
 ** return (a ^ ((a ^ b) & -(a < b)));
 */
+
 uintmax_t	ft_umin(uintmax_t a, uintmax_t b)
 {
 	return (a <= b ? a : b);

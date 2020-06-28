@@ -16,7 +16,7 @@
 # include "collection/list.h"
 
 typedef struct s_node	t_node;
-struct s_node {
+struct		s_node {
 	t_node	*prev;
 	t_node	*next;
 };

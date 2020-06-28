@@ -15,7 +15,7 @@
 
 bool	list_exists(const t_obj *list, ssize_t index)
 {
-    return ((size_t)index < (size_t)list->size);
+	return ((size_t)index < (size_t)list->size);
 }
 
 void	*list_getitem(void *node)

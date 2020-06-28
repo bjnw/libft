@@ -14,10 +14,10 @@
 
 uint32_t	lowbias32(uint32_t n)
 {
-    n ^= n >> 0x10;
-    n *= 0x7feb352du;
-    n ^= n >> 0x0f;
-    n *= 0x846ca68bu;
-    n ^= n >> 0x10;
-    return (n);
+	n ^= n >> 0x10;
+	n *= 0x7feb352du;
+	n ^= n >> 0x0f;
+	n *= 0x846ca68bu;
+	n ^= n >> 0x10;
+	return (n);
 }

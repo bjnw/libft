@@ -6,7 +6,7 @@
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 17:23:05 by ourgot            #+#    #+#             */
-/*   Updated: 2020/02/26 17:23:05 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/06/28 01:00:48 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,4 @@ void	asm_bts(uint64_t *val, size_t offset);
 
 double	asm_fsqrt(double val);
 
-# endif
+#endif

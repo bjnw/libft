@@ -14,6 +14,10 @@
 
 #include "bigint.h"
 
+/*
+** FIXME k = bi->size;
+*/
+
 void	bi_normalize(t_bigint *bi)
 {
 	t_comp *comp;
@@ -21,7 +25,6 @@ void	bi_normalize(t_bigint *bi)
 	size_t k;
 
 	comp = bi->comps;
-	// FIXME k = bi->size;
 	k = BI_COMPS;
 	while (k--)
 	{

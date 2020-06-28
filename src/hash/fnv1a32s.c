@@ -19,8 +19,8 @@ uint32_t	fnv1a32s(const char *s)
 	ret = FNV1A32_OFFSET_BASIS;
 	while (*s)
 	{
-		ret ^= (uint8_t)*s++;
+		ret ^= (uint8_t)(*s++);
 		ret *= FNV1A32_PRIME;
 	}
-    return (ret);
+	return (ret);
 }

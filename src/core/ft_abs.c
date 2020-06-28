@@ -16,6 +16,7 @@
 ** mask = n >> (sizeof(intmax_t) * CHAR_BIT - 1);
 ** return ((n + mask) ^ mask);
 */
+
 uintmax_t	ft_abs(intmax_t n)
 {
 	return (n < 0 ? -n : n);

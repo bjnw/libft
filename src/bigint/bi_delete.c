@@ -14,9 +14,12 @@
 
 #include "bigint.h"
 
+/*
+** TODO #ifdef BI_DYNAMIC etc
+** free(bi->comps);
+*/
+
 void	bi_delete(t_bigint *bi)
 {
-	// TODO #ifdef BI_DYNAMIC etc
-	// free(bi->comps);
 	free(bi);
 }

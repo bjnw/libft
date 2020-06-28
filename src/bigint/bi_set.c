@@ -16,7 +16,6 @@
 #include "bigint.h"
 #include "libft.h"
 
-// FIXME ugly
 void	bi_set(t_bigint *bi, uintmax_t i)
 {
 	t_comp *comp;

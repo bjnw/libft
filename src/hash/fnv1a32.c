@@ -24,5 +24,5 @@ uint32_t	fnv1a32(const void *s, size_t n)
 		ret ^= *data++;
 		ret *= FNV1A32_PRIME;
 	}
-    return (ret);
+	return (ret);
 }

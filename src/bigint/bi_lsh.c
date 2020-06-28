@@ -16,8 +16,11 @@
 #include "bigint.h"
 #include "libft.h"
 
-// TODO realloc
-// TODO overflow
+/*
+** TODO realloc
+** TODO overflow
+*/
+
 void	bi_lsh(t_bigint *bi, uintmax_t i)
 {
 	t_comp *dst;

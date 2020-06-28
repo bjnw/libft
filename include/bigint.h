@@ -28,24 +28,11 @@
 
 typedef uint64_t	t_comp;
 
-# if defined(BI_DYNAMIC)
-
-typedef struct {
-	t_comp	*comps;
-	size_t	size;
-	size_t	maxsize;
-	bool	negative;
-}	t_bigint;
-
-# else
-
 typedef struct {
 	t_comp	comps[BI_COMPS];
 	size_t	size;
 	bool	negative;
 }	t_bigint;
-
-# endif
 
 t_bigint	*bi_new(void);
 t_bigint	*bi_clone(const t_bigint *bi);

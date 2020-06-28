@@ -19,7 +19,7 @@
 # include <stddef.h>
 
 typedef struct s_object_trait	t_obj;
-struct s_object_trait {
+struct	s_object_trait {
 	void	*(*add)(t_obj *, va_list);
 	void	*(*get)(const t_obj *, va_list);
 	bool	(*set)(t_obj *, va_list);
@@ -51,8 +51,10 @@ void	*clone(const t_obj *obj);
 void	clear(t_obj *obj);
 void	extend(t_obj *dst, const t_obj *src);
 void	*concat(const t_obj *obj1, const t_obj *obj2);
-// void	*flatten(const t_obj *obj);
-// void	*merge(const t_obj *obj1, const t_obj *obj2);
+/*
+** // void	*flatten(const t_obj *obj);
+** // void	*merge(const t_obj *obj1, const t_obj *obj2);
+*/
 void	delete(t_obj *obj);
 
 void	foreach(t_obj *obj, void (*f)(void *));
@@ -72,6 +74,8 @@ ssize_t	size(const t_obj *obj);
 bool	isempty(const t_obj *obj);
 
 void	setattr_dtor(t_obj *obj, void (*dtor)(void *));
-// void	setattr_default(t_obj *obj, void *default);
+/*
+** // void	setattr_default(t_obj *obj, void *default);
+*/
 
 #endif

@@ -9,8 +9,10 @@ SRC := %C_FILES%
 OBJ := $(SRC:%.c=$(BUILD)/%.o)
 DEP := $(OBJ:%.o=%.d)
 
-AR := llvm-ar
-RANLIB := llvm-ranlib
+# AR := llvm-ar
+# RANLIB := llvm-ranlib
+AR := ar
+RANLIB := ranlib
 
 CC := clang
 WFLAGS := -Wall -Wextra
@@ -26,14 +28,15 @@ vpath %.c %SRC_DIRS%
 .PHONY: all clean fclean re test love debug
 
 $(NAME): $(OBJ)
-	@echo "Linking static library '$@'..."
+	@echo "Linking '$@'..."
 	@$(AR) rcs $@ $?
 	@$(RANLIB) $@
+	@echo "\x1b[32;1mDone\x1b[0m"
 
 -include $(DEP)
 $(BUILD)/%.o: %.c
 	@mkdir -p $(@D)
-	@echo "Building object '$@'"
+	@echo "[$(NAME)] Building object '$@'"
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
 $(NAME_SHARED): $(OBJ)

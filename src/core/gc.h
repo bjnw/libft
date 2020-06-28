@@ -13,10 +13,11 @@
 #ifndef GC_H
 # define GC_H
 
-typedef struct {
+typedef struct s_node	t_node;
+struct	s_node {
 	void	*ctx;
 	void	*next;
-}	t_node;
+};
 
 extern void *g_last_node;
 

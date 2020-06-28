@@ -24,5 +24,5 @@ uint64_t	fnv1a64(const void *s, size_t n)
 		ret ^= *data++;
 		ret *= FNV1A64_PRIME;
 	}
-    return (ret);
+	return (ret);
 }

@@ -16,7 +16,7 @@
 
 #if defined(MEMWORD)
 
-#include "memword.h"
+# include "memword.h"
 
 char	*ft_strrchr(const char *s, int c)
 {

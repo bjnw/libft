@@ -15,7 +15,10 @@
 #include "bigint.h"
 #include "libft.h"
 
-// FIXME unsigned overflow check
+/*
+** FIXME unsigned overflow check
+*/
+
 void	bi_sub(const t_bigint *a, const t_bigint *b, t_bigint *c)
 {
 	size_t size;
