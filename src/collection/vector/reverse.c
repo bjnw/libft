@@ -22,7 +22,7 @@ void	reverse(t_obj *vector)
 	high = vector->size - 1;
 	while (low < high)
 	{
-		ft_memswap(
+		ft_swap(
 				vector_getitem(vector, low),
 				vector_getitem(vector, high),
 				vector->itemsize);

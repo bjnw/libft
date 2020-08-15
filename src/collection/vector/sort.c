@@ -29,14 +29,14 @@ static ssize_t	lomuto(t_obj *vector, ssize_t low, ssize_t high,
 		tmp = vector_getitem(vector, i);
 		if ((*cmp)(vector_getitem(vector, pivot), tmp) > 0)
 		{
-			ft_memswap(
+			ft_swap(
 					vector_getitem(vector, j), tmp,
 					vector->itemsize);
 			j++;
 		}
 		i++;
 	}
-	ft_memswap(
+	ft_swap(
 			vector_getitem(vector, j),
 			vector_getitem(vector, high),
 			vector->itemsize);

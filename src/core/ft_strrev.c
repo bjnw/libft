@@ -20,6 +20,6 @@ char	*ft_strrev(char *s)
 	ret = s;
 	eol = s + ft_strlen(s);
 	while (s < --eol)
-		ft_memswap(s++, eol, sizeof(char));
+		ft_swap(s++, eol, sizeof(char));
 	return (ret);
 }

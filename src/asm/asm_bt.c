@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-	__attribute__((always_inline))
+__attribute__((always_inline))
 bool	asm_bt(uint64_t val, size_t offset)
 {
 	bool ret;

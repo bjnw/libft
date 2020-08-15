@@ -56,7 +56,6 @@ void		*xrealloc(void *data, size_t newsize, size_t oldsize);
 
 void		*gc_malloc(size_t size);
 void		gc_sweep(const void *scope);
-void		gc_finalize(void);
 
 void		ft_bzero(void *s, size_t n);
 void		*ft_memset(void *s, int c, size_t n);
@@ -68,7 +67,7 @@ void		*ft_mempcpy(void *dst, const void *src, size_t n);
 void		*ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 void		*ft_memdup(const void *s, size_t n);
-void		ft_memswap(void *restrict s1, void *restrict s2, size_t n);
+void		ft_swap(void *restrict s1, void *restrict s2, size_t n);
 void		*ft_memdel(void **ptr);
 void		*ft_memdelpv(void **ptr);
 char		*ft_strcat(char *dst, const char *src);

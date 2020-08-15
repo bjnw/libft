@@ -20,8 +20,10 @@ void	gc_sweep(const void *scope)
 	void	*tmp;
 
 	node = g_last_node;
-	while (node && node->ctx < scope)
+	while (node->ctx < scope || !scope)
 	{
+		if (!node)
+			break ;
 		tmp = node;
 		node = node->next;
 		free(tmp);

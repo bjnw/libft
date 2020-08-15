@@ -13,7 +13,7 @@
 #include "gc.h"
 #include "libft.h"
 
-void *g_last_node = NULL;
+void *g_last_node;
 
 void	*gc_malloc(size_t size)
 {
@@ -22,7 +22,7 @@ void	*gc_malloc(size_t size)
 	if (size == 0)
 		panic("malloc: invalid argument");
 	gc_sweep(&node);
-	node = xmalloc(sizeof(t_node) + size);
+	node = xcalloc(1, sizeof(t_node) + size);
 	node->next = g_last_node;
 	node->ctx = &node;
 	g_last_node = node;

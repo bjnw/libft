@@ -48,12 +48,12 @@ void	*collect(t_obj *iterobj);
 
 void	*copy(const t_obj *obj);
 void	*clone(const t_obj *obj);
-void	clear(t_obj *obj);
+void	*join(const t_obj *obj1, const t_obj *obj2);
 void	extend(t_obj *dst, const t_obj *src);
-void	*concat(const t_obj *obj1, const t_obj *obj2);
+void	clear(t_obj *obj);
 /*
-** // void	*flatten(const t_obj *obj);
-** // void	*merge(const t_obj *obj1, const t_obj *obj2);
+** void	*flatten(const t_obj *obj);
+** void	*merge(const t_obj *obj1, const t_obj *obj2);
 */
 void	delete(t_obj *obj);
 
@@ -75,7 +75,7 @@ bool	isempty(const t_obj *obj);
 
 void	setattr_dtor(t_obj *obj, void (*dtor)(void *));
 /*
-** // void	setattr_default(t_obj *obj, void *default);
+** void	setattr_default(t_obj *obj, void *default);
 */
 
 #endif

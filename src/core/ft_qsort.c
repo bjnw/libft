@@ -28,12 +28,12 @@ static void	*lomuto(void *left, void *right, size_t size,
 	{
 		if ((*cmp)(pivot, j) > 0)
 		{
-			ft_memswap(i, j, size);
+			ft_swap(i, j, size);
 			i += size;
 		}
 		j += size;
 	}
-	ft_memswap(i, right, size);
+	ft_swap(i, right, size);
 	return (i);
 }
 
