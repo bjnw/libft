@@ -20,23 +20,24 @@ WFLAGS := -Wall -Wextra
 # WFLAGS += -Werror
 OFLAGS := -O2 -march=native
 OFLAGS += -ftree-vectorize
-OFLAGS += -flto=thin
-CFLAGS := $(WFLAGS) $(OFLAGS) -fPIC -MMD -I./$(INCLUDE)
+# OFLAGS += -flto=thin
+CFLAGS := $(WFLAGS) $(OFLAGS) -MMD -I$(INCLUDE)
+# CFLAGS += -fPIC
 
 vpath %.c %SRC_DIRS%
 
 .PHONY: all clean fclean re test love debug
 
 $(NAME): $(OBJ)
-	@echo "Linking '$@'..."
+	@printf "[$(NAME)] Linking objects...\n"
 	@$(AR) rcs $@ $?
 	@$(RANLIB) $@
-	@echo "\x1b[32;1mDone\x1b[0m"
+	@printf "\033[32;1m[$(NAME)] Done\033[0m\n"
 
 -include $(DEP)
 $(BUILD)/%.o: %.c
 	@mkdir -p $(@D)
-	@echo "[$(NAME)] Building object '$@'"
+	@printf "[$(NAME)] Building object '$@'\n"
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
 $(NAME_SHARED): $(OBJ)
@@ -57,8 +58,8 @@ test: all
 	@test/test.sh "$(CC)" "$(CFLAGS)" "-L./ $(NAME)"
 
 love:
-	@echo 'not war'
+	@printf 'not war\n'
 	@sh util/genmake.sh > Makefile
 
 debug:
-	@echo 'nope'
+	@printf 'nope\n'
