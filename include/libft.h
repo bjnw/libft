@@ -16,6 +16,7 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
+# include <stdarg.h>
 
 typedef unsigned char	*t_addr;
 
@@ -106,6 +107,11 @@ void		ft_putstr(const char *s);
 void		ft_putstr_fd(const char *s, int fd);
 void		ft_putendl(const char *s);
 void		ft_putendl_fd(const char *s, int fd);
+
+int			ft_printf(const char *fmt, ...);
+int			ft_dprintf(int fd, const char *fmt, ...);
+int			ft_sprintf(char *buf, const char *fmt, ...);
+int			ft_vsprintf(char *buf, const char *fmt, va_list ap);
 
 void		ft_qsort(void *data, size_t len, size_t size,
 				int (*cmp)(const void *, const void *));
