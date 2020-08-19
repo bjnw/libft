@@ -55,8 +55,10 @@ void		*xmalloc(size_t size);
 void		*xcalloc(size_t nmemb, size_t size);
 void		*xrealloc(void *data, size_t newsize, size_t oldsize);
 
-void		*gc_malloc(size_t size);
-void		gc_sweep(const void *scope);
+void		*malloca(size_t size);
+void		*malloca_opt(size_t size, void (*dtor)(void *));
+void		malloca_cleanup(const void *ctx);
+void		malloca_finalize(void);
 
 void		ft_bzero(void *s, size_t n);
 void		*ft_memset(void *s, int c, size_t n);

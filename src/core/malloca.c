@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_sweep.c                                         :+:      :+:    :+:   */
+/*   malloca.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,23 +10,52 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include <stdlib.h>
 
-#include "gc.h"
+#include "libft.h"
+#include "malloca.h"
 
-void	gc_sweep(const void *scope)
+void	*g_stack_base;
+
+void	*malloca(size_t size)
 {
-	t_node	*node;
-	void	*tmp;
+	return (malloca_opt(size, NULL));
+}
 
-	node = g_last_node;
-	while (node->ctx < scope || !scope)
+void	*malloca_opt(size_t size, void (*dtor)(void *))
+{
+	t_meta *ptr;
+
+	if (size == 0)
+		panic(ERR_INVAL);
+	malloca_cleanup(&ptr);
+	ptr = xcalloc(1, META_SIZE + size);
+	ptr->next = g_stack_base;
+	ptr->ctx = &ptr;
+	ptr->dtor = dtor;
+	g_stack_base = ptr;
+	return (ptr->data);
+}
+
+void	malloca_cleanup(const void *ctx)
+{
+	t_meta	*ptr;
+	t_meta	*tmp;
+
+	ptr = g_stack_base;
+	while (ptr && ptr->ctx < ctx)
 	{
-		if (!node)
-			break ;
-		tmp = node;
-		node = node->next;
+		tmp = ptr;
+		ptr = ptr->next;
+		if (tmp->dtor)
+			tmp->dtor(tmp->data);
 		free(tmp);
 	}
-	g_last_node = node;
+	g_stack_base = ptr;
+}
+
+void	malloca_finalize(void)
+{
+	malloca_cleanup((void *)UINTPTR_MAX);
 }

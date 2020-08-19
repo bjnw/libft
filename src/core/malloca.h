@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc.h                                               :+:      :+:    :+:   */
+/*   malloca.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,15 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GC_H
-# define GC_H
+#ifndef MALLOCA_H
+# define MALLOCA_H
 
-typedef struct s_node	t_node;
-struct	s_node {
-	void	*ctx;
+# define ERR_INVAL "malloca: invalid argument"
+
+typedef struct s_meta	t_meta;
+struct	s_meta {
 	void	*next;
+	void	*ctx;
+	void	(*dtor)(void *);
+	void	*data[];
 };
 
-extern void *g_last_node;
+# define META_SIZE	sizeof(t_meta)
 
 #endif
