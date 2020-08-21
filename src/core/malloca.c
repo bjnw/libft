@@ -16,7 +16,7 @@
 #include "libft.h"
 #include "malloca.h"
 
-void	*g_stack_base;
+static void *g_stack_base;
 
 void	*malloca(size_t size)
 {
