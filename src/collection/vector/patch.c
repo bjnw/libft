@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   patch.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "vectorobj.h"
 
-void	*split(const char *s, int delim, size_t itemsize,
-			void (*f)(void *, const char *, const char *))
+void	patch(t_obj *dst, const t_obj *src, ssize_t from)
 {
-	t_obj	*ret;
-	void	*it;
-	void	*item;
+	void	*itdst;
+	void	*itsrc;
+	void	*itemdst;
+	void	*itemsrc;
 	ssize_t	n;
-	char	*s0;
 
-	n = ft_strelems(s, delim);
-	ret = vector(n, itemsize);
-	ret->size = n;
-	it = iter(ret);
-	while ((item = next(it)))
+	n = dst->size;
+	if (from < 0)
 	{
-		s0 = ft_strjmp(&s, delim);
-		(*f)(item, s0, s);
+		from += n;
+		if (from < 0)
+			from = 0;
 	}
-	return (ret);
+	else if (from > n)
+		from = n;
+	itdst = drop(dst, from);
+	itsrc = iter(src);
+	while (true)
+	{
+		itemdst = next(itdst);
+		itemsrc = next(itsrc);
+		if (!itemdst || !itemsrc)
+			break ;
+		ft_memcpy(itemdst, itemsrc, dst->itemsize);
+	}
 }

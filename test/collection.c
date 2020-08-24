@@ -5,11 +5,8 @@
 #include <string.h>
 
 #include "libft.h"
-#include "collection/abstractobj.h"
 #include "collection/vector.h"
 #include "collection/list.h"
-
-#include "../src/collection/vector/vectorobj.h"
 
 void	myatoi(void *item, const char *begin, const char *end)
 {
@@ -105,9 +102,9 @@ int		obj_cmp(void *item1, void *item2)
 // __attribute__((noinline))
 // void	mt()
 // {
-// 	void *p1 = gc_malloc(10);
-// 	void *p3 = gc_malloc(10);
-// 	void *p4 = gc_malloc(10);
+// 	void *p1 = malloca(10);
+// 	void *p3 = malloca(10);
+// 	void *p4 = malloca(10);
 // }
 
 #define TIME_DIFF(a,b) ((double)(b - a) / CLOCKS_PER_SEC)
@@ -120,14 +117,14 @@ int		main(void)
 	void *item;
 	void *it;
 
-	// void *p1 = gc_malloc(100);
+	// void *p1 = malloca(100);
 	// mt();
-	// void *p2 = gc_malloc(100);
+	// void *p2 = malloca(100);
 	// mt();
-	// void *p3 = gc_malloc(100);
+	// void *p3 = malloca(100);
 	// mt();
-	// void *p4 = gc_malloc(100);
-	// gc_finalize();
+	// void *p4 = malloca(100);
+	// malloca_finalize();
 /*
 	// void *num = split(num,
 	// 	"42,000,1,2,3,4,     5,6,7,8  ,9,    10"
@@ -232,7 +229,7 @@ int		main(void)
 	);
 	foreach(num, num_print);
 	printf("num ints splitted\n");
-	printf("num ratio: %ld/%ld\n", size(num), ((t_vector *)num)->capacity);
+	printf("num size: %ld\n", size(num));
 
 	it = takewhile(num, num_pos);
 	foreach(it, num_print);
@@ -245,8 +242,14 @@ int		main(void)
 	// it = iter(num);
 	// void *mpn = map(it, num_mul1000);
 	// foreach(mpn, num_print);
-	// printf("mpn ratio: %ld/%ld\n", size(mpn), ((t_vector *)mpn)->capacity);
+	// printf("mpn size: %ld\n", size(mpn));
 	// delete(mpn);
+
+	it = reversed(num);
+	it = drop(it, 10);
+	patch(num, it, 0);
+	foreach(num, num_print);
+	printf("num patched\n");
 
 	begin = clock();
 	for (ssize_t i = 0; i < n; i++) {
@@ -255,7 +258,7 @@ int		main(void)
 	end = clock();
 	// foreach(num, num_print);
 	printf("num added %ld items,  %fs\n", n, TIME_DIFF(begin, end));
-	printf("num ratio: %ld/%ld\n", size(num), ((t_vector *)num)->capacity);
+	printf("num size: %ld\n", size(num));
 
 	val = reduce(num, num_min);
 	printf("num min=%d\n", *val);
@@ -331,14 +334,14 @@ int		main(void)
 	end = clock();
 	// foreach(num, num_print);
 	printf("num removed 1/2 items, %fs\n", TIME_DIFF(begin, end));
-	printf("num ratio: %ld/%ld\n", size(num), ((t_vector *)num)->capacity);
+	printf("num size: %ld\n", size(num));
 
 	begin = clock();
 	void *flt = filter(num, num_filter);
 	end = clock();
 	// foreach(flt, num_print);
 	printf("flt filtered %ld items, %fs\n", size(flt), TIME_DIFF(begin, end));
-	printf("flt ratio: %ld/%ld\n", size(flt), ((t_vector *)flt)->capacity);
+	printf("flt size: %ld\n", size(flt));
 
 
 	begin = clock();
@@ -347,7 +350,7 @@ int		main(void)
 	end = clock();
 	// foreach(sl, num_print);
 	printf("sl sliced %ld items  %fs\n", size(sl), TIME_DIFF(begin, end));
-	printf("sl ratio: %ld/%ld\n", size(sl), ((t_vector *)sl)->capacity);
+	printf("sl size: %ld\n", size(sl));
 
 	begin = clock();
 	for (ssize_t i = 0; i < 100; i++) {
@@ -355,7 +358,7 @@ int		main(void)
 	}
 	end = clock();
 	printf("flt extended 100 times with sl items, %fs\n", TIME_DIFF(begin, end));
-	printf("flt ratio: %ld/%ld\n", size(flt), ((t_vector *)flt)->capacity);
+	printf("flt size: %ld\n", size(flt));
 
 	// begin = clock();
 	// for (ssize_t i = 1; i <= 10000; i++) {
@@ -364,13 +367,13 @@ int		main(void)
 	// end = clock();
 	// // foreach(flt, num_print);
 	// printf("flt items inserted to -1..-10000, %fs\n", TIME_DIFF(begin, end));
-	// printf("flt ratio: %ld/%ld\n", size(flt), ((t_vector *)flt)->capacity);
+	// printf("flt size: %ld\n", size(flt));
 
 	begin = clock();
 	extend(num, flt);
 	end = clock();
 	printf("num extended with flt items, %fs\n", TIME_DIFF(begin, end));
-	printf("num ratio: %ld/%ld\n", size(num), ((t_vector *)num)->capacity);
+	printf("num size: %ld\n", size(num));
 
 	it = take(num, 10);
 	foreach(reversed(it), num_print);
@@ -405,7 +408,7 @@ int		main(void)
 	// end = clock();
 	// // foreach(srt, num_print);
 	// printf("srt sorted, %fs\n", TIME_DIFF(begin, end));
-	// printf("srt ratio: %ld/%ld\n", size(srt), ((t_vector *)srt)->capacity);
+	// printf("srt size: %ld\n", size(srt));
 
 	delete(sl);
 	delete(flt);
@@ -450,10 +453,10 @@ int		main(void)
 	void *sli = slice(str, 3, 7);
 	void *sl = collect(sli);
 	foreach(sl, str_print);
-	printf("sl ratio: %ld/%ld\n\n", size(sl), ((t_vector *)sl)->capacity);
+	printf("sl size: %ld\n\n", size(sl));
 
 	foreach(str, str_print);
-	printf("str upcase, reversed, changed ratio: %ld/%ld\n\n", size(str), ((t_vector *)str)->capacity);
+	printf("str upcase, reversed, changed size: %ld\n\n", size(str));
 
 	delete(sl);
 	delete(str);
