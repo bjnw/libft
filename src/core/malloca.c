@@ -20,10 +20,10 @@ static void *g_stack_base;
 
 void	*malloca(size_t size)
 {
-	return (malloca_opt(size, NULL));
+	return (malloca_dtor(size, NULL));
 }
 
-void	*malloca_opt(size_t size, void (*dtor)(void *))
+void	*malloca_dtor(size_t size, void (*dtor)(void *))
 {
 	t_meta *ptr;
 

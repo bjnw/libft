@@ -56,7 +56,7 @@ void		*xcalloc(size_t nmemb, size_t size);
 void		*xrealloc(void *data, size_t newsize, size_t oldsize);
 
 void		*malloca(size_t size);
-void		*malloca_opt(size_t size, void (*dtor)(void *));
+void		*malloca_dtor(size_t size, void (*dtor)(void *));
 void		malloca_cleanup(const void *ctx);
 void		malloca_finalize(void);
 
