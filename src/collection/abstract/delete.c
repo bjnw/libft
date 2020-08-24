@@ -16,6 +16,6 @@
 
 void	delete(t_obj *obj)
 {
-	obj->clear(obj);
+	clear(obj);
 	free(obj);
 }
