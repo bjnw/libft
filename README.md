@@ -6,7 +6,9 @@
 ## Ne plus ultra
 #### Collections (iterators included)
 Superclass,  provides ``map()``, ``filter()``, ``reduce()``, and some other methods (with its closure-like variants) for all objects, derived from this class
+
 [include/abstractobj.h](https://github.com/bjnw/libft/blob/master/include/collection/abstractobj.h)
+
 [src/collection/abstract](https://github.com/bjnw/libft/blob/master/src/collection/abstract)
 
 Example: ``abstractobj`` → ``sequenceobj`` → ``vector``
