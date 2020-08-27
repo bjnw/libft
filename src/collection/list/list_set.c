@@ -21,7 +21,7 @@ bool	list_set(t_obj *list, va_list ap)
 	index = va_arg(ap, ssize_t);
 	if (index < 0)
 		index += list->size;
-	if (!list_exists(list, index))
+	if (!item_exists(list, index))
 		return (false);
 	node = list_getnode(list, index);
 	if (list->dtor)

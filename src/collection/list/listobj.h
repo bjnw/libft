@@ -31,6 +31,7 @@ typedef struct {
 	t_node	*current;
 }	t_iter;
 
+void		list_init(t_obj *obj);
 void		*list_add(t_obj *list, va_list ap);
 void		*list_get(const t_obj *list, va_list ap);
 bool		list_set(t_obj *list, va_list ap);
@@ -41,8 +42,7 @@ void		*list_copy(const t_obj *src);
 void		*list_clone(const t_obj *src);
 void		list_clear(t_obj *list);
 
-void		list_init(t_obj *obj);
-bool		list_exists(const t_obj *list, ssize_t index);
+bool		item_exists(const t_obj *list, ssize_t index);
 void		*list_getitem(void *node);
 void		*list_setitem(t_obj *list, void *node, const void *val);
 void		*list_newnode(const t_obj *list, const void *val);

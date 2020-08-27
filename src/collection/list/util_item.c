@@ -13,7 +13,7 @@
 #include "libft.h"
 #include "listobj.h"
 
-bool	list_exists(const t_obj *list, ssize_t index)
+bool	item_exists(const t_obj *list, ssize_t index)
 {
 	return ((size_t)index < (size_t)list->size);
 }

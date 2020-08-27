@@ -21,7 +21,7 @@ void	*pop(t_obj *vector, ssize_t index, void *out)
 	n = vector->size;
 	if (index < 0)
 		index += n;
-	if (!vector_exists(vector, index))
+	if (!item_exists(vector, index))
 		return (NULL);
 	item = vector_getitem(vector, index);
 	ft_memcpy(out, item, vector->itemsize);

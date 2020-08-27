@@ -20,7 +20,7 @@ bool	vector_set(t_obj *vector, va_list ap)
 	index = va_arg(ap, ssize_t);
 	if (index < 0)
 		index += vector->size;
-	if (!vector_exists(vector, index))
+	if (!item_exists(vector, index))
 		return (false);
 	if (vector->dtor)
 		vector->dtor(vector_getitem(vector, index));

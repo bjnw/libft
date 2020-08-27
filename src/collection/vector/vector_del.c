@@ -21,7 +21,7 @@ bool	vector_del(t_obj *vector, va_list ap)
 	n = vector->size;
 	if (index < 0)
 		index += n;
-	if (!vector_exists(vector, index))
+	if (!item_exists(vector, index))
 		return (false);
 	if (vector->dtor)
 		vector->dtor(vector_getitem(vector, index));

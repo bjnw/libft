@@ -13,7 +13,7 @@
 #include "libft.h"
 #include "vectorobj.h"
 
-bool	vector_exists(const t_obj *vector, ssize_t index)
+bool	item_exists(const t_obj *vector, ssize_t index)
 {
 	return ((size_t)index < (size_t)vector->size);
 }
