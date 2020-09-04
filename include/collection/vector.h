@@ -24,6 +24,8 @@ void	*split(const char *s, int delim, size_t itemsize,
 void	*emplace(t_obj *vector, void *ctx, void (*f)(void *, void *));
 void	*insert(t_obj *vector, ssize_t index, const void *val);
 void	*pop(t_obj *vector, ssize_t index, void *out);
+void	*bfind(const t_obj *vector, const void *val,
+			int (*cmp)(const void *, const void *));
 void	sort(t_obj *vector, int (*cmp)(const void *, const void *));
 void	reverse(t_obj *vector);
 void	patch(t_obj *dst, const t_obj *src, ssize_t from);
