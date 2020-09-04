@@ -21,6 +21,8 @@ void	*bfind(const t_obj *vector, const void *val,
 	ssize_t	high;
 	void	*item;
 
+	if (vector->size == 0)
+		return (NULL);
 	low = 0;
 	high = vector->size - 1;
 	while (low != high)

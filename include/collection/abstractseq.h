@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sequenceobj.h                                      :+:      :+:    :+:   */
+/*   abstractseq.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SEQUENCEOBJ_H
-# define SEQUENCEOBJ_H
+#ifndef ABSTRACTSEQ_H
+# define ABSTRACTSEQ_H
 
 # include "collection/abstractobj.h"
 

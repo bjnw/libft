@@ -13,7 +13,7 @@
 #ifndef VECTOR_H
 # define VECTOR_H
 
-# include "collection/sequenceobj.h"
+# include "collection/abstractseq.h"
 
 void	*tovector(const t_obj *obj);
 void	*vector(ssize_t size, size_t itemsize);
