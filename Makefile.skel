@@ -26,7 +26,7 @@ CFLAGS := $(WFLAGS) $(OFLAGS) -MMD -I$(INCLUDE)
 
 vpath %.c %SRC_DIRS%
 
-.PHONY: all clean fclean re test love debug
+.PHONY: all clean fclean re test love debug db
 
 $(NAME): $(OBJ)
 	@printf "[$(NAME)] Linking objects...\n"
@@ -59,7 +59,10 @@ test: all
 
 love:
 	@printf 'not war\n'
-	@sh util/genmake.sh > Makefile
+	@sh bin/genmake.sh > Makefile
 
 debug:
 	@printf 'nope\n'
+
+db:
+	@compiledb make
