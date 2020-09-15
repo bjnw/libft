@@ -123,5 +123,6 @@ void		*ft_map(const void *data, size_t len, size_t size,
 				void (*f)(void *));
 
 void		panic(const char *msg);
+void		except(bool state, const char *msg);
 
 #endif
