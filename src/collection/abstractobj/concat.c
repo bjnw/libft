@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join.c                                             :+:      :+:    :+:   */
+/*   concat.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "collection/abstractobj.h"
 
-void	*join(const t_obj *obj1, const t_obj *obj2)
+void	*concat(const t_obj *obj1, const t_obj *obj2)
 {
 	t_obj *ret;
 

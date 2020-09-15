@@ -48,7 +48,7 @@ void	*collect(t_obj *iterobj);
 
 void	*copy(const t_obj *obj);
 void	*clone(const t_obj *obj);
-void	*join(const t_obj *obj1, const t_obj *obj2);
+void	*concat(const t_obj *obj1, const t_obj *obj2);
 void	extend(t_obj *dst, const t_obj *src);
 void	clear(t_obj *obj);
 /*
