@@ -10,12 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-
 #include "libft.h"
 
-void	except(bool state, const char *msg)
+void	except(bool expr, const char *msg)
 {
-	if (state)
+	if (expr)
 		panic(msg);
 }
