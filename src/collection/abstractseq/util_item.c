@@ -10,15 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "collection/abstractseq.h"
 #include "libft.h"
-#include "listobj.h"
 
-void	*list_getitem(void *node)
+bool	item_exists(const t_obj *list, ssize_t index)
 {
-	return (node + sizeof(t_node));
-}
-
-void	*list_setitem(t_obj *list, void *node, const void *val)
-{
-	return (ft_memcpy(node + sizeof(t_node), val, list->itemsize));
+	return ((size_t)index < (size_t)list->size);
 }

@@ -13,11 +13,6 @@
 #include "libft.h"
 #include "vectorobj.h"
 
-bool	item_exists(const t_obj *vector, ssize_t index)
-{
-	return ((size_t)index < (size_t)vector->size);
-}
-
 void	*vector_getitem(const t_obj *vector, ssize_t index)
 {
 	return (vector->data + index * vector->itemsize);
