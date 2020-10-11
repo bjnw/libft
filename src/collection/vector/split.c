@@ -23,7 +23,8 @@ void	*split(const char *s, int delim, size_t itemsize,
 	char	*s0;
 
 	n = ft_strelems(s, delim);
-	ret = vector(n, itemsize);
+	ret = vector(itemsize);
+	vector_reserve(ret, n);
 	ret->size = n;
 	it = iter(ret);
 	while ((item = next(it)))

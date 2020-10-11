@@ -17,7 +17,7 @@ void	*vector_copy(const t_obj *src)
 {
 	t_obj *ret;
 
-	ret = vector(0, src->itemsize);
+	ret = vector(src->itemsize);
 	ret->dtor = src->dtor;
 	return (ret);
 }

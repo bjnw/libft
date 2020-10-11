@@ -16,7 +16,7 @@ void	*wrap(void *data, ssize_t size, size_t itemsize)
 {
 	t_obj *ret;
 
-	ret = vector(0, itemsize);
+	ret = vector(itemsize);
 	ret->size = size;
 	ret->data = data;
 	return (ret);

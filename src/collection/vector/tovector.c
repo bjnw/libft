@@ -17,7 +17,8 @@ void	*tovector(const t_obj *obj)
 {
 	t_obj *ret;
 
-	ret = vector(obj->size, obj->itemsize);
+	ret = vector(obj->itemsize);
+	vector_reserve(ret, obj->size);
 	extend(ret, obj);
 	return (ret);
 }

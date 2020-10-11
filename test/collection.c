@@ -397,7 +397,7 @@ int		main(void)
 	// }
 
 	// srand(1111);
-	// void *srt = vector(10000000, sizeof(int));
+	// void *srt = vector(sizeof(int));
 	// for (int i = 0, n; i < 10000000; i++) {
 	// 	n = rand() % 10000000;
 	// 	add(srt, &n);

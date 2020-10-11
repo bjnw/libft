@@ -13,13 +13,12 @@
 #include "libft.h"
 #include "vectorobj.h"
 
-void	*vector(ssize_t size, size_t itemsize)
+void	*vector(size_t itemsize)
 {
 	t_obj *ret;
 
 	ret = xcalloc(1, sizeof(t_vector));
 	ret->itemsize = itemsize;
 	vector_init(ret);
-	vector_reserve(ret, size);
 	return (ret);
 }

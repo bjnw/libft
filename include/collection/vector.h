@@ -16,7 +16,7 @@
 # include "collection/abstractseq.h"
 
 void	*tovector(const t_obj *obj);
-void	*vector(ssize_t size, size_t itemsize);
+void	*vector(size_t itemsize);
 void	*wrap(void *data, ssize_t size, size_t itemsize);
 void	*unwrap(t_obj *vector);
 void	*split(const char *s, int delim, size_t itemsize,
