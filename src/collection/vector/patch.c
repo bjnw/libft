@@ -10,27 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 #include "libft.h"
 #include "vectorobj.h"
 
 void	patch(t_obj *dst, const t_obj *src, ssize_t from)
 {
-	void	*itdst;
-	void	*itsrc;
-	void	*itemdst;
-	void	*itemsrc;
-	ssize_t	n;
+	void *itdst;
+	void *itsrc;
+	void *itemdst;
+	void *itemsrc;
 
-	n = dst->size;
-	if (from < 0)
-	{
-		from += n;
-		if (from < 0)
-			from = 0;
-	}
-	else if (from > n)
-		from = n;
-	itdst = drop(dst, from);
+	itdst = view(dst, from, size(src), 1);
 	itsrc = iter(src);
 	while (true)
 	{
@@ -40,4 +32,8 @@ void	patch(t_obj *dst, const t_obj *src, ssize_t from)
 			break ;
 		ft_memcpy(itemdst, itemsrc, dst->itemsize);
 	}
+	if (itemdst)
+		free(itdst);
+	if (itemsrc)
+		free(itsrc);
 }
