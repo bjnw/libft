@@ -45,6 +45,6 @@ void			vector_copyitems(t_obj *dst, const t_obj *src);
 void			vector_lshitems(t_obj *vector, ssize_t index);
 void			vector_rshitems(t_obj *vector, ssize_t index);
 void			vector_reserve(t_obj *vector, ssize_t capacity);
-void			vector_resize(t_obj *vector, ssize_t size);
+void			vector_resize(t_obj *vector, ssize_t newsize);
 
 #endif

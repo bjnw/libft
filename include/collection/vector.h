@@ -32,7 +32,7 @@ void	patch(t_obj *dst, const t_obj *src, ssize_t from);
 
 void	*reversed(t_obj *vector);
 void	*view(t_obj *vector, ssize_t from, ssize_t size, ssize_t step);
-void	*slice(t_obj *vector, ssize_t low, ssize_t high);
+void	*slice(t_obj *vector, ssize_t from, ssize_t until);
 void	*take(t_obj *vector, ssize_t size);
 void	*drop(t_obj *vector, ssize_t size);
 void	*takewhile(t_obj *vector, bool (*p)(const void *));

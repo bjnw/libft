@@ -46,19 +46,21 @@ void	vector_reserve(t_obj *vector, ssize_t capacity)
 	((t_vector *)vector)->capacity = capacity;
 }
 
-void	vector_resize(t_obj *vector, ssize_t size)
+void	vector_resize(t_obj *vector, ssize_t newsize)
 {
 	ssize_t capacity;
 
-	if (size > ((t_vector *)vector)->capacity ||
-			size < ((t_vector *)vector)->capacity >> 1)
+	capacity = ((t_vector *)vector)->capacity;
+	if (newsize <= capacity && newsize >= capacity >> 1)
 	{
-		capacity = ((size_t)size + (size >> 2) + 0x1f) & ~0x0f;
-		if (size - vector->size > capacity - size)
-			capacity = ((size_t)size + 0x0f) & ~0x0f;
-		else if (size == 0)
-			capacity = 0;
-		vector_reserve(vector, capacity);
+		vector->size = newsize;
+		return ;
 	}
-	vector->size = size;
+	capacity = (size_t)newsize + (newsize >> 1) + 6 & ~3;
+	if (newsize - vector->size > capacity - newsize)
+		capacity = (size_t)newsize + 3 & ~3;
+	else if (newsize == 0)
+		capacity = 0;
+	vector_reserve(vector, capacity);
+	vector->size = newsize;
 }
