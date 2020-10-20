@@ -43,8 +43,8 @@ bool	set(t_obj *obj, ...);
 bool	del(t_obj *obj, ...);
 
 void	*iter(const t_obj *obj);
-void	*next(t_obj *iterobj);
-void	*collect(t_obj *iterobj);
+void	*next(t_obj *itobj);
+void	*collect(t_obj *itobj);
 
 void	*copy(const t_obj *obj);
 void	*clone(const t_obj *obj);

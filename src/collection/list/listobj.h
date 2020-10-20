@@ -29,7 +29,7 @@ typedef struct {
 typedef struct {
 	t_list	list;
 	t_node	*current;
-}	t_iter;
+}	t_itobj;
 
 void		list_init(t_obj *obj);
 void		*list_add(t_obj *list, va_list ap);
@@ -37,7 +37,7 @@ void		*list_get(const t_obj *list, va_list ap);
 bool		list_set(t_obj *list, va_list ap);
 bool		list_del(t_obj *list, va_list ap);
 void		*list_iter(const t_obj *list);
-void		*list_next(t_obj *iterobj);
+void		*list_next(t_obj *itobj);
 void		*list_copy(const t_obj *src);
 void		*list_clone(const t_obj *src);
 void		list_clear(t_obj *list);

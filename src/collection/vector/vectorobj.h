@@ -25,7 +25,7 @@ typedef struct {
 	ssize_t		index;
 	ssize_t		size;
 	ssize_t		step;
-}	t_iter;
+}	t_itobj;
 
 void			vector_init(t_obj *obj);
 void			*vector_add(t_obj *vector, va_list ap);
@@ -33,7 +33,7 @@ void			*vector_get(const t_obj *vector, va_list ap);
 bool			vector_set(t_obj *vector, va_list ap);
 bool			vector_del(t_obj *vector, va_list ap);
 void			*vector_iter(const t_obj *vector);
-void			*vector_next(t_obj *iterobj);
+void			*vector_next(t_obj *itobj);
 void			*vector_copy(const t_obj *src);
 void			*vector_clone(const t_obj *src);
 void			vector_clear(t_obj *vector);

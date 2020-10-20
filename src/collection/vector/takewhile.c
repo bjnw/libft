@@ -14,7 +14,7 @@
 
 void	*takewhile(t_obj *vector, bool (*p)(const void *))
 {
-	t_iter	*ret;
+	t_itobj	*ret;
 	void	*it;
 	void	*item;
 	ssize_t	n;

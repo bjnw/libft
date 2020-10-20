@@ -14,12 +14,12 @@
 
 #include "listobj.h"
 
-void	*list_next(t_obj *iterobj)
+void	*list_next(t_obj *itobj)
 {
-	t_iter	*it;
+	t_itobj	*it;
 	void	*item;
 
-	it = (t_iter *)iterobj;
+	it = (t_itobj *)itobj;
 	if (it->current)
 	{
 		item = list_getitem(it->current);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_iter.c                                        :+:      :+:    :+:   */
+/*   list_itobj.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,9 +15,9 @@
 
 void	*list_iter(const t_obj *list)
 {
-	t_iter *ret;
+	t_itobj *ret;
 
-	ret = xcalloc(1, sizeof(t_iter));
+	ret = xcalloc(1, sizeof(t_itobj));
 	ft_memcpy(ret, list, sizeof(t_list));
 	((t_obj *)ret)->iter = NULL;
 	ret->current = list->data;

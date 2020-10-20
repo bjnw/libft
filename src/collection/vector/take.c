@@ -14,7 +14,7 @@
 
 void	*take(t_obj *vector, ssize_t size)
 {
-	t_iter	*ret;
+	t_itobj	*ret;
 	ssize_t	n;
 
 	n = vector->size;

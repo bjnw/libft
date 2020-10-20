@@ -14,15 +14,15 @@
 
 #include "vectorobj.h"
 
-void	*vector_next(t_obj *iterobj)
+void	*vector_next(t_obj *itobj)
 {
-	t_iter	*it;
+	t_itobj	*it;
 	void	*item;
 
-	it = (t_iter *)iterobj;
-	if (it->size && item_exists(iterobj, it->index))
+	it = (t_itobj *)itobj;
+	if (it->size && item_exists(itobj, it->index))
 	{
-		item = vector_getitem(iterobj, it->index);
+		item = vector_getitem(itobj, it->index);
 		it->index += it->step;
 		it->size--;
 		return (item);

@@ -15,9 +15,9 @@
 
 void	*vector_iter(const t_obj *vector)
 {
-	t_iter *ret;
+	t_itobj *ret;
 
-	ret = xcalloc(1, sizeof(t_iter));
+	ret = xcalloc(1, sizeof(t_itobj));
 	ft_memcpy(ret, vector, sizeof(t_vector));
 	((t_obj *)ret)->iter = NULL;
 	ret->step = 1;

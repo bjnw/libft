@@ -14,7 +14,7 @@
 
 void	*reversed(t_obj *vector)
 {
-	t_iter *ret;
+	t_itobj *ret;
 
 	ret = iter(vector);
 	if (ret->size > 1)

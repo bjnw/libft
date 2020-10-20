@@ -15,7 +15,7 @@
 void	*view(t_obj *vector, ssize_t from,
 			ssize_t size, ssize_t step)
 {
-	t_iter	*ret;
+	t_itobj	*ret;
 	ssize_t	n;
 
 	n = vector->size;

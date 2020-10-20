@@ -14,7 +14,7 @@
 
 void	*slice(t_obj *vector, ssize_t from, ssize_t until)
 {
-	t_iter	*ret;
+	t_itobj	*ret;
 	ssize_t	size;
 	ssize_t	n;
 
