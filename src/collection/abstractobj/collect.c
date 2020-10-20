@@ -12,11 +12,11 @@
 
 #include "collection/abstractobj.h"
 
-void	*collect(t_obj *iterobj)
+void	*collect(t_obj *itobj)
 {
 	t_obj *ret;
 
-	ret = copy(iterobj);
-	extend(ret, iterobj);
+	ret = copy(itobj);
+	extend(ret, itobj);
 	return (ret);
 }

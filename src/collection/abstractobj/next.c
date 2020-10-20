@@ -12,7 +12,7 @@
 
 #include "collection/abstractobj.h"
 
-void	*next(t_obj *iterobj)
+void	*next(t_obj *itobj)
 {
-	return (iterobj->next(iterobj));
+	return (itobj->next(itobj));
 }
