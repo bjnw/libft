@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_r.c                                         :+:      :+:    :+:   */
+/*   find_r.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,7 +14,7 @@
 
 #include "collection/abstractobj.h"
 
-void	*search_r(const t_obj *obj, const void *val, void *ctx,
+void	*find_r(const t_obj *obj, const void *val, void *ctx,
 			int (*cmp)(void *, const void *, const void *))
 {
 	void	*it;

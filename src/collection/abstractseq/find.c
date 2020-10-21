@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search.c                                           :+:      :+:    :+:   */
+/*   find.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,7 +14,7 @@
 
 #include "collection/abstractobj.h"
 
-void	*search(const t_obj *obj, const void *val,
+void	*find(const t_obj *obj, const void *val,
 			int (*cmp)(const void *, const void *))
 {
 	void	*it;
