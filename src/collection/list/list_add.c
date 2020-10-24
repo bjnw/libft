@@ -14,23 +14,23 @@
 
 void	*list_add(t_obj *list, va_list ap)
 {
-	const void	*val;
+	t_meta		*meta;
+	const void	*value;
 	t_node		*node;
 	t_node		*last;
-	void		*item;
 
-	val = va_arg(ap, const void *);
-	node = list_newnode(list, val);
-	last = ((t_list *)list)->last;
+	meta = list->meta;
+	value = va_arg(ap, const void *);
+	node = list_newnode(list, value);
+	last = meta->last;
 	if (last)
 	{
 		last->next = node;
 		node->prev = last;
 	}
 	else
-		list->data = node;
-	((t_list *)list)->last = node;
-	list->size++;
-	item = list_getitem(node);
-	return (item);
+		meta->first = node;
+	meta->last = node;
+	meta->size++;
+	return (node->item);
 }

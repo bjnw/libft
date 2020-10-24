@@ -18,7 +18,7 @@ void	*vector_get(const t_obj *vector, va_list ap)
 
 	index = va_arg(ap, ssize_t);
 	if (index < 0)
-		index += vector->size;
+		index += vector->meta->size;
 	if (item_exists(vector, index))
 		return (vector_getitem(vector, index));
 	return (NULL);

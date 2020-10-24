@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fold.c                                             :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,17 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstractobj.h"
+#include "collection/abstractseq.h"
+#include "collection/abstractmeta.h"
 
-void	*fold(const t_obj *obj, void *init, void *(*op)(void *, void *))
+bool	item_exists(const t_obj *seq, ssize_t index)
 {
-	void *acc;
-	void *it;
-	void *item;
-
-	it = iter(obj);
-	acc = init;
-	while ((item = next(it)))
-		acc = (*op)(acc, item);
-	return (acc);
+	return ((size_t)index < (size_t)seq->meta->size);
 }

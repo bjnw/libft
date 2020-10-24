@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "collection/abstractobj.h"
+#include "collection/abstractmeta.h"
 
 bool	isempty(const t_obj *obj)
 {
-	return (obj->size == 0);
+	return (obj->meta->size == 0);
 }

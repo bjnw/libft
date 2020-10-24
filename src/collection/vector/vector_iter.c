@@ -15,12 +15,10 @@
 
 void	*vector_iter(const t_obj *vector)
 {
-	t_itobj *ret;
+	t_itobj *it;
 
-	ret = xcalloc(1, sizeof(t_itobj));
-	ft_memcpy(ret, vector, sizeof(t_vector));
-	((t_obj *)ret)->iter = NULL;
-	ret->step = 1;
-	ret->size = vector->size;
-	return (ret);
+	it = itobj(vector, VECTOR_ITOBJ_SIZE);
+	it->size = vector->meta->size;
+	it->step = 1;
+	return (it);
 }

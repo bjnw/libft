@@ -17,7 +17,7 @@
 
 void	*tolist(const t_obj *obj);
 void	*list(size_t itemsize);
-void	*addfirst(t_obj *list, const void *val);
+void	*addfirst(t_obj *list, const void *value);
 void	*popfirst(t_obj *list, void *out);
 void	*poplast(t_obj *list, void *out);
 void	*first(const t_obj *list);

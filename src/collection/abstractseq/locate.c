@@ -14,23 +14,23 @@
 
 #include "collection/abstractobj.h"
 
-ssize_t	locate(const t_obj *obj, const void *val,
+ssize_t	locate(const t_obj *obj, const void *value,
 			int (*cmp)(const void *, const void *))
 {
-	ssize_t	ret;
+	ssize_t	index;
 	void	*it;
 	void	*item;
 
-	ret = 0;
+	index = 0;
 	it = iter(obj);
 	while ((item = next(it)))
 	{
-		if ((*cmp)(item, val) == 0)
+		if ((*cmp)(item, value) == 0)
 		{
 			free(it);
-			return (ret);
+			return (index);
 		}
-		ret++;
+		index++;
 	}
 	return (-1);
 }

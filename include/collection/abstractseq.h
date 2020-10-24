@@ -15,17 +15,17 @@
 
 # include "collection/abstractobj.h"
 
-void	*find(const t_obj *obj, const void *val,
+void	*find(const t_obj *obj, const void *value,
 			int (*cmp)(const void *, const void *));
-ssize_t	count(const t_obj *obj, const void *val,
+ssize_t	count(const t_obj *obj, const void *value,
 			int (*cmp)(const void *, const void *));
-ssize_t	locate(const t_obj *obj, const void *val,
+ssize_t	locate(const t_obj *obj, const void *value,
 			int (*cmp)(const void *, const void *));
-void	*find_r(const t_obj *obj, const void *val, void *ctx,
+void	*find_r(const t_obj *obj, const void *value, void *ctx,
 			int (*cmp)(void *, const void *, const void *));
-ssize_t	count_r(const t_obj *obj, const void *val, void *ctx,
+ssize_t	count_r(const t_obj *obj, const void *value, void *ctx,
 			int (*cmp)(void *, const void *, const void *));
-ssize_t	locate_r(const t_obj *obj, const void *val, void *ctx,
+ssize_t	locate_r(const t_obj *obj, const void *value, void *ctx,
 			int (*cmp)(void *, const void *, const void *));
 
 #endif

@@ -12,15 +12,15 @@
 
 #include "vectorobj.h"
 
-void	*emplace(t_obj *vector, void *ctx,
+void	*emplace(t_obj *vector, void *arg,
 			void (*f)(void *, void *))
 {
 	void	*item;
 	ssize_t	n;
 
-	n = vector->size;
+	n = vector->meta->size;
 	vector_resize(vector, n + 1);
 	item = vector_getitem(vector, n);
-	(*f)(ctx, item);
+	(*f)(item, arg);
 	return (item);
 }

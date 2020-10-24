@@ -14,5 +14,9 @@
 
 void	*last(const t_obj *list)
 {
-	return (list_getitem(((t_list *)list)->last));
+	t_node *node;
+
+	if ((node = list->meta->last))
+		return (node->item);
+	return (NULL);
 }

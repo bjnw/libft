@@ -14,11 +14,11 @@
 
 void	*add(t_obj *obj, ...)
 {
-	void	*ret;
+	void	*item;
 	va_list	ap;
 
 	va_start(ap, obj);
-	ret = obj->add(obj, ap);
+	item = obj->add(obj, ap);
 	va_end(ap);
-	return (ret);
+	return (item);
 }

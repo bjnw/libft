@@ -10,15 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "vectorobj.h"
 
 void	*tovector(const t_obj *obj)
 {
-	t_obj *ret;
+	t_obj	*new;
+	t_meta	*meta;
 
-	ret = vector(obj->itemsize);
-	vector_reserve(ret, obj->size);
-	extend(ret, obj);
-	return (ret);
+	meta = obj->meta;
+	new = vector(meta->itemsize);
+	vector_reserve(new, meta->size);
+	extend(new, obj);
+	return (new);
 }

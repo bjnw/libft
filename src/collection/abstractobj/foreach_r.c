@@ -12,11 +12,10 @@
 
 #include "collection/abstractobj.h"
 
-void	foreach_r(t_obj *obj, void *ctx,
-			void (*f)(void *, void *))
+void	foreach_r(t_obj *obj, void *ctx, void (*f)(void *, void *))
 {
-	void	*it;
-	void	*item;
+	void *it;
+	void *item;
 
 	it = iter(obj);
 	while ((item = next(it)))

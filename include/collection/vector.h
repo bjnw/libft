@@ -21,14 +21,14 @@ void	*wrap(void *data, ssize_t size, size_t itemsize);
 void	*unwrap(t_obj *vector);
 void	*split(const char *s, int delim, size_t itemsize,
 			void (*f)(void *, const char *, const char *));
-void	*emplace(t_obj *vector, void *ctx, void (*f)(void *, void *));
-void	*insert(t_obj *vector, ssize_t index, const void *val);
+void	*emplace(t_obj *vector, void *arg, void (*f)(void *, void *));
+void	*insert(t_obj *vector, ssize_t index, const void *value);
 void	*pop(t_obj *vector, ssize_t index, void *out);
-void	*bfind(const t_obj *vector, const void *val,
+void	*bfind(const t_obj *vector, const void *value,
 			int (*cmp)(const void *, const void *));
 void	sort(t_obj *vector, int (*cmp)(const void *, const void *));
+void	patch(t_obj *dst, const t_obj *src, ssize_t from, ssize_t size);
 void	reverse(t_obj *vector);
-void	patch(t_obj *dst, const t_obj *src, ssize_t from);
 
 void	*reversed(t_obj *vector);
 void	*view(t_obj *vector, ssize_t from, ssize_t size, ssize_t step);

@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fold.c                                             :+:      :+:    :+:   */
+/*   abstractmeta.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstractobj.h"
+#ifndef ABSTRACTMETA_H
+# define ABSTRACTMETA_H
 
-void	*fold(const t_obj *obj, void *init, void *(*op)(void *, void *))
-{
-	void *acc;
-	void *it;
-	void *item;
+# ifndef ABSTRACTOBJ_H
+# error "This file is for internal use only"
+# endif
 
-	it = iter(obj);
-	acc = init;
-	while ((item = next(it)))
-		acc = (*op)(acc, item);
-	return (acc);
-}
+# include <sys/types.h>
+# include <stddef.h>
+
+/*
+** NOTE order is important!
+*/
+struct	s_object_meta {
+	size_t	itemsize;
+	ssize_t	size;
+};
+
+#endif

@@ -14,8 +14,8 @@
 
 void	extend(t_obj *dst, const t_obj *src)
 {
-	void	*it;
-	void	*item;
+	void *it;
+	void *item;
 
 	it = iter(src);
 	while ((item = next(it)))

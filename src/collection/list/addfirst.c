@@ -14,21 +14,21 @@
 
 void	*addfirst(t_obj *list, const void *val)
 {
+	t_meta	*meta;
 	t_node	*node;
 	t_node	*first;
-	void	*item;
 
+	meta = list->meta;
 	node = list_newnode(list, val);
-	first = list->data;
+	first = meta->first;
 	if (first)
 	{
 		node->next = first;
 		first->prev = node;
 	}
 	else
-		((t_list *)list)->last = node;
-	list->data = node;
-	list->size++;
-	item = list_getitem(node);
-	return (item);
+		meta->last = node;
+	meta->first = node;
+	meta->size++;
+	return (node->item);
 }

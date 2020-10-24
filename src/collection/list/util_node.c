@@ -13,58 +13,64 @@
 #include "libft.h"
 #include "listobj.h"
 
-void	*list_newnode(const t_obj *list, const void *val)
+void	*list_newnode(const t_obj *list, const void *value)
 {
-	void *ret;
+	t_node	*node;
+	t_meta	*meta;
 
-	ret = xcalloc(1, sizeof(t_node) + list->itemsize);
-	ft_memcpy(ret + sizeof(t_node), val, list->itemsize);
-	return (ret);
+	meta = list->meta;
+	node = xcalloc(1, sizeof(t_node) + meta->itemsize);
+	ft_memcpy(node->item, value, meta->itemsize);
+	return (node);
 }
 
 void	*list_getnode(const t_obj *list, ssize_t index)
 {
-	t_node	*ret;
+	t_node	*node;
+	t_meta	*meta;
 	ssize_t	n;
 
-	n = list->size;
+	meta = list->meta;
+	n = meta->size;
 	if (index <= n >> 1)
 	{
-		ret = list->data;
+		node = meta->first;
 		while (index--)
-			ret = ret->next;
+			node = node->next;
 	}
 	else
 	{
 		index = n - index;
-		ret = ((t_list *)list)->last;
+		node = meta->last;
 		while (--index)
-			ret = ret->prev;
+			node = node->prev;
 	}
-	return (ret);
+	return (node);
 }
 
 void	*list_popnode(t_obj *list, ssize_t index)
 {
-	t_node *ret;
+	t_node	*node;
+	t_meta	*meta;
 
-	ret = list_getnode(list, index);
-	if (ret->prev)
-		ret->prev->next = ret->next;
+	meta = list->meta;
+	node = list_getnode(list, index);
+	if (node->prev)
+		node->prev->next = node->next;
 	else
 	{
-		list->data = ret->next;
-		if (ret->next)
-			ret->next->prev = NULL;
+		meta->first = node->next;
+		if (node->next)
+			node->next->prev = NULL;
 	}
-	if (ret->next)
-		ret->next->prev = ret->prev;
+	if (node->next)
+		node->next->prev = node->prev;
 	else
 	{
-		((t_list *)list)->last = ret->prev;
-		if (ret->prev)
-			ret->prev->next = NULL;
+		meta->last = node->prev;
+		if (node->prev)
+			node->prev->next = NULL;
 	}
-	list->size--;
-	return (ret);
+	meta->size--;
+	return (node);
 }

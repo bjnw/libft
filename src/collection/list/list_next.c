@@ -22,7 +22,7 @@ void	*list_next(t_obj *itobj)
 	it = (t_itobj *)itobj;
 	if (it->current)
 	{
-		item = list_getitem(it->current);
+		item = it->current->item;
 		it->current = it->current->next;
 		return (item);
 	}

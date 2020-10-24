@@ -14,11 +14,11 @@
 
 void	*slice(t_obj *vector, ssize_t from, ssize_t until)
 {
-	t_itobj	*ret;
+	t_itobj	*it;
 	ssize_t	size;
 	ssize_t	n;
 
-	n = vector->size;
+	n = vector->meta->size;
 	if (from < 0)
 		from = 0;
 	else if (from > n)
@@ -28,6 +28,6 @@ void	*slice(t_obj *vector, ssize_t from, ssize_t until)
 	else if (until > n)
 		until = n;
 	size = until - from;
-	ret = view(vector, from, size, 1);
-	return (ret);
+	it = view(vector, from, size, 1);
+	return (it);
 }

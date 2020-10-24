@@ -16,19 +16,20 @@
 
 void	list_clear(t_obj *list)
 {
+	t_meta	*meta;
 	t_node	*node;
 	t_node	*tmp;
 
-	node = list->data;
-	while (node)
+	meta = list->meta;
+	node = meta->first;
+	while ((tmp = node))
 	{
-		tmp = node;
 		node = node->next;
 		if (list->dtor)
-			list->dtor(list_getitem(tmp));
+			list->dtor(tmp->item);
 		free(tmp);
 	}
-	list->data = NULL;
-	list->size = 0;
-	((t_list *)list)->last = NULL;
+	meta->size = 0;
+	meta->first = NULL;
+	meta->last = NULL;
 }

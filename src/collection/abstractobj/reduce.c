@@ -12,16 +12,15 @@
 
 #include "collection/abstractobj.h"
 
-void	*reduce(const t_obj *obj,
-			void *(*op)(void *, void *))
+void	*reduce(const t_obj *obj, void *(*op)(void *, void *))
 {
-	void	*ret;
-	void	*it;
-	void	*item;
+	void *acc;
+	void *it;
+	void *item;
 
 	it = iter(obj);
-	ret = next(it);
+	acc = next(it);
 	while ((item = next(it)))
-		ret = (*op)(ret, item);
-	return (ret);
+		acc = (*op)(acc, item);
+	return (acc);
 }

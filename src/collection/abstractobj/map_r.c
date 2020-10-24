@@ -11,13 +11,9 @@
 /* ************************************************************************** */
 
 #include "collection/abstractobj.h"
+#include "closureobj.h"
 
-void	*map_r(const t_obj *obj, void *ctx,
-			void (*f)(void *, void *))
+void	*map_r(const t_obj *obj, void *ctx, void (*f)(void *, void *))
 {
-	t_obj *ret;
-
-	ret = clone(obj);
-	foreach_r(ret, ctx, f);
-	return (ret);
+	return (clobj(obj, map_next_r, ctx, f));
 }

@@ -16,9 +16,9 @@
 
 void	*unwrap(t_obj *vector)
 {
-	void *ret;
+	void *data;
 
-	ret = vector->data;
+	data = vector->meta->data;
 	free(vector);
-	return (ret);
+	return (data);
 }

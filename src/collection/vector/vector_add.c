@@ -14,13 +14,13 @@
 
 void	*vector_add(t_obj *vector, va_list ap)
 {
-	const void	*val;
+	const void	*value;
 	void		*item;
 	ssize_t		n;
 
-	n = vector->size;
+	n = vector->meta->size;
 	vector_resize(vector, n + 1);
-	val = va_arg(ap, const void *);
-	item = vector_setitem(vector, n, val);
+	value = va_arg(ap, const void *);
+	item = vector_setitem(vector, n, value);
 	return (item);
 }

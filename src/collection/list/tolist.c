@@ -14,9 +14,9 @@
 
 void	*tolist(const t_obj *obj)
 {
-	t_obj *ret;
+	t_obj *new;
 
-	ret = list(obj->itemsize);
-	extend(ret, obj);
-	return (ret);
+	new = list(obj->meta->itemsize);
+	extend(new, obj);
+	return (new);
 }

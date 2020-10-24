@@ -15,16 +15,19 @@
 
 void	*pop(t_obj *vector, ssize_t index, void *out)
 {
+	t_meta	*meta;
 	void	*item;
 	ssize_t	n;
 
-	n = vector->size;
+	meta = vector->meta;
+	n = meta->size;
 	if (index < 0)
 		index += n;
 	if (!item_exists(vector, index))
 		return (NULL);
 	item = vector_getitem(vector, index);
-	ft_memcpy(out, item, vector->itemsize);
+	if (out)
+		ft_memcpy(out, item, meta->itemsize);
 	if (index + 1 < n)
 		vector_lshitems(vector, index + 1);
 	vector_resize(vector, n - 1);

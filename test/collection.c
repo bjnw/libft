@@ -1,12 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/types.h>
 #include <time.h>
 #include <stdint.h>
 #include <string.h>
 
+#include "collection/abstractobj.h"
 #include "libft.h"
 #include "collection/vector.h"
 #include "collection/list.h"
+#include "util.h"
 
 void	myatoi(void *item, const char *begin, const char *end)
 {
@@ -14,37 +17,66 @@ void	myatoi(void *item, const char *begin, const char *end)
 	*(int *)item = ft_atoi(begin);
 }
 
-bool	num_filter(const void *item)
+bool	int_odd(const void *item)
 {
-	return (*(int *)item % 7 == 0);
+	return (*(int *)item % 2 == 1);
 }
 
-bool	num_pos(const void *item)
+bool	int_even(const void *item)
 {
-	return (*(int *)item >= 0);
+	return (*(int *)item % 2 == 0);
 }
 
-void	num_mul1000(void *item)
+bool	int_div3(const void *item)
 {
-	*(int *)item *= 1000;
+	return (*(int *)item % 3 == 0);
 }
 
-void	num_print(void *item)
+bool	int_pos(const void *item)
+{
+	return (*(int *)item > 0);
+}
+
+bool	int_neg(const void *item)
+{
+	return (*(int *)item < 0);
+}
+
+bool	int_distinct(void *ctx, const void *item)
+{
+	int *prev = ctx;
+	int n = *(int *)item;
+
+	if (*prev == n)
+		return (false);
+	*prev = n;
+	return (true);
+}
+
+void	int_mul100(void *item)
+{
+	*(int *)item *= 100;
+}
+
+void	int_mul1693(void *item)
+{
+	*(int *)item *= 1693;
+}
+
+void	*int_neg_mul1693(void *item)
+{
+	if (!int_neg(item))
+		return (NULL);
+	int_mul1693(item);
+	return (item);
+}
+
+void	int_print(void *item)
 {
 	printf("[%10d]\n", *(int *)item);
 }
 
-void	*num_max(void *v1, void *v2)
-{
-	return (*(int *)v1 > *(int *)v2 ? v1 : v2);
-}
-
-void	*num_min(void *v1, void *v2)
-{
-	return (*(int *)v1 < *(int *)v2 ? v1 : v2);
-}
-
-void	*num_sum(void *sum, void *item)
+void	*int_sum(void *sum, void *item)
 {
 	*(intmax_t *)sum += *(int *)item;
 	return (sum);
@@ -63,7 +95,7 @@ void	str_upper(void *item)
 
 void	str_print(void *s)
 {
-	printf("> %s <\n", *(char **)s);
+	printf("\" %s \"\n", *(char **)s);
 }
 
 void	str_free(void *s)
@@ -71,7 +103,7 @@ void	str_free(void *s)
 	free(*(char **)s);
 }
 
-void	str_dup(void *item, const void *s)
+void	str_dup(void *item, void *s)
 {
 	*(char **)item = ft_strdup(s);
 }
@@ -84,14 +116,14 @@ typedef struct {
 void	lst_print(void *item)
 {
 	t_struct *st = item;
-	printf("-> c = %c, i = %d\n", st->c, st->i);
+	printf("{ c = '%c', i = %d }\n", st->c, st->i);
 }
 
 void	lst_fn(void *item)
 {
 	t_struct *st = item;
 	st->c = ft_toupper(st->c);
-	st->i -= 100;
+	int_mul1693(&st->i);
 }
 
 int		obj_cmp(void *item1, void *item2)
@@ -111,11 +143,12 @@ int		obj_cmp(void *item1, void *item2)
 
 int		main(void)
 {
-	const ssize_t n = 10000000;
+	const ssize_t MAX_ITEMS = 10000000;
 	clock_t begin, end;
 	int *val;
 	void *item;
 	void *it;
+	intmax_t acc;
 
 	// void *p1 = malloca(100);
 	// mt();
@@ -126,7 +159,7 @@ int		main(void)
 	// void *p4 = malloca(100);
 	// malloca_finalize();
 /*
-	// void *num = split(num,
+	// void *ints = split(ints,
 	// 	"42,000,1,2,3,4,     5,6,7,8  ,9,    10"
 	// 	",,,,  00123,  +456   ,7890  ,-_-, zzz,"
 	// 	"-666,     1234567890,  ,,NaN,,-10000,,",
@@ -135,328 +168,355 @@ int		main(void)
 	// 	myatoi
 	// );
 
-	// void *td = tolist(num);
-	// extend(td, num);
-	// foreach(td, num_print);
+	// void *td = tolist(ints);
+	// extend(td, ints);
+	// foreach(td, int_print);
 
 	void *lst = list(sizeof(t_struct));
 
 	begin = clock();
-	for (ssize_t i = 0; i < n; i++) {
-		add(lst, &(t_struct){100, 'a'});
-		addfront(lst, &(t_struct){200, 'b'});
+	for (ssize_t i = 0; i < MAX_ITEMS / 2; i++) {
+		add(lst, &(t_struct){1617, 'a'});
+		addfirst(lst, &(t_struct){-42, 'Z'});
 	}
 	end = clock();
 	// foreach(lst, lst_fn);
 	// foreach(lst, lst_print);
-	printf("lst added items,  %fs\n", TIME_DIFF(begin, end));
-	printf("lst size: %ld\n", size(lst));
+	printf("lst: added %ld items,  %fs\n", size(lst), TIME_DIFF(begin, end));
 
 	// begin = clock();
 	// for (ssize_t i = 0, z = 1; i < size(lst); i++, z *= -1) {
 	// 	item = get(lst, i * z);
 	// }
 	// end = clock();
-	// printf("accessed (rand) %ld items, %fs\n", size(lst), TIME_DIFF(begin, end));
+	// printf("lst: accessed (random)  %ld items,  %fs\n\n", size(lst), TIME_DIFF(begin, end));
 
 	// begin = clock();
 	// for (ssize_t i = 0; i < size(lst); i++) {
 	// 	item = get(lst, i);
 	// }
 	// end = clock();
-	// printf("accessed (cons) %ld items, %fs\n", size(lst), TIME_DIFF(begin, end));
+	// printf("lst: accessed (linear)  %ld items,  %fs\n\n", size(lst), TIME_DIFF(begin, end));
 
-	// it = iter(lst);
-	// begin = clock();
-	// while ((item = next(it))) {
-	// 	val = item;
-	// }
-	// end = clock();
-	// printf("accessed (iter) %ld items, %fs\n", size(lst), TIME_DIFF(begin, end));
-
-	// begin = clock();
-	// for (ssize_t i = 0, z = 1; i < size(lst); i++, z *= -1) {
-	// 	set(lst, i * z, &(t_struct){i, 'r'});
-	// }
-	// end = clock();
-	// // foreach(lst, num_print);
-	// printf("updated (rand) %ld items, %fs\n", size(lst), TIME_DIFF(begin, end));
-
-	// begin = clock();
-	// for (ssize_t i = 0; i < size(lst); i++) {
-	// 	set(lst, i, &(t_struct){i, 'c'});
-	// }
-	// end = clock();
-	// // foreach(lst, num_print);
-	// printf("updated (cons) %ld items, %fs\n", size(lst), TIME_DIFF(begin, end));
-
-	// it = iter(lst);
-	// int x = 0;
-	// begin = clock();
-	// while ((val = next(it))) {
-	// 	*(t_struct *)val = (t_struct){x++, 'a' + x % 26};
-	// }
-	// end = clock();
-	// // foreach(lst, num_print);
-	// printf("updated (iter) %ld items, %fs\n", size(lst), TIME_DIFF(begin, end));
-
-
-	t_struct st;
-	begin = clock();
-	for (ssize_t i = 0, sz = size(lst) / 2 - 10; i < sz; i++) {
-		popfront(lst, &st);
-		popback(lst, &st);
-	}
-	end = clock();
-	printf("lst poped items,  %fs\n", TIME_DIFF(begin, end));
-	printf("lst size: %ld\n", size(lst));
-
-	foreach(lst, lst_print);
-
-	// item = get(lst, -1l);
-	// lst_print(item);
-	delete(lst);
-
-// */
-// /**
-	void *num = split(
-		"42,000,1,2,3,4,     5,6,7,8  ,9,    10"
-		",,,,  00123,  +456   ,7890  ,-_-, zzz,"
-		"-666,     1234567890,  ,,NaN,,-10000,,",
-		',',
-		sizeof(int),
-		myatoi
-	);
-	foreach(num, num_print);
-	printf("num ints splitted\n");
-	printf("num size: %ld\n", size(num));
-
-	it = takewhile(num, num_pos);
-	foreach(it, num_print);
-	printf("num positive taked\n");
-
-	it = dropwhile(num, num_pos);
-	foreach(it, num_print);
-	printf("num positive dropped\n");
-
-	// it = iter(num);
-	// void *mpn = map(it, num_mul1000);
-	// foreach(mpn, num_print);
-	// printf("mpn size: %ld\n", size(mpn));
-	// delete(mpn);
-
-	it = reversed(num);
-	it = drop(it, 10);
-	patch(num, it, 0);
-	foreach(num, num_print);
-	printf("num patched\n");
-
-	begin = clock();
-	for (ssize_t i = 0; i < n; i++) {
-		add(num, &i);
-	}
-	end = clock();
-	// foreach(num, num_print);
-	printf("num added %ld items,  %fs\n", n, TIME_DIFF(begin, end));
-	printf("num size: %ld\n", size(num));
-
-	val = reduce(num, num_min);
-	printf("num min=%d\n", *val);
-	val = reduce(num, num_max);
-	printf("num max=%d\n", *val);
-	intmax_t sum = 0;
-	sum = *(intmax_t *)fold(num, &sum, num_sum);
-	printf("num sum=%ld\n", sum);
-
-	begin = clock();
-	foreach(num, num_mul1000);
-	end = clock();
-	printf("f applied for %ld items, %fs\n", n, TIME_DIFF(begin, end));
-
-	begin = clock();
-	reverse(num);
-	end = clock();
-	// foreach(num, num_print);
-	printf("reversed %ld items, %fs\n", size(num), TIME_DIFF(begin, end));
-
-	begin = clock();
-	for (ssize_t i = 0, z = 1; i < size(num); i++, z *= -1) {
-		val = get(num, i * z);
-	}
-	end = clock();
-	printf("accessed (rand) %ld items, %fs\n", size(num), TIME_DIFF(begin, end));
-
-	begin = clock();
-	for (ssize_t i = 0; i < size(num); i++) {
-		val = get(num, i);
-	}
-	end = clock();
-	printf("accessed (cons) %ld items, %fs\n", size(num), TIME_DIFF(begin, end));
-
-	it = iter(num);
+	it = iter(lst);
 	begin = clock();
 	while ((item = next(it))) {
 		val = item;
 	}
 	end = clock();
-	printf("accessed (iter) %ld items, %fs\n", size(num), TIME_DIFF(begin, end));
+	printf("lst: accessed (iterate) %ld items,  %fs\n\n", size(lst), TIME_DIFF(begin, end));
 
+	// begin = clock();
+	// for (ssize_t i = 0, z = 1; i < size(lst); i++, z *= -1) {
+	// 	set(lst, i * z, &(t_struct){i, 'a' + i % 26});
+	// }
+	// end = clock();
+	// // foreach(lst, int_print);
+	// printf("lst: updated (random)  %ld items,  %fs\n\n", size(lst), TIME_DIFF(begin, end));
+
+	// begin = clock();
+	// for (ssize_t i = 0; i < size(lst); i++) {
+	// 	set(lst, i, &(t_struct){i, 'a' + i % 26});
+	// }
+	// end = clock();
+	// // foreach(lst, int_print);
+	// printf("lst: updated (linear)  %ld items,  %fs\n\n", size(lst), TIME_DIFF(begin, end));
+
+	it = iter(lst);
+	int x = 0;
 	begin = clock();
-	for (ssize_t i = 0, z = 1; i < size(num); i++, z *= -1) {
-		set(num, i * z, &i);
+	while ((val = next(it))) {
+		*(t_struct *)val = (t_struct){x, 'a' + x % 26};
+		x++;
 	}
 	end = clock();
-	// foreach(num, num_print);
-	printf("updated (rand) %ld items, %fs\n", size(num), TIME_DIFF(begin, end));
+	// foreach(lst, int_print);
+	printf("lst: updated (iterate) %ld items,  %fs\n\n", size(lst), TIME_DIFF(begin, end));
 
+	t_struct st;
 	begin = clock();
-	for (ssize_t i = 0; i < size(num); i++) {
-		set(num, i, &i);
+	for (ssize_t i = 0, sz = size(lst) / 2 - 10; i < sz; i++) {
+		popfirst(lst, &st);
+		poplast(lst, NULL);
 	}
 	end = clock();
-	// foreach(num, num_print);
-	printf("updated (cons) %ld items, %fs\n", size(num), TIME_DIFF(begin, end));
+	printf("lst: poped items,  %fs\n", TIME_DIFF(begin, end));
+	printf("lst size: %ld\n", size(lst));
 
-	it = iter(num);
+	foreach(lst, lst_print);
+
+	delete(lst);
+// */
+// /**
+	void *ints = split(
+		"42,,1,  2,3,4 , 000  ,4, 5,6   ,7,8  ,9,    10"
+		",,,,  00123,  +456,   -1122  ,7890  ,-_-, zzz,"
+		"  -666,     1234567890,  ,,  NaN,    ,-10000,,",
+		',',
+		sizeof(int),
+		myatoi
+	);
+	foreach(ints, int_print);
+	printf("ints splitted\n");
+	printf("ints size: %ld\n\n", size(ints));
+
+    begin = clock();
+	for (ssize_t i = -10; i <= 10; i++) {
+		add(ints, &i);
+	}
+	end = clock();
+	foreach(ints, int_print);
+	printf("ints: appended %ld items -10..10,  %fs\n", 20L, TIME_DIFF(begin, end));
+	printf("ints size: %ld\n\n", size(ints));
+
+	foreach(filter(map(filter(ints, int_odd), int_mul1693), int_div3), int_print);
+	printf("ints: processed odd? -> mul1693 -> div3?,  %fs\n\n", TIME_DIFF(begin, end));
+
+	foreach(filter(ints, int_neg), int_print);
+	printf("ints: filtered (int_neg)\n");
+	acc = 0;
+	fold(filter(ints, int_neg), &acc, int_sum);
+	printf("ints sum of negative: %ld\n\n", acc);
+
+	it = takewhile(ints, int_pos);
+	foreach(it, int_print);
+	printf("ints: taked first positive items\n\n");
+
+	it = drop(ints, 100);
+	foreach(it, int_print);
+	printf("ints: dropped first 120 items (nothing)\n\n");
+
+	it = drop(ints, 36);
+	foreach(it, int_print);
+	printf("ints: dropped first 36 items\n\n");
+
+	// TODO take/drop/reverse closures
+	it = map(map(reversed(drop(ints, size(ints) - 10)), int_mul100), int_mul100);
+	// foreach(it, int_print);
+	patch(ints, it, 5, 10);
+	foreach(take(ints, 20), int_print);
+	printf("...\nints: patched items 5..15 with last 10 reversed "
+			"mapped (mul100 x 2) items\n(first 20 items printed)\n\n");
+
+	foreach(filtermap(ints, int_neg_mul1693), int_print);
+	printf("ints: filtermap (int_neg_mul1693)\n\n");
+
+
+	begin = clock();
+	for (ssize_t i = 0; i < MAX_ITEMS; i++) {
+		add(ints, &i);
+	}
+	end = clock();
+	// foreach(ints, int_print);
+	printf("ints: added %ld items,  %fs\n", MAX_ITEMS, TIME_DIFF(begin, end));
+	printf("ints size: %ld\n\n", size(ints));
+
+	val = reduce(ints, min_int32p);
+	printf("ints min: %d\n", *val);
+	val = reduce(ints, max_int32p);
+	printf("ints max: %d\n", *val);
+	acc = 0;
+	begin = clock();
+	fold(ints, &acc, int_sum);
+	end = clock();
+	printf("ints sum: %ld\naverage time for fold: %fs\n\n", acc, TIME_DIFF(begin, end));
+
+	begin = clock();
+	foreach(ints, int_mul100);
+	end = clock();
+	printf("int_mul100 applied for %ld items,  %fs\n\n", size(ints), TIME_DIFF(begin, end));
+
+	begin = clock();
+	reverse(ints);
+	end = clock();
+	// foreach(ints, int_print);
+	printf("ints: reversed inplace %ld items,  %fs\n\n", size(ints), TIME_DIFF(begin, end));
+
+	begin = clock();
+	for (ssize_t i = 0, z = 1; i < size(ints); i++, z *= -1) {
+		val = get(ints, i * z);
+	}
+	end = clock();
+	printf("ints: accessed (random)  %ld items,  %fs\n", size(ints), TIME_DIFF(begin, end));
+
+	begin = clock();
+	for (ssize_t i = 0; i < size(ints); i++) {
+		val = get(ints, i);
+	}
+	end = clock();
+	printf("ints: accessed (linear)  %ld items,  %fs\n", size(ints), TIME_DIFF(begin, end));
+
+	it = iter(ints);
+	begin = clock();
+	while ((item = next(it))) {
+		val = item;
+	}
+	end = clock();
+	printf("ints: accessed (iterate) %ld items,  %fs\n\n", size(ints), TIME_DIFF(begin, end));
+
+	begin = clock();
+	for (ssize_t i = 0, z = 1; i < size(ints); i++, z *= -1) {
+		set(ints, i * z, &i);
+	}
+	end = clock();
+	// foreach(ints, int_print);
+	printf("ints: updated (random)  %ld items,  %fs\n", size(ints), TIME_DIFF(begin, end));
+
+	begin = clock();
+	for (ssize_t i = 0; i < size(ints); i++) {
+		set(ints, i, &i);
+	}
+	end = clock();
+	// foreach(ints, int_print);
+	printf("ints: updated (linear)  %ld items,  %fs\n", size(ints), TIME_DIFF(begin, end));
+
+	it = iter(ints);
 	int x = 0;
 	begin = clock();
 	while ((val = next(it))) {
 		*val = x++;
 	}
 	end = clock();
-	// foreach(num, num_print);
-	printf("updated (iter) %ld items, %fs\n", size(num), TIME_DIFF(begin, end));
+	// foreach(ints, int_print);
+	printf("ints: updated (iterate) %ld items,  %fs\n\n", size(ints), TIME_DIFF(begin, end));
 
 	begin = clock();
-	for (ssize_t i = 0, m = (size(num) >> 1) + 1; i < m; i++) {
-		del(num, -1L);
+	for (ssize_t i = 0, m = (size(ints) >> 1) + 1; i < m; i++) {
+		del(ints, -1L);
 	}
 	end = clock();
-	// foreach(num, num_print);
-	printf("num removed 1/2 items, %fs\n", TIME_DIFF(begin, end));
-	printf("num size: %ld\n", size(num));
+	// foreach(ints, int_print);
+	printf("ints: removed 1/2 items, new size: %ld,  %fs\n\n", size(ints), TIME_DIFF(begin, end));
 
 	begin = clock();
-	void *flt = filter(num, num_filter);
+	it = filter(ints, int_even);
+	void *flt = collect(it);
 	end = clock();
-	// foreach(flt, num_print);
-	printf("flt filtered %ld items, %fs\n", size(flt), TIME_DIFF(begin, end));
-	printf("flt size: %ld\n", size(flt));
+	// foreach(flt, int_print);
+	printf("flt: filtered (num_even) and collected %ld items,  %fs\n\n", size(flt), TIME_DIFF(begin, end));
 
 
 	begin = clock();
 	it = slice(flt, 1122, 94780);
 	void *sl = collect(it);
 	end = clock();
-	// foreach(sl, num_print);
-	printf("sl sliced %ld items  %fs\n", size(sl), TIME_DIFF(begin, end));
-	printf("sl size: %ld\n", size(sl));
+	// foreach(sl, int_print);
+	printf("sl: sliced and collected %ld items,  %fs\n\n", size(sl), TIME_DIFF(begin, end));
 
 	begin = clock();
 	for (ssize_t i = 0; i < 100; i++) {
 		extend(flt, sl);
 	}
 	end = clock();
-	printf("flt extended 100 times with sl items, %fs\n", TIME_DIFF(begin, end));
-	printf("flt size: %ld\n", size(flt));
+	printf("flt: extended 100 times with sl items,  %fs\n", TIME_DIFF(begin, end));
+	printf("flt size: %ld\n\n", size(flt));
 
 	// begin = clock();
-	// for (ssize_t i = 1; i <= 10000; i++) {
+	// for (ssize_t i = 1; i <= size(flt) / 4; i++) {
 	// 	insert(flt, -i, &i);
 	// }
 	// end = clock();
-	// // foreach(flt, num_print);
-	// printf("flt items inserted to -1..-10000, %fs\n", TIME_DIFF(begin, end));
-	// printf("flt size: %ld\n", size(flt));
+	// // foreach(flt, int_print);
+	// printf("flt: inserted to -1..-%ld,  %fs\n", size(flt) / 4, TIME_DIFF(begin, end));
+	// printf("flt size: %ld\n\n", size(flt));
 
 	begin = clock();
-	extend(num, flt);
+	extend(ints, flt);
 	end = clock();
-	printf("num extended with flt items, %fs\n", TIME_DIFF(begin, end));
-	printf("num size: %ld\n", size(num));
+	printf("ints: extended with flt items,  %fs\n", TIME_DIFF(begin, end));
+	printf("ints size: %ld\n\n", size(ints));
 
-	it = take(num, 10);
-	foreach(reversed(it), num_print);
-	it = drop(num, size(num) - 10);
-	foreach(it, num_print);
+	// foreach(reversed(take(ints, 10)), int_print);
+	// printf("ints first reversed 10 items\n\n");
 
-	// del(num, 0);
-	// del(num, 0);
-	// del(num, 0);
-	// del(num, 0);
-	// del(num, -1L);
-	// del(num, -1L);
-	// foreach(num, num_print);
-	// delete(sl);
+	// foreach(drop(ints, size(ints) - 10), int_print);
+	// printf("ints last 10 items\n\n");
 
-	// for (ssize_t i = 0; i < size(num); i += 100000) {
-	// 	intmax_t maxsum = 0;
-	// 	it = sliding(num, i, 1, 100);
-	// 	fold(it, &maxsum, num_sum);
-	// 	num_print(&maxsum);
+	// del(ints, 0);
+	// del(ints, 0);
+	// del(ints, 0);
+	// del(ints, -1L);
+	// del(ints, -1L);
+	// del(ints, -1L);
+	// foreach(ints, int_print);
+
+	// intmax_t maxsum = 0;
+	// ssize_t slicesize = size(ints) / 7000;
+	// for (ssize_t i = 0; i < size(ints); i += slicesize) {
+	// 	intmax_t sum = 0;
+	// 	it = view(ints, i, slicesize, 1);
+	// 	fold(it, &sum, int_sum);
+	// 	if (sum > maxsum)
+	// 		maxsum = sum;
 	// }
+	// int_print(&maxsum);
+	// printf("ints: maxsum of slice size %ld: %ld\n\n", slicesize, maxsum);
 
-	// srand(1111);
+	// srand(0xDEAD);
 	// void *srt = vector(sizeof(int));
-	// for (int i = 0, n; i < 10000000; i++) {
-	// 	n = rand() % 10000000;
-	// 	add(srt, &n);
+	// for (int i = 0; i < MAX_ITEMS; i++) {
+	// 	int r = rand() % MAX_ITEMS;
+	// 	add(srt, &r);
 	// }
 	// begin = clock();
-	// // ft_qsort(((t_obj *)srt)->data, ((t_obj *)srt)->size, ((t_obj *)srt)->itemsize, num_cmp);
-	// sort(srt, num_cmp);
+	// sort(srt, cmp_int32p);
 	// end = clock();
-	// // foreach(srt, num_print);
-	// printf("srt sorted, %fs\n", TIME_DIFF(begin, end));
-	// printf("srt size: %ld\n", size(srt));
+	// // foreach(srt, int_print);
+	// printf("srt: sorted,  %fs\n", TIME_DIFF(begin, end));
+	// printf("srt size: %ld\n\n", size(srt));
+	// delete(srt);
 
 	delete(sl);
 	delete(flt);
-	delete(num);
+	delete(ints);
 // **/
 /**
 	void *str = split(
-		"and  again and |again!|    ..   yoji  |"
+		"and  again and |AGAIN!|    ..   yoji  |"
 		"146%|-- @|flamingos/zakatos |(Y)_zzzz_|"
-		"GORT!\nKLAATU  BARADA nikto||||!??\v  |"
-		"lorem ipsum dolor sit down and shut up "
-		"   ooooooo   |    leeeee      |    fin.",
+		"GORT!\t\tKLAATU  BARADA nikto| ||!??\v|"
+		"lorem ipsum dolor sit down and shut up|"
+		"   ooooooo |||| no ooo plz    |    fin.",
 		'|',
-		sizeof(char *)
+		sizeof(char *),
 		str_cut
 	);
-	// setprop_dtor(str, str_free);
+	setattr_dtor(str, str_free);
+	foreach(str, str_print);
+	printf("str splitted\n");
+	printf("str size: %ld\n\n", size(str));
 
 	foreach(str, str_upper);
 	reverse(str);
-	// foreach(str, str_print);
 
-	char *p1, *p2, *p3;
-	pop(str, -3, &p1);
-	pop(str, -1, &p2);
-	pop(str, 2, &p3);
-	printf("pop: --- %s ---\n", p1);
-	printf("pop: --- %s ---\n", p2);
-	printf("pop: --- %s ---\n", p3);
-	free(p1);
-	free(p2);
-	free(p3);
-	del(str, 1);
-	del(str, -1L);
+	// char *p1, *p2, *p3;
+	// pop(str, -3, &p1);
+	// pop(str, -1, &p2);
+	// pop(str, 2, &p3);
+	// printf("pop -3: \" %s \"\n", p1);
+	// printf("pop -1: \" %s \"\n", p2);
+	// printf("pop 2: \" %s \"\n\n", p3);
+	// free(p1); free(p2); free(p3);
+
+	del(str, 3);
+	del(str, -4L);
 
 	emplace(str, "~~dummy!\n", str_dup);
 	emplace(str, "Frankly, my dear, I don't give a damn", str_dup);
 	emplace(str, "shake your bytes", str_dup);
-	char *s = ft_strdup("???update???");
-	set(str, 2, &s);
+	foreach(str, str_print);
+	printf("str: emplaced 3 items\n");
+	printf("str size: %ld\n\n", size(str));
 
-	void *sli = slice(str, 3, 7);
-	void *sl = collect(sli);
+	// char *s = ft_strdup("???update???");
+	// set(str, 2, &s);
+
+	void *sl = collect(slice(str, 3, 7));
 	foreach(sl, str_print);
 	printf("sl size: %ld\n\n", size(sl));
 
 	foreach(str, str_print);
-	printf("str upcase, reversed, changed size: %ld\n\n", size(str));
+	printf("str: upcase, reversed, changed size: %ld\n\n", size(str));
 
 	delete(sl);
 	delete(str);

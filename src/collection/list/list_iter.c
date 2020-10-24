@@ -15,11 +15,9 @@
 
 void	*list_iter(const t_obj *list)
 {
-	t_itobj *ret;
+	t_itobj *it;
 
-	ret = xcalloc(1, sizeof(t_itobj));
-	ft_memcpy(ret, list, sizeof(t_list));
-	((t_obj *)ret)->iter = NULL;
-	ret->current = list->data;
-	return (ret);
+	it = itobj(list, LIST_ITOBJ_SIZE);
+	it->current = list->meta->first;
+	return (it);
 }

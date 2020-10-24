@@ -14,7 +14,7 @@
 
 #include "collection/abstractobj.h"
 
-void	*find(const t_obj *obj, const void *val,
+void	*find(const t_obj *obj, const void *value,
 			int (*cmp)(const void *, const void *))
 {
 	void	*it;
@@ -23,11 +23,11 @@ void	*find(const t_obj *obj, const void *val,
 	it = iter(obj);
 	while ((item = next(it)))
 	{
-		if ((*cmp)(item, val) == 0)
+		if ((*cmp)(item, value) == 0)
 		{
 			free(it);
 			return (item);
 		}
 	}
-	return (NULL);
+	return (obj->fallback);
 }

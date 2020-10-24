@@ -15,37 +15,54 @@
 
 # include "collection/list.h"
 
+typedef struct s_iterator_object	t_itobj;
+
 typedef struct s_node	t_node;
-struct		s_node {
-	t_node	*prev;
+
+struct	s_node {
 	t_node	*next;
+	t_node	*prev;
+	void	*item[];
 };
 
-typedef struct {
-	t_obj	object;
+struct	s_object_meta {
+	size_t	itemsize;
+	ssize_t	size;
+	t_node	*first;
 	t_node	*last;
-}	t_list;
+};
 
-typedef struct {
-	t_list	list;
+struct	s_iterator_object {
+	t_obj	iterable;
 	t_node	*current;
-}	t_itobj;
+};
 
-void		list_init(t_obj *obj);
+# define LIST_META_SIZE		sizeof(t_meta)
+# define LIST_ITOBJ_SIZE	sizeof(t_itobj)
+
+/*
+** NOTE src/collection/abstractobj/util.c
+*/
+void		*obj(void (*init)(t_obj *), size_t itemsize, size_t metasize);
+void		*itobj(const t_obj *obj, size_t itobjsize);
+
+/*
+** NOTE src/collection/abstractseq/util.c
+*/
+bool		item_exists(const t_obj *seq, ssize_t index);
+
+void		list_init(t_obj *list);
+void		*list_iter(const t_obj *list);
+void		*list_next(t_obj *itobj);
 void		*list_add(t_obj *list, va_list ap);
 void		*list_get(const t_obj *list, va_list ap);
 bool		list_set(t_obj *list, va_list ap);
 bool		list_del(t_obj *list, va_list ap);
-void		*list_iter(const t_obj *list);
-void		*list_next(t_obj *itobj);
 void		*list_copy(const t_obj *src);
 void		*list_clone(const t_obj *src);
 void		list_clear(t_obj *list);
 
-bool		item_exists(const t_obj *list, ssize_t index);
-void		*list_getitem(void *node);
-void		*list_setitem(t_obj *list, void *node, const void *val);
-void		*list_newnode(const t_obj *list, const void *val);
+void		*list_newnode(const t_obj *list, const void *value);
 void		*list_getnode(const t_obj *list, ssize_t index);
 void		*list_popnode(t_obj *list, ssize_t index);
 

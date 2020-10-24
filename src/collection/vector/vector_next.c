@@ -20,10 +20,10 @@ void	*vector_next(t_obj *itobj)
 	void	*item;
 
 	it = (t_itobj *)itobj;
-	if (it->size && item_exists(itobj, it->index))
+	if (it->size && item_exists(itobj, it->current))
 	{
-		item = vector_getitem(itobj, it->index);
-		it->index += it->step;
+		item = vector_getitem(itobj, it->current);
+		it->current += it->step;
 		it->size--;
 		return (item);
 	}

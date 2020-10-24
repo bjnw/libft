@@ -14,9 +14,9 @@
 
 void	*list_clone(const t_obj *src)
 {
-	t_obj *ret;
+	t_obj *new;
 
-	ret = list_copy(src);
-	extend(ret, src);
-	return (ret);
+	new = list_copy(src);
+	extend(new, src);
+	return (new);
 }

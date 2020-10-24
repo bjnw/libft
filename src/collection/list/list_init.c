@@ -12,15 +12,15 @@
 
 #include "listobj.h"
 
-void	list_init(t_obj *obj)
+void	list_init(t_obj *list)
 {
-	obj->add = list_add;
-	obj->get = list_get;
-	obj->set = list_set;
-	obj->del = list_del;
-	obj->iter = list_iter;
-	obj->next = list_next;
-	obj->copy = list_copy;
-	obj->clone = list_clone;
-	obj->clear = list_clear;
+	list->iter = list_iter;
+	list->next = list_next;
+	list->add = list_add;
+	list->get = list_get;
+	list->set = list_set;
+	list->del = list_del;
+	list->copy = list_copy;
+	list->clone = list_clone;
+	list->clear = list_clear;
 }

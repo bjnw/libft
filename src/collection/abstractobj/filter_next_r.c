@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fold.c                                             :+:      :+:    :+:   */
+/*   filter_next_r.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 #include "collection/abstractobj.h"
+#include "closureobj.h"
 
-void	*fold(const t_obj *obj, void *init, void *(*op)(void *, void *))
+void	*filter_next_r(t_obj *itobj)
 {
-	void *acc;
-	void *it;
-	void *item;
+	bool	(*p)(void *, const void *);
+	t_clobj	*cl;
+	void	*item;
 
-	it = iter(obj);
-	acc = init;
-	while ((item = next(it)))
-		acc = (*op)(acc, item);
-	return (acc);
+	cl = (t_clobj *)itobj;
+	p = cl->callback;
+	while ((item = next(cl->it)))
+	{
+		if ((*p)(cl->ctx, item))
+			return (item);
+	}
+	free(cl);
+	return (NULL);
 }

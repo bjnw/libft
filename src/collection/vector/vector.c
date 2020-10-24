@@ -10,15 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "vectorobj.h"
 
 void	*vector(size_t itemsize)
 {
-	t_obj *ret;
-
-	ret = xcalloc(1, sizeof(t_vector));
-	ret->itemsize = itemsize;
-	vector_init(ret);
-	return (ret);
+	return (obj(vector_init, itemsize, VECTOR_META_SIZE));
 }

@@ -15,14 +15,14 @@
 #include "libft.h"
 #include "vectorobj.h"
 
-void	patch(t_obj *dst, const t_obj *src, ssize_t from)
+void	patch(t_obj *dst, const t_obj *src, ssize_t from, ssize_t size)
 {
 	void *itdst;
 	void *itsrc;
 	void *itemdst;
 	void *itemsrc;
 
-	itdst = view(dst, from, size(src), 1);
+	itdst = view(dst, from, size, 1);
 	itsrc = iter(src);
 	while (true)
 	{
@@ -30,7 +30,7 @@ void	patch(t_obj *dst, const t_obj *src, ssize_t from)
 		itemsrc = next(itsrc);
 		if (!itemdst || !itemsrc)
 			break ;
-		ft_memcpy(itemdst, itemsrc, dst->itemsize);
+		ft_memcpy(itemdst, itemsrc, src->meta->itemsize);
 	}
 	if (itemdst)
 		free(itdst);

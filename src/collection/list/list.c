@@ -10,15 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "listobj.h"
 
 void	*list(size_t itemsize)
 {
-	t_obj *ret;
-
-	ret = xcalloc(1, sizeof(t_list));
-	ret->itemsize = itemsize;
-	list_init(ret);
-	return (ret);
+	return (obj(list_init, itemsize, LIST_META_SIZE));
 }

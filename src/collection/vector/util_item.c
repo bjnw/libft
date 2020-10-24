@@ -15,13 +15,17 @@
 
 void	*vector_getitem(const t_obj *vector, ssize_t index)
 {
-	return (vector->data + index * vector->itemsize);
+	t_meta *meta;
+
+	meta = vector->meta;
+	return (meta->data + index * meta->itemsize);
 }
 
-void	*vector_setitem(t_obj *vector, ssize_t index, const void *val)
+void	*vector_setitem(t_obj *vector, ssize_t index, const void *value)
 {
-	return (ft_memcpy(
-				vector_getitem(vector, index),
-				val,
-				vector->itemsize));
+	void *item;
+
+	item = vector_getitem(vector, index);
+	ft_memcpy(item, value, vector->meta->itemsize);
+	return (item);
 }

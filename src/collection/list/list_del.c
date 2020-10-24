@@ -21,12 +21,12 @@ bool	list_del(t_obj *list, va_list ap)
 
 	index = va_arg(ap, ssize_t);
 	if (index < 0)
-		index += list->size;
+		index += list->meta->size;
 	if (!item_exists(list, index))
 		return (false);
 	node = list_popnode(list, index);
 	if (list->dtor)
-		list->dtor(list_getitem(node));
+		list->dtor(node->item);
 	free(node);
 	return (true);
 }

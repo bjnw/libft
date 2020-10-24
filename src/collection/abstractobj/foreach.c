@@ -14,8 +14,8 @@
 
 void	foreach(t_obj *obj, void (*f)(void *))
 {
-	void	*it;
-	void	*item;
+	void *it;
+	void *item;
 
 	it = iter(obj);
 	while ((item = next(it)))

@@ -17,15 +17,15 @@
 
 void	*poplast(t_obj *list, void *out)
 {
+	t_meta	*meta;
 	t_node	*node;
 
-	if (!list->size)
+	meta = list->meta;
+	if (meta->size == 0)
 		return (NULL);
-	node = list_popnode(list, list->size - 1);
-	ft_memcpy(
-			out,
-			list_getitem(node),
-			list->itemsize);
+	node = list_popnode(list, meta->size - 1);
+	if (out)
+		ft_memcpy(out, node->item, meta->itemsize);
 	free(node);
 	return (out);
 }

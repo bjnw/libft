@@ -12,19 +12,19 @@
 
 #include "collection/abstractobj.h"
 
-ssize_t	count_r(const t_obj *obj, const void *val, void *ctx,
+ssize_t	count_r(const t_obj *obj, const void *value, void *ctx,
 			int (*cmp)(void *, const void *, const void *))
 {
-	ssize_t	ret;
+	ssize_t	n;
 	void	*it;
 	void	*item;
 
-	ret = 0;
+	n = 0;
 	it = iter(obj);
 	while ((item = next(it)))
 	{
-		if ((*cmp)(ctx, item, val) == 0)
-			ret++;
+		if ((*cmp)(ctx, item, value) == 0)
+			n++;
 	}
-	return (ret);
+	return (n);
 }

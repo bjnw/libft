@@ -10,20 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "collection/abstractobj.h"
+#include "collection/abstractmeta.h"
+#include "libft.h"
 
 void	*toarray(const t_obj *obj)
 {
-	void	*ret;
+	void	*data;
+	t_meta	*meta;
 	void	*it;
 	void	*item;
 	void	*p;
 
-	ret = xmalloc(obj->size * obj->itemsize);
-	p = ret;
+	meta = obj->meta;
+	data = xmalloc(meta->size * meta->itemsize);
+	p = data;
 	it = iter(obj);
 	while ((item = next(it)))
-		p = ft_mempcpy(p, item, obj->itemsize);
-	return (ret);
+		p = ft_mempcpy(p, item, meta->itemsize);
+	return (data);
 }

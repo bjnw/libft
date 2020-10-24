@@ -19,10 +19,9 @@ void	*list_get(const t_obj *list, va_list ap)
 
 	index = va_arg(ap, ssize_t);
 	if (index < 0)
-		index += list->size;
-	if (item_exists(list, index)) {
-		node = list_getnode(list, index);
-		return (list_getitem(node));
-	}
-	return (NULL);
+		index += list->meta->size;
+	if (!item_exists(list, index))
+		return (NULL);
+	node = list_getnode(list, index);
+	return (node->item);
 }

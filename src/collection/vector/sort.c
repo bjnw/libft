@@ -16,11 +16,13 @@
 static ssize_t	lomuto(t_obj *vector, ssize_t low, ssize_t high,
 		int (*cmp)(const void *, const void *))
 {
+	t_meta	*meta;
 	ssize_t	pivot;
 	ssize_t	i;
 	ssize_t	j;
 	void	*tmp;
 
+	meta = vector->meta;
 	pivot = high;
 	i = low;
 	j = low;
@@ -29,17 +31,13 @@ static ssize_t	lomuto(t_obj *vector, ssize_t low, ssize_t high,
 		tmp = vector_getitem(vector, i);
 		if ((*cmp)(vector_getitem(vector, pivot), tmp) > 0)
 		{
-			ft_swap(
-					vector_getitem(vector, j), tmp,
-					vector->itemsize);
+			ft_swap(vector_getitem(vector, j), tmp, meta->itemsize);
 			j++;
 		}
 		i++;
 	}
-	ft_swap(
-			vector_getitem(vector, j),
-			vector_getitem(vector, high),
-			vector->itemsize);
+	ft_swap(vector_getitem(vector, j), vector_getitem(vector, high),
+		meta->itemsize);
 	return (j);
 }
 
@@ -70,6 +68,6 @@ void			sort(t_obj *vector, int (*cmp)(const void *, const void *))
 	ssize_t	high;
 
 	low = 0;
-	high = vector->size - 1;
+	high = vector->meta->size - 1;
 	quicksort(vector, low, high, cmp);
 }

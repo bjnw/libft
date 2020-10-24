@@ -17,15 +17,15 @@
 
 void	*popfirst(t_obj *list, void *out)
 {
+	t_meta	*meta;
 	t_node	*node;
 
-	if (!list->size)
+	meta = list->meta;
+	if (meta->size == 0)
 		return (NULL);
 	node = list_popnode(list, 0);
-	ft_memcpy(
-			out,
-			list_getitem(node),
-			list->itemsize);
+	if (out)
+		ft_memcpy(out, node->item, meta->itemsize);
 	free(node);
 	return (out);
 }

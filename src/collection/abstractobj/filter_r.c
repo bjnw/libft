@@ -11,20 +11,9 @@
 /* ************************************************************************** */
 
 #include "collection/abstractobj.h"
+#include "closureobj.h"
 
-void	*filter_r(const t_obj *obj, void *ctx,
-			bool (*p)(void *, const void *))
+void	*filter_r(const t_obj *obj, void *ctx, bool (*p)(void *, const void *))
 {
-	void	*ret;
-	void	*it;
-	void	*item;
-
-	ret = copy(obj);
-	it = iter(obj);
-	while ((item = next(it)))
-	{
-		if ((*p)(ctx, item))
-			add(ret, item);
-	}
-	return (ret);
+	return (clobj(obj, filter_next_r, ctx, p));
 }

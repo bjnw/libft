@@ -14,8 +14,8 @@
 
 void	*takewhile(t_obj *vector, bool (*p)(const void *))
 {
-	t_itobj	*ret;
 	void	*it;
+	t_itobj	*nil;
 	void	*item;
 	ssize_t	n;
 
@@ -27,6 +27,6 @@ void	*takewhile(t_obj *vector, bool (*p)(const void *))
 			return (view(it, 0, n, 1));
 		n++;
 	}
-	ret = view(vector, 0, 0, 0);
-	return (ret);
+	nil = view(vector, 0, 0, 0);
+	return (nil);
 }

@@ -10,23 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "listobj.h"
 
 bool	list_set(t_obj *list, va_list ap)
 {
+	t_meta		*meta;
 	ssize_t		index;
-	const void	*val;
+	const void	*value;
 	t_node		*node;
 
+	meta = list->meta;
 	index = va_arg(ap, ssize_t);
 	if (index < 0)
-		index += list->size;
+		index += meta->size;
 	if (!item_exists(list, index))
 		return (false);
 	node = list_getnode(list, index);
 	if (list->dtor)
-		list->dtor(list_getitem(node));
-	val = va_arg(ap, const void *);
-	list_setitem(list, node, val);
+		list->dtor(node->item);
+	value = va_arg(ap, const void *);
+	ft_memcpy(node->item, value, meta->itemsize);
 	return (true);
 }

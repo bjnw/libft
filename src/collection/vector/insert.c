@@ -12,12 +12,12 @@
 
 #include "vectorobj.h"
 
-void	*insert(t_obj *vector, ssize_t index, const void *val)
+void	*insert(t_obj *vector, ssize_t index, const void *value)
 {
 	void	*item;
 	ssize_t	n;
 
-	n = vector->size;
+	n = vector->meta->size;
 	vector_resize(vector, n + 1);
 	if (index < 0)
 	{
@@ -29,6 +29,6 @@ void	*insert(t_obj *vector, ssize_t index, const void *val)
 		index = n;
 	if (index < n)
 		vector_rshitems(vector, index);
-	item = vector_setitem(vector, index, val);
+	item = vector_setitem(vector, index, value);
 	return (item);
 }

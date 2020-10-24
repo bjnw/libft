@@ -15,17 +15,17 @@
 
 void	reverse(t_obj *vector)
 {
+	t_meta	*meta;
 	ssize_t	low;
 	ssize_t	high;
 
+	meta = vector->meta;
 	low = 0;
-	high = vector->size - 1;
+	high = meta->size - 1;
 	while (low < high)
 	{
-		ft_swap(
-				vector_getitem(vector, low),
-				vector_getitem(vector, high),
-				vector->itemsize);
+		ft_swap(vector_getitem(vector, low), vector_getitem(vector, high),
+			meta->itemsize);
 		low++;
 		high--;
 	}

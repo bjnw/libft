@@ -15,10 +15,10 @@
 void	*view(t_obj *vector, ssize_t from,
 			ssize_t size, ssize_t step)
 {
-	t_itobj	*ret;
+	t_itobj	*it;
 	ssize_t	n;
 
-	n = vector->size;
+	n = vector->meta->size;
 	if (from < 0)
 	{
 		from += n;
@@ -31,9 +31,9 @@ void	*view(t_obj *vector, ssize_t from,
 		size = 0;
 	else if (step > n - from)
 		size = 1;
-	ret = iter(vector);
-	ret->index = from;
-	ret->size = size;
-	ret->step = step;
-	return (ret);
+	it = iter(vector);
+	it->current = from;
+	it->size = size;
+	it->step = step;
+	return (it);
 }

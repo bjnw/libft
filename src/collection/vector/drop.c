@@ -14,14 +14,14 @@
 
 void	*drop(t_obj *vector, ssize_t size)
 {
-	t_itobj	*ret;
+	t_itobj	*it;
 	ssize_t	n;
 
-	n = vector->size;
+	n = vector->meta->size;
 	if (size > n)
 		size = n;
 	else if (size < 0)
 		size = 0;
-	ret = view(vector, size, n - size, 1);
-	return (ret);
+	it = view(vector, size, n - size, 1);
+	return (it);
 }

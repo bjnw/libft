@@ -12,15 +12,15 @@
 
 #include "vectorobj.h"
 
-void	vector_init(t_obj *obj)
+void	vector_init(t_obj *vector)
 {
-	obj->add = vector_add;
-	obj->get = vector_get;
-	obj->set = vector_set;
-	obj->del = vector_del;
-	obj->iter = vector_iter;
-	obj->next = vector_next;
-	obj->copy = vector_copy;
-	obj->clone = vector_clone;
-	obj->clear = vector_clear;
+	vector->iter = vector_iter;
+	vector->next = vector_next;
+	vector->add = vector_add;
+	vector->get = vector_get;
+	vector->set = vector_set;
+	vector->del = vector_del;
+	vector->copy = vector_copy;
+	vector->clone = vector_clone;
+	vector->clear = vector_clear;
 }

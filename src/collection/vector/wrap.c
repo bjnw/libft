@@ -14,10 +14,12 @@
 
 void	*wrap(void *data, ssize_t size, size_t itemsize)
 {
-	t_obj *ret;
+	t_obj	*new;
+	t_meta	*meta;
 
-	ret = vector(itemsize);
-	ret->size = size;
-	ret->data = data;
-	return (ret);
+	new = vector(itemsize);
+	meta = new->meta;
+	meta->size = size;
+	meta->data = data;
+	return (new);
 }

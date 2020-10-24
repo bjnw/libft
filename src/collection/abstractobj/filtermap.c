@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_item.c                                        :+:      :+:    :+:   */
+/*   filtermap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstractseq.h"
-#include "libft.h"
+#include "collection/abstractobj.h"
+#include "closureobj.h"
 
-bool	item_exists(const t_obj *list, ssize_t index)
+void	*filtermap(const t_obj *obj, void *(*f)(void *))
 {
-	return ((size_t)index < (size_t)list->size);
+	return (clobj(obj, filtermap_next, NULL, f));
 }

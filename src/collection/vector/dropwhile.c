@@ -14,8 +14,8 @@
 
 void	*dropwhile(t_obj *vector, bool (*p)(const void *))
 {
-	t_itobj	*ret;
 	void	*it;
+	t_itobj	*nil;
 	void	*item;
 	ssize_t	n;
 
@@ -24,9 +24,9 @@ void	*dropwhile(t_obj *vector, bool (*p)(const void *))
 	while ((item = next(it)))
 	{
 		if (!(*p)(item))
-			return (view(it, n, vector->size - n, 1));
+			return (view(it, n, vector->meta->size - n, 1));
 		n++;
 	}
-	ret = view(vector, 0, 0, 0);
-	return (ret);
+	nil = view(vector, 0, 0, 0);
+	return (nil);
 }

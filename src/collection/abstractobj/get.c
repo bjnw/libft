@@ -14,11 +14,13 @@
 
 void	*get(const t_obj *obj, ...)
 {
-	void	*ret;
+	void	*item;
 	va_list	ap;
 
 	va_start(ap, obj);
-	ret = obj->get(obj, ap);
+	item = obj->get(obj, ap);
 	va_end(ap);
-	return (ret);
+	if (item)
+		return (item);
+	return (obj->fallback);
 }

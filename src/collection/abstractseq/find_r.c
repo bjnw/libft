@@ -14,7 +14,7 @@
 
 #include "collection/abstractobj.h"
 
-void	*find_r(const t_obj *obj, const void *val, void *ctx,
+void	*find_r(const t_obj *obj, const void *value, void *ctx,
 			int (*cmp)(void *, const void *, const void *))
 {
 	void	*it;
@@ -23,11 +23,11 @@ void	*find_r(const t_obj *obj, const void *val, void *ctx,
 	it = iter(obj);
 	while ((item = next(it)))
 	{
-		if ((*cmp)(ctx, item, val) == 0)
+		if ((*cmp)(ctx, item, value) == 0)
 		{
 			free(it);
 			return (item);
 		}
 	}
-	return (NULL);
+	return (obj->fallback);
 }

@@ -14,11 +14,11 @@
 
 bool	vector_del(t_obj *vector, va_list ap)
 {
-	ssize_t	index;
-	ssize_t	n;
+	ssize_t index;
+	ssize_t n;
 
 	index = va_arg(ap, ssize_t);
-	n = vector->size;
+	n = vector->meta->size;
 	if (index < 0)
 		index += n;
 	if (!item_exists(vector, index))

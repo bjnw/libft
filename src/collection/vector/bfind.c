@@ -13,29 +13,31 @@
 #include "libft.h"
 #include "vectorobj.h"
 
-void	*bfind(const t_obj *vector, const void *val,
+void	*bfind(const t_obj *vector, const void *value,
 			int (*cmp)(const void *, const void *))
 {
+	void	*item;
+	t_meta	*meta;
 	ssize_t	low;
 	ssize_t	mid;
 	ssize_t	high;
-	void	*item;
 
-	if (vector->size == 0)
+	meta = vector->meta;
+	if (meta->size == 0)
 		return (NULL);
 	low = 0;
-	high = vector->size - 1;
+	high = meta->size - 1;
 	while (low != high)
 	{
 		mid = (low + high) / 2;
 		item = vector_getitem(vector, mid);
-		if ((*cmp)(item, val) > 0)
+		if ((*cmp)(item, value) > 0)
 			high = mid - 1;
 		else
 			low = mid;
 	}
 	item = vector_getitem(vector, low);
-	if ((*cmp)(item, val) == 0)
+	if ((*cmp)(item, value) == 0)
 		return (item);
 	return (NULL);
 }

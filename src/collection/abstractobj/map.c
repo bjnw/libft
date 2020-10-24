@@ -11,12 +11,9 @@
 /* ************************************************************************** */
 
 #include "collection/abstractobj.h"
+#include "closureobj.h"
 
 void	*map(const t_obj *obj, void (*f)(void *))
 {
-	t_obj *ret;
-
-	ret = clone(obj);
-	foreach(ret, f);
-	return (ret);
+	return (clobj(obj, map_next, NULL, f));
 }

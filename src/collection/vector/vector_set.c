@@ -15,16 +15,16 @@
 bool	vector_set(t_obj *vector, va_list ap)
 {
 	ssize_t		index;
-	const void	*val;
+	const void	*value;
 
 	index = va_arg(ap, ssize_t);
 	if (index < 0)
-		index += vector->size;
+		index += vector->meta->size;
 	if (!item_exists(vector, index))
 		return (false);
 	if (vector->dtor)
 		vector->dtor(vector_getitem(vector, index));
-	val = va_arg(ap, const void *);
-	vector_setitem(vector, index, val);
+	value = va_arg(ap, const void *);
+	vector_setitem(vector, index, value);
 	return (true);
 }

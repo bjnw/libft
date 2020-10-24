@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "collection/abstractobj.h"
+#include "collection/abstractmeta.h"
 
 ssize_t	size(const t_obj *obj)
 {
-	return (obj->size);
+	return (obj->meta->size);
 }
