@@ -15,8 +15,6 @@
 
 # include "collection/vector.h"
 
-typedef struct s_iterator_object	t_itobj;
-
 struct	s_object_meta {
 	size_t	itemsize;
 	ssize_t	size;
@@ -24,21 +22,20 @@ struct	s_object_meta {
 	void	*data;
 };
 
-struct	s_iterator_object {
-	t_obj	iterable;
-	ssize_t	current;
+struct	s_iterator_state {
+	ssize_t	index;
 	ssize_t	size;
 	ssize_t	step;
 };
 
 # define VECTOR_META_SIZE	sizeof(t_meta)
-# define VECTOR_ITOBJ_SIZE	sizeof(t_itobj)
+# define VECTOR_STATE_SIZE	sizeof(t_state)
 
 /*
 ** NOTE src/collection/abstractobj/util.c
 */
 void		*obj(void (*init)(t_obj *), size_t itemsize, size_t metasize);
-void		*itobj(const t_obj *obj, size_t itobjsize);
+void		*itobj(const t_obj *obj, size_t statesize);
 
 /*
 ** NOTE src/collection/abstractseq/util.c

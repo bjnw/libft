@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "listobj.h"
 
 void	*list_copy(const t_obj *src)

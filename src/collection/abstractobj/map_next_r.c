@@ -20,16 +20,18 @@
 void	*map_next_r(t_obj *itobj)
 {
 	void	(*f)(void *, void *);
-	t_clobj	*cl;
+	t_itobj	*cl;
+	t_state	*state;
 	void	*item;
 
-	cl = (t_clobj *)itobj;
-	if ((item = next(cl->it)))
+	cl = (t_itobj *)itobj;
+	state = cl->state;
+	f = state->callback;
+	if ((item = next(state->nested)))
 	{
-		f = cl->callback;
-		ft_memcpy(cl->item, item, itobj->meta->itemsize);
-		(*f)(cl->ctx, cl->item);
-		return (cl->item);
+		ft_memcpy(state->item, item, itobj->meta->itemsize);
+		(*f)(state->ctx, state->item);
+		return (state->item);
 	}
 	free(cl);
 	return (NULL);

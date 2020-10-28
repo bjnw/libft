@@ -15,8 +15,6 @@
 
 # include "collection/list.h"
 
-typedef struct s_iterator_object	t_itobj;
-
 typedef struct s_node	t_node;
 
 struct	s_node {
@@ -32,19 +30,18 @@ struct	s_object_meta {
 	t_node	*last;
 };
 
-struct	s_iterator_object {
-	t_obj	iterable;
-	t_node	*current;
+struct	s_iterator_state {
+	t_node	*node;
 };
 
 # define LIST_META_SIZE		sizeof(t_meta)
-# define LIST_ITOBJ_SIZE	sizeof(t_itobj)
+# define LIST_STATE_SIZE	sizeof(t_state)
 
 /*
 ** NOTE src/collection/abstractobj/util.c
 */
 void		*obj(void (*init)(t_obj *), size_t itemsize, size_t metasize);
-void		*itobj(const t_obj *obj, size_t itobjsize);
+void		*itobj(const t_obj *obj, size_t statesize);
 
 /*
 ** NOTE src/collection/abstractseq/util.c

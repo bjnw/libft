@@ -15,20 +15,14 @@
 
 # include "collection/abstractobj.h"
 
-/*
-** TODO chained closures / call lists?
-*/
-typedef struct s_iterator_closure	t_clobj;
-
-struct	s_iterator_closure {
-	t_obj	iterable;
-	void	*it;
+struct	s_iterator_state {
+	void	*nested;
 	void	*ctx;
 	void	*callback;
 	void	*item[];
 };
 
-# define ITOBJ_CLOSURE_SIZE	sizeof(t_clobj)
+# define ENCLOSED_STATE_SIZE	sizeof(t_state)
 
 /*
 ** NOTE src/collection/abstractobj/util.c

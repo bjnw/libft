@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "listobj.h"
 
 void	*list_iter(const t_obj *list)
 {
 	t_itobj *it;
 
-	it = itobj(list, LIST_ITOBJ_SIZE);
-	it->current = list->meta->first;
+	it = itobj(list, LIST_STATE_SIZE);
+	it->state->node = list->meta->first;
 	return (it);
 }

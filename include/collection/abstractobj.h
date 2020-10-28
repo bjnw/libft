@@ -20,6 +20,8 @@
 
 typedef struct s_object_trait	t_obj;
 typedef struct s_object_meta	t_meta;
+typedef struct s_iterator_trait	t_itobj;
+typedef struct s_iterator_state	t_state;
 
 struct	s_object_trait {
 	void	*(*iter)(const t_obj *);
@@ -34,6 +36,11 @@ struct	s_object_trait {
 	void	(*dtor)(void *);
 	void	*fallback;
 	t_meta	*meta;
+};
+
+struct s_iterator_trait {
+	t_obj	iterable;
+	t_state	*state;
 };
 
 void	*toarray(const t_obj *obj);
@@ -56,9 +63,9 @@ void	setattr_fallback(t_obj *obj, void *item);
 /*
 ** TODO
 ** void	setattr_cmp(t_obj *obj, int (*cmp)(const void *, const void *));
+** void	setattr_hash(t_obj *obj, uint64_t (*hash)(const void *, size_t));
 */
 
-void	*collect(t_obj *itobj);
 void	*concat(const t_obj *a, const t_obj *b);
 void	extend(t_obj *dst, const t_obj *src);
 /*
@@ -70,18 +77,33 @@ void	extend(t_obj *dst, const t_obj *src);
 */
 
 void	foreach(t_obj *obj, void (*f)(void *));
-void	*map(const t_obj *obj, void (*f)(void *));
-void	*filter(const t_obj *obj, bool (*p)(const void *));
-void	*filtermap(const t_obj *obj, void *(*f)(void *));
-void	*reduce(const t_obj *obj, void *(*op)(void *, void *));
-void	*fold(const t_obj *obj, void *init, void *(*op)(void *, void *));
 void	foreach_r(t_obj *obj, void *ctx, void (*f)(void *, void *));
+
+/*
+** TODO
+** void	*nth(const t_obj *obj, ssize_t n);
+** void	*take(const t_obj *obj, ssize_t n);
+** void	*takewhile(const t_obj *obj, bool (*p)(const void *));
+** void	*drop(const t_obj *obj, ssize_t n);
+** void	*dropwhile(const t_obj *obj, bool (*p)(const void *));
+*/
+
+void	*map(const t_obj *obj, void (*f)(void *));
 void	*map_r(const t_obj *obj, void *ctx, void (*f)(void *, void *));
+void	*filter(const t_obj *obj, bool (*p)(const void *));
 void	*filter_r(const t_obj *obj, void *ctx, bool (*p)(void *, const void *));
+void	*filtermap(const t_obj *obj, void *(*f)(void *));
 void	*filtermap_r(const t_obj *obj, void *ctx, void *(*f)(void *, void *));
+void	*reduce(const t_obj *obj, void *(*op)(void *, void *));
 void	*reduce_r(const t_obj *obj, void *ctx,
 			void *(*op)(void *, void *, void *));
+void	*fold(const t_obj *obj, void *init, void *(*op)(void *, void *));
 void	*fold_r(const t_obj *obj, void *ctx, void *init,
 			void *(*op)(void *, void *, void *));
+
+/* TODO
+** void	*cloned(t_obj *itobj);
+*/
+void	*collect(t_obj *itobj);
 
 #endif

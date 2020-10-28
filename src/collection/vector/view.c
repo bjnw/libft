@@ -29,11 +29,11 @@ void	*view(t_obj *vector, ssize_t from,
 		from = n;
 	if (size < 0)
 		size = 0;
-	else if (step > n - from)
+	if (step > n - from)
 		size = 1;
 	it = iter(vector);
-	it->current = from;
-	it->size = size;
-	it->step = step;
+	it->state->index = from;
+	it->state->size = size;
+	it->state->step = step;
 	return (it);
 }

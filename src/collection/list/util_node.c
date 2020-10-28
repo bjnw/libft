@@ -16,32 +16,30 @@
 void	*list_newnode(const t_obj *list, const void *value)
 {
 	t_node	*node;
-	t_meta	*meta;
+	size_t	itemsize;
 
-	meta = list->meta;
-	node = xcalloc(1, sizeof(t_node) + meta->itemsize);
-	ft_memcpy(node->item, value, meta->itemsize);
+	itemsize = list->meta->itemsize;
+	node = xcalloc(1, sizeof(t_node) + itemsize);
+	ft_memcpy(node->item, value, itemsize);
 	return (node);
 }
 
 void	*list_getnode(const t_obj *list, ssize_t index)
 {
 	t_node	*node;
-	t_meta	*meta;
 	ssize_t	n;
 
-	meta = list->meta;
-	n = meta->size;
+	n = list->meta->size;
 	if (index <= n >> 1)
 	{
-		node = meta->first;
+		node = list->meta->first;
 		while (index--)
 			node = node->next;
 	}
 	else
 	{
 		index = n - index;
-		node = meta->last;
+		node = list->meta->last;
 		while (--index)
 			node = node->prev;
 	}

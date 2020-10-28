@@ -15,10 +15,7 @@
 
 void	*vector_getitem(const t_obj *vector, ssize_t index)
 {
-	t_meta *meta;
-
-	meta = vector->meta;
-	return (meta->data + index * meta->itemsize);
+	return (vector->meta->data + index * vector->meta->itemsize);
 }
 
 void	*vector_setitem(t_obj *vector, ssize_t index, const void *value)

@@ -18,14 +18,14 @@
 void	*filter_next_r(t_obj *itobj)
 {
 	bool	(*p)(void *, const void *);
-	t_clobj	*cl;
+	t_itobj	*cl;
 	void	*item;
 
-	cl = (t_clobj *)itobj;
-	p = cl->callback;
-	while ((item = next(cl->it)))
+	cl = (t_itobj *)itobj;
+	p = cl->state->callback;
+	while ((item = next(cl->state->nested)))
 	{
-		if ((*p)(cl->ctx, item))
+		if ((*p)(cl->state->ctx, item))
 			return (item);
 	}
 	free(cl);

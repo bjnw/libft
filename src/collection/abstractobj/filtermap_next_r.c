@@ -20,18 +20,20 @@
 void	*filtermap_next_r(t_obj *itobj)
 {
 	void	*(*f)(void *, void *);
-	t_clobj	*cl;
+	t_itobj	*cl;
+	t_state	*state;
 	void	*item;
 	size_t	itemsize;
 
-	cl = (t_clobj *)itobj;
-	f = cl->callback;
+	cl = (t_itobj *)itobj;
+	state = cl->state;
+	f = state->callback;
 	itemsize = itobj->meta->itemsize;
-	while ((item = next(cl->it)))
+	while ((item = next(state->nested)))
 	{
-		ft_memcpy(cl->item, item, itemsize);
-		if ((*f)(cl->ctx, cl->item))
-			return (cl->item);
+		ft_memcpy(state->item, item, itemsize);
+		if ((*f)(state->ctx, state->item))
+			return (state->item);
 	}
 	free(cl);
 	return (NULL);

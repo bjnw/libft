@@ -14,12 +14,10 @@
 
 void	*tovector(const t_obj *obj)
 {
-	t_obj	*new;
-	t_meta	*meta;
+	t_obj *new;
 
-	meta = obj->meta;
-	new = vector(meta->itemsize);
-	vector_reserve(new, meta->size);
+	new = vector(obj->meta->itemsize);
+	vector_reserve(new, obj->meta->size);
 	extend(new, obj);
 	return (new);
 }

@@ -17,13 +17,15 @@
 void	*list_next(t_obj *itobj)
 {
 	t_itobj	*it;
+	t_state	*state;
 	void	*item;
 
 	it = (t_itobj *)itobj;
-	if (it->current)
+	state = it->state;
+	if (state->node)
 	{
-		item = it->current->item;
-		it->current = it->current->next;
+		item = state->node->item;
+		state->node = state->node->next;
 		return (item);
 	}
 	free(it);

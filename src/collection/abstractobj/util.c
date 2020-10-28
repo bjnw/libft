@@ -17,34 +17,35 @@
 
 void	*obj(void (*init)(t_obj *), size_t itemsize, size_t metasize)
 {
-	t_obj *new;
+	t_obj *obj;
 
-	new = xcalloc(1, sizeof(t_obj) + metasize);
-	(*init)(new);
-	new->meta = (void *)(&new->meta + 1);
-	new->meta->itemsize = itemsize;
-	return (new);
+	obj = xcalloc(1, sizeof(t_obj) + metasize);
+	(*init)(obj);
+	obj->meta = (void *)(&obj->meta + 1);
+	obj->meta->itemsize = itemsize;
+	return (obj);
 }
 
-void	*itobj(const t_obj *obj, size_t itobjsize)
+void	*itobj(const t_obj *obj, size_t statesize)
 {
-	t_obj *it;
+	t_itobj *it;
 
-	it = xcalloc(1, itobjsize);
-	*it = *obj;
-	it->iter = NULL;
+	it = xcalloc(1, sizeof(t_itobj) + statesize);
+	it->iterable = *obj;
+	it->iterable.iter = NULL;
+	it->state = (void *)(&it->state + 1);
 	return (it);
 }
 
 void	*clobj(const t_obj *obj, void *(*next)(t_obj *),
 			void *ctx, void *callback)
 {
-	t_clobj *cl;
+	t_itobj *cl;
 
-	cl = itobj(obj, ITOBJ_CLOSURE_SIZE + obj->meta->itemsize);
+	cl = itobj(obj, ENCLOSED_STATE_SIZE + obj->meta->itemsize);
 	cl->iterable.next = next;
-	cl->it = iter(obj);
-	cl->ctx = ctx;
-	cl->callback = callback;
+	cl->state->nested = iter(obj);
+	cl->state->ctx = ctx;
+	cl->state->callback = callback;
 	return (cl);
 }

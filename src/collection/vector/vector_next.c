@@ -17,14 +17,16 @@
 void	*vector_next(t_obj *itobj)
 {
 	t_itobj	*it;
+	t_state	*state;
 	void	*item;
 
 	it = (t_itobj *)itobj;
-	if (it->size && item_exists(itobj, it->current))
+	state = it->state;
+	if (state->size && item_exists(itobj, state->index))
 	{
-		item = vector_getitem(itobj, it->current);
-		it->current += it->step;
-		it->size--;
+		item = vector_getitem(itobj, state->index);
+		state->index += state->step;
+		state->size--;
 		return (item);
 	}
 	free(it);

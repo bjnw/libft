@@ -14,13 +14,15 @@
 
 void	*reversed(t_obj *vector)
 {
-	t_itobj *it;
+	t_itobj	*it;
+	t_state	*state;
 
 	it = iter(vector);
-	if (it->size > 1)
+	state = it->state;
+	if (state->size > 1)
 	{
-		it->current += it->step * (it->size - 1);
-		it->step *= -1;
+		state->index += state->step * (state->size - 1);
+		state->step *= -1;
 	}
 	return (it);
 }
