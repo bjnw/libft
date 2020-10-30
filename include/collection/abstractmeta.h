@@ -14,7 +14,7 @@
 # define ABSTRACTMETA_H
 
 # ifndef ABSTRACTOBJ_H
-# error "This file is for internal use only"
+#  error "This file is for internal use only"
 # endif
 
 # include <sys/types.h>

@@ -14,20 +14,19 @@
 
 #include "collection/abstractobj.h"
 
-void	*find_r(const t_obj *obj, const void *value, void *ctx,
-			int (*cmp)(void *, const void *, const void *))
+void	*find_r(const t_obj *seq, const void *value, const void *ctx,
+			int (*cmp)(const void *, const void *, const void *))
 {
-	void	*it;
-	void	*item;
+	void *it;
+	void *item;
 
-	it = iter(obj);
+	it = iter(seq);
 	while ((item = next(it)))
 	{
-		if ((*cmp)(ctx, item, value) == 0)
-		{
-			free(it);
-			return (item);
-		}
+		if ((*cmp)(ctx, item, value))
+			continue ;
+		free(it);
+		return (item);
 	}
-	return (obj->fallback);
+	return (seq->fallback);
 }

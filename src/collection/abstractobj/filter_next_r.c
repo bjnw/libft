@@ -13,7 +13,7 @@
 #include <stdlib.h>
 
 #include "collection/abstractobj.h"
-#include "closureobj.h"
+#include "filtermapitobj.h"
 
 void	*filter_next_r(t_obj *itobj)
 {
@@ -23,7 +23,7 @@ void	*filter_next_r(t_obj *itobj)
 
 	cl = (t_itobj *)itobj;
 	p = cl->state->callback;
-	while ((item = next(cl->state->nested)))
+	while ((item = next(cl->nested)))
 	{
 		if ((*p)(cl->state->ctx, item))
 			return (item);

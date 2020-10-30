@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_r.c                                            :+:      :+:    :+:   */
+/*   nth.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,9 +11,22 @@
 /* ************************************************************************** */
 
 #include "collection/abstractobj.h"
-#include "filtermapitobj.h"
+#include "collection/abstractmeta.h"
 
-void	*map_r(const t_obj *obj, void *ctx, void (*f)(void *, void *))
+void	*nth(t_obj *itobj, ssize_t n)
 {
-	return (fm_itobj(obj, map_next_r, ctx, f));
+	void *item;
+
+	if (n < 0)
+	{
+		n += itobj->meta->size;
+		if (n < 0)
+			n = 0;
+	}
+	item = next(itobj);
+	while (item && n--)
+	{
+		item = next(itobj);
+	}
+	return (item);
 }

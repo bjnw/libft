@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   closureobj.h                                       :+:      :+:    :+:   */
+/*   exists.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLOSUREOBJ_H
-# define CLOSUREOBJ_H
+#include <stdlib.h>
 
-# include "collection/abstractobj.h"
+#include "collection/abstractobj.h"
 
-struct	s_iterator_state {
-	void	*nested;
-	void	*ctx;
-	void	*callback;
-	void	*item[];
-};
+bool	exists(const t_obj *obj, bool (*p)(const void *))
+{
+	void *it;
+	void *item;
 
-# define ENCLOSED_STATE_SIZE	sizeof(t_state)
-
-/*
-** NOTE src/collection/abstractobj/util.c
-*/
-void	*clobj(const t_obj *obj, void *(*next)(t_obj *),
-			void *ctx, void *callback);
-
-void	*map_next(t_obj *itobj);
-void	*filter_next(t_obj *itobj);
-void	*filtermap_next(t_obj *itobj);
-void	*map_next_r(t_obj *itobj);
-void	*filter_next_r(t_obj *itobj);
-void	*filtermap_next_r(t_obj *itobj);
-
-#endif
+	it = iter(obj);
+	while ((item = next(it)))
+	{
+		if ((*p)(item))
+		{
+			free (it);
+			return (true);
+		}
+	}
+	return (false);
+}

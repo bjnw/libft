@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   locate.c                                           :+:      :+:    :+:   */
+/*   filtermapitobj.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef FILTERMAPITOBJ_H
+# define FILTERMAPITOBJ_H
 
-#include "collection/abstractobj.h"
+# include "collection/abstractobj.h"
 
-ssize_t	locate(const t_obj *obj, const void *value,
-			int (*cmp)(const void *, const void *))
-{
-	ssize_t	index;
-	void	*it;
-	void	*item;
+struct	s_iterator_state {
+	void	*ctx;
+	void	*callback;
+	void	*item[];
+};
 
-	index = 0;
-	it = iter(obj);
-	while ((item = next(it)))
-	{
-		if ((*cmp)(item, value) == 0)
-		{
-			free(it);
-			return (index);
-		}
-		index++;
-	}
-	return (-1);
-}
+# define FILTERMAP_STATE_SIZE	sizeof(t_state)
+
+/*
+** NOTE src/collection/abstractobj/util.c
+*/
+void	*fm_itobj( const t_obj *obj, void *(*next)(t_obj *),
+			void *ctx, void *callback);
+
+void	*map_next(t_obj *itobj);
+void	*filter_next(t_obj *itobj);
+void	*filtermap_next(t_obj *itobj);
+void	*map_next_r(t_obj *itobj);
+void	*filter_next_r(t_obj *itobj);
+void	*filtermap_next_r(t_obj *itobj);
+
+#endif

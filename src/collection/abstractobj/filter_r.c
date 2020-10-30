@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "collection/abstractobj.h"
-#include "closureobj.h"
+#include "filtermapitobj.h"
 
 void	*filter_r(const t_obj *obj, void *ctx, bool (*p)(void *, const void *))
 {
-	return (clobj(obj, filter_next_r, ctx, p));
+	return (fm_itobj(obj, filter_next_r, ctx, p));
 }

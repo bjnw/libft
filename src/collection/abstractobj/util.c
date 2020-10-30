@@ -12,7 +12,7 @@
 
 #include "collection/abstractobj.h"
 #include "collection/abstractmeta.h"
-#include "closureobj.h"
+#include "filtermapitobj.h"
 #include "libft.h"
 
 void	*obj(void (*init)(t_obj *), size_t itemsize, size_t metasize)
@@ -37,14 +37,14 @@ void	*itobj(const t_obj *obj, size_t statesize)
 	return (it);
 }
 
-void	*clobj(const t_obj *obj, void *(*next)(t_obj *),
+void	*fm_itobj(const t_obj *obj, void *(*next)(t_obj *),
 			void *ctx, void *callback)
 {
 	t_itobj *cl;
 
-	cl = itobj(obj, ENCLOSED_STATE_SIZE + obj->meta->itemsize);
+	cl = itobj(obj, FILTERMAP_STATE_SIZE + obj->meta->itemsize);
 	cl->iterable.next = next;
-	cl->state->nested = iter(obj);
+	cl->nested = iter(obj);
 	cl->state->ctx = ctx;
 	cl->state->callback = callback;
 	return (cl);

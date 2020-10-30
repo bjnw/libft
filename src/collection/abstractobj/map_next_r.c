@@ -14,7 +14,7 @@
 
 #include "collection/abstractobj.h"
 #include "collection/abstractmeta.h"
-#include "closureobj.h"
+#include "filtermapitobj.h"
 #include "libft.h"
 
 void	*map_next_r(t_obj *itobj)
@@ -27,7 +27,7 @@ void	*map_next_r(t_obj *itobj)
 	cl = (t_itobj *)itobj;
 	state = cl->state;
 	f = state->callback;
-	if ((item = next(state->nested)))
+	if ((item = next(cl->nested)))
 	{
 		ft_memcpy(state->item, item, itobj->meta->itemsize);
 		(*f)(state->ctx, state->item);

@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_r.c                                            :+:      :+:    :+:   */
+/*   forall.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstractobj.h"
-#include "filtermapitobj.h"
+#include <stdlib.h>
 
-void	*map_r(const t_obj *obj, void *ctx, void (*f)(void *, void *))
+#include "collection/abstractobj.h"
+
+bool	forall(const t_obj *obj, bool (*p)(const void *))
 {
-	return (fm_itobj(obj, map_next_r, ctx, f));
+	void *it;
+	void *item;
+
+	it = iter(obj);
+	while ((item = next(it)))
+	{
+		if (!(*p)(item))
+		{
+			free (it);
+			return (false);
+		}
+	}
+	return (true);
 }

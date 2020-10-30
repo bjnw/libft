@@ -12,18 +12,18 @@
 
 #include "collection/abstractobj.h"
 
-ssize_t	count_r(const t_obj *obj, const void *value, void *ctx,
-			int (*cmp)(void *, const void *, const void *))
+ssize_t	count_r(const t_obj *seq, const void *ctx,
+			bool (*p)(const void *, const void *))
 {
 	ssize_t	n;
 	void	*it;
 	void	*item;
 
 	n = 0;
-	it = iter(obj);
+	it = iter(seq);
 	while ((item = next(it)))
 	{
-		if ((*cmp)(ctx, item, value) == 0)
+		if ((*p)(ctx, item))
 			n++;
 	}
 	return (n);
