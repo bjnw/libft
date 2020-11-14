@@ -10,18 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 #include "bigint.h"
+#include "libft.h"
+
+/*
+** FIXME negativeness
+*/
 
 void	bi_print(const t_bigint *bi)
 {
 	const t_comp *p;
 
-	// FIXME negativeness
 	p = bi->comps + bi->size - 1;
-	printf("%lu", *p);
+	ft_printf("%lu", *p);
 	while (--p >= bi->comps)
-		printf("%.9lu", *p);
-	printf("\n");
+		ft_printf("%.9lu", *p);
+	ft_printf("\n");
 }

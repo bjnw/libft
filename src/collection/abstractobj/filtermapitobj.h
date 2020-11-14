@@ -26,7 +26,7 @@ struct	s_iterator_state {
 /*
 ** NOTE src/collection/abstractobj/util.c
 */
-void	*fm_itobj( const t_obj *obj, void *(*next)(t_obj *),
+void	*fm_itobj(const t_obj *obj, void *(*next)(t_obj *),
 			const void *ctx, void *callback);
 
 void	*map_next(t_obj *itobj);
