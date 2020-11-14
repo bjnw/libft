@@ -12,8 +12,7 @@
 
 #include "collection/abstractobj.h"
 
-void	*fold_r(const t_obj *obj, void *ctx, void *init,
-			void *(*op)(void *, void *, void *))
+void	*fold_r(const t_obj *obj, const void *ctx, void *init, t_f2_r op)
 {
 	void *acc;
 	void *it;

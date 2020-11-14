@@ -12,7 +12,7 @@
 
 #include "collection/abstractobj.h"
 
-void	foreach_r(t_obj *obj, void *ctx, void (*f)(void *, void *))
+void	foreach_r(t_obj *obj, const void *ctx, t_f1s_r f)
 {
 	void *it;
 	void *item;

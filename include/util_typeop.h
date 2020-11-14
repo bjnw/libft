@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   min_uint64p.c                                      :+:      :+:    :+:   */
+/*   util_typeop.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
+#ifndef UTIL_TYPEOP_H
+# define UTIL_TYPEOP_H
 
-void	*min_uint64p(void *a, void *b)
-{
-	return (*(uint64_t *)a <= *(uint64_t *)b ? a : b);
-}
+int		cmp_char(char a, char b);
+int		cmp_byte(unsigned char a, unsigned char b);
+int		cmp_int(int a, int b);
+int		cmp_long(long a, long b);
+
+int		cmp_charp(const void *a, const void *b);
+int		cmp_bytep(const void *a, const void *b);
+int		cmp_intp(const void *a, const void *b);
+int		cmp_longp(const void *a, const void *b);
+
+void	*min_charp(void *a, void *b);
+void	*min_bytep(void *a, void *b);
+void	*min_intp(void *a, void *b);
+
+void	*max_charp(void *a, void *b);
+void	*max_bytep(void *a, void *b);
+void	*max_intp(void *a, void *b);
+void	*max_longp(void *a, void *b);
+
+#endif

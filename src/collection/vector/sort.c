@@ -13,8 +13,7 @@
 #include "libft.h"
 #include "vectorobj.h"
 
-static ssize_t	lomuto(t_obj *vector, ssize_t low, ssize_t high,
-		int (*cmp)(const void *, const void *))
+static ssize_t	lomuto(t_obj *vector, ssize_t low, ssize_t high, t_cmp cmp)
 {
 	size_t	itemsize;
 	ssize_t	pivot;
@@ -40,8 +39,7 @@ static ssize_t	lomuto(t_obj *vector, ssize_t low, ssize_t high,
 	return (j);
 }
 
-static void		quicksort(t_obj *vector, ssize_t low, ssize_t high,
-		int (*cmp)(const void *, const void *))
+static void		quicksort(t_obj *vector, ssize_t low, ssize_t high, t_cmp cmp)
 {
 	ssize_t pivot;
 
@@ -61,7 +59,7 @@ static void		quicksort(t_obj *vector, ssize_t low, ssize_t high,
 	}
 }
 
-void			sort(t_obj *vector, int (*cmp)(const void *, const void *))
+void			sort(t_obj *vector, t_cmp cmp)
 {
 	ssize_t low;
 	ssize_t high;

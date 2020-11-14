@@ -14,7 +14,7 @@
 
 #include "collection/abstractobj.h"
 
-bool	exists(const t_obj *obj, bool (*p)(const void *))
+bool	exists(const t_obj *obj, t_pred p)
 {
 	void *it;
 	void *item;
@@ -24,7 +24,7 @@ bool	exists(const t_obj *obj, bool (*p)(const void *))
 	{
 		if ((*p)(item))
 		{
-			free (it);
+			delete(it);
 			return (true);
 		}
 	}

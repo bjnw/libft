@@ -12,7 +12,7 @@
 
 #include "vectorobj.h"
 
-void	*dropwhile(t_obj *vector, bool (*p)(const void *))
+void	*dropwhile(t_obj *vector, t_pred p)
 {
 	void	*it;
 	t_itobj	*nil;

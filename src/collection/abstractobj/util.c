@@ -33,12 +33,13 @@ void	*itobj(const t_obj *obj, size_t statesize)
 	it = xcalloc(1, sizeof(t_itobj) + statesize);
 	it->iterable = *obj;
 	it->iterable.iter = NULL;
+	it->iterable.clear = NULL;
 	it->state = (void *)(&it->state + 1);
 	return (it);
 }
 
 void	*fm_itobj(const t_obj *obj, void *(*next)(t_obj *),
-			void *ctx, void *callback)
+			const void *ctx, void *callback)
 {
 	t_itobj *cl;
 

@@ -10,15 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "collection/abstractobj.h"
 #include "filtermapitobj.h"
 
 void	*filter_next(t_obj *itobj)
 {
-	bool	(*p)(const void *);
 	t_itobj	*cl;
+	t_pred	p;
 	void	*item;
 
 	cl = (t_itobj *)itobj;
@@ -28,6 +26,6 @@ void	*filter_next(t_obj *itobj)
 		if ((*p)(item))
 			return (item);
 	}
-	free(cl);
+	delete(itobj);
 	return (NULL);
 }

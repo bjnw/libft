@@ -16,9 +16,9 @@
 # include "collection/abstractobj.h"
 
 struct	s_iterator_state {
-	void	*ctx;
-	void	*callback;
-	void	*item[];
+	const void	*ctx;
+	void		*callback;
+	void		*data[];
 };
 
 # define FILTERMAP_STATE_SIZE	sizeof(t_state)
@@ -27,7 +27,7 @@ struct	s_iterator_state {
 ** NOTE src/collection/abstractobj/util.c
 */
 void	*fm_itobj( const t_obj *obj, void *(*next)(t_obj *),
-			void *ctx, void *callback);
+			const void *ctx, void *callback);
 
 void	*map_next(t_obj *itobj);
 void	*filter_next(t_obj *itobj);

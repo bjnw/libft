@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "libft.h"
 #include "vectorobj.h"
 
@@ -33,7 +31,7 @@ void	patch(t_obj *dst, const t_obj *src, ssize_t from, ssize_t size)
 		ft_memcpy(itemdst, itemsrc, src->meta->itemsize);
 	}
 	if (itemdst)
-		free(itdst);
+		delete(itdst);
 	if (itemsrc)
-		free(itsrc);
+		delete(itsrc);
 }

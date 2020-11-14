@@ -12,7 +12,7 @@
 
 #include "collection/abstractobj.h"
 
-void	*reduce(const t_obj *obj, void *(*op)(void *, void *))
+void	*reduce(const t_obj *obj, t_f2 op)
 {
 	void *acc;
 	void *it;

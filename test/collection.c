@@ -1,15 +1,15 @@
+#include <sys/types.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <sys/types.h>
 #include <time.h>
 #include <stdint.h>
-#include <string.h>
 
 #include "collection/abstractobj.h"
-#include "libft.h"
+#include "collection/functype.h"
 #include "collection/vector.h"
 #include "collection/list.h"
-#include "util.h"
+#include "libft.h"
+#include "util_typeop.h"
 
 void	myatoi(void *item, const char *begin, const char *end)
 {
@@ -128,7 +128,7 @@ void	lst_fn(void *item)
 
 int		obj_cmp(void *item1, void *item2)
 {
-	return (memcmp(item1, item2, sizeof(t_struct)));
+	return (ft_memcmp(item1, item2, sizeof(t_struct)));
 }
 
 // __attribute__((noinline))
@@ -311,9 +311,9 @@ int		main(void)
 	printf("ints: added %ld items,  %fs\n", MAX_ITEMS, TIME_DIFF(begin, end));
 	printf("ints size: %ld\n\n", size(ints));
 
-	val = reduce(ints, min_int32p);
+	val = reduce(ints, min_intp);
 	printf("ints min: %d\n", *val);
-	val = reduce(ints, max_int32p);
+	val = reduce(ints, max_intp);
 	printf("ints max: %d\n", *val);
 	acc = 0;
 	begin = clock();

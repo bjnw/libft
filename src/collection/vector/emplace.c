@@ -12,8 +12,7 @@
 
 #include "vectorobj.h"
 
-void	*emplace(t_obj *vector, void *arg,
-			void (*f)(void *, void *))
+void	*emplace(t_obj *vector, void *arg, t_f2s f)
 {
 	void	*item;
 	ssize_t	n;

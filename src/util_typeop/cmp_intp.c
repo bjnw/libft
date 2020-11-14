@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   max_%type%p.c                                       :+:      :+:    :+:   */
+/*   cmp_intp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
-
-void	*max_%type%p(void *a, void *b)
+int		cmp_intp(const void *ap, const void *bp)
 {
-	return (*(%type%_t *)a >= *(%type%_t *)b ? a : b);
+	const int	a = *(int *)ap;
+	const int	b = *(int *)bp;
+
+	return ((a > b) - (a < b));
 }

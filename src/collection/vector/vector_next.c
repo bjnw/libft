@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "vectorobj.h"
 
 void	*vector_next(t_obj *itobj)
@@ -29,6 +27,6 @@ void	*vector_next(t_obj *itobj)
 		state->size--;
 		return (item);
 	}
-	free(it);
+	delete(itobj);
 	return (NULL);
 }

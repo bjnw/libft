@@ -14,7 +14,7 @@
 #include "vectorobj.h"
 
 void	*split(const char *s, int delim, size_t itemsize,
-			void (*f)(void *, const char *, const char *))
+			void (*parse)(void *, const char *, const char *))
 {
 	t_obj	*new;
 	void	*it;
@@ -29,7 +29,7 @@ void	*split(const char *s, int delim, size_t itemsize,
 	while ((item = next(it)))
 	{
 		s0 = ft_strjmp(&s, delim);
-		(*f)(item, s0, s);
+		(*parse)(item, s0, s);
 	}
 	return (new);
 }

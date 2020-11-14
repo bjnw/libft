@@ -10,12 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "collection/abstractobj.h"
 
-void	*find_r(const t_obj *seq, const void *value, const void *ctx,
-			int (*cmp)(const void *, const void *, const void *))
+void	*find_r(const t_obj *seq, const void *value,
+			const void *ctx, t_cmp_r cmp)
 {
 	void *it;
 	void *item;
@@ -25,7 +23,7 @@ void	*find_r(const t_obj *seq, const void *value, const void *ctx,
 	{
 		if ((*cmp)(ctx, item, value))
 			continue ;
-		free(it);
+		delete(it);
 		return (item);
 	}
 	return (seq->fallback);

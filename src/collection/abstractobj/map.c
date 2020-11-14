@@ -13,7 +13,7 @@
 #include "collection/abstractobj.h"
 #include "filtermapitobj.h"
 
-void	*map(const t_obj *obj, void (*f)(void *))
+void	*map(const t_obj *obj, t_f1s f)
 {
 	return (fm_itobj(obj, map_next, NULL, f));
 }

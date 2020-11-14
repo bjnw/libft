@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "listobj.h"
 
 void	*list_next(t_obj *itobj)
@@ -28,6 +26,6 @@ void	*list_next(t_obj *itobj)
 		state->node = state->node->next;
 		return (item);
 	}
-	free(it);
+	delete(itobj);
 	return (NULL);
 }

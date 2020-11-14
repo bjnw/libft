@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   max_int8p.c                                        :+:      :+:    :+:   */
+/*   cmp_bytep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
-
-void	*max_int8p(void *a, void *b)
+int		cmp_bytep(const void *ap, const void *bp)
 {
-	return (*(int8_t *)a >= *(int8_t *)b ? a : b);
+	return (*(unsigned char *)ap - *(unsigned char *)bp);
 }

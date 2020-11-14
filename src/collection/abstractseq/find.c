@@ -10,12 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "collection/abstractobj.h"
 
-void	*find(const t_obj *seq, const void *value,
-			int (*cmp)(const void *, const void *))
+void	*find(const t_obj *seq, const void *value, t_cmp cmp)
 {
 	void *it;
 	void *item;
@@ -25,7 +22,7 @@ void	*find(const t_obj *seq, const void *value,
 	{
 		if ((*cmp)(item, value))
 			continue ;
-		free(it);
+		delete(it);
 		return (item);
 	}
 	return (seq->fallback);

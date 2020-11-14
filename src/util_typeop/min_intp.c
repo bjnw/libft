@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmp_uint64p.c                                      :+:      :+:    :+:   */
+/*   min_intp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
-
-int		cmp_uint64p(const void *ap, const void *bp)
+void	*min_intp(void *a, void *b)
 {
-	const uint64_t	a = *(uint64_t *)ap;
-	const uint64_t	b = *(uint64_t *)bp;
-
-	return ((a > b) - (a < b));
+	return (*(int *)a <= *(int *)b ? a : b);
 }

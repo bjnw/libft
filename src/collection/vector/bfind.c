@@ -13,8 +13,7 @@
 #include "libft.h"
 #include "vectorobj.h"
 
-void	*bfind(const t_obj *vector, const void *value,
-			int (*cmp)(const void *, const void *))
+void	*bfind(const t_obj *vector, const void *value, t_cmp cmp)
 {
 	void	*item;
 	ssize_t	low;

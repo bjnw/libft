@@ -14,8 +14,7 @@
 
 #include "collection/abstractobj.h"
 
-bool	equals(const t_obj *lhs, const t_obj *rhs,
-			int (*cmp)(const void *, const void *))
+bool	equals(const t_obj *lhs, const t_obj *rhs, t_cmp cmp)
 {
 	void *itl;
 	void *itr;
@@ -36,8 +35,8 @@ bool	equals(const t_obj *lhs, const t_obj *rhs,
 	if (!iteml && !itemr)
 		return (true);
 	if (iteml)
-		free(itl);
+		delete(itl);
 	if (itemr)
-		free(itr);
+		delete(itr);
 	return (false);
 }

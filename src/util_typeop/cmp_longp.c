@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   max_uint64p.c                                      :+:      :+:    :+:   */
+/*   cmp_longp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
-
-void	*max_uint64p(void *a, void *b)
+int		cmp_longp(const void *ap, const void *bp)
 {
-	return (*(uint64_t *)a >= *(uint64_t *)b ? a : b);
+	const long	a = *(long *)ap;
+	const long	b = *(long *)bp;
+
+	return ((a > b) - (a < b));
 }

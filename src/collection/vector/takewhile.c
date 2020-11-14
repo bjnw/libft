@@ -12,7 +12,7 @@
 
 #include "vectorobj.h"
 
-void	*takewhile(t_obj *vector, bool (*p)(const void *))
+void	*takewhile(t_obj *vector, t_pred p)
 {
 	void	*it;
 	t_itobj	*nil;

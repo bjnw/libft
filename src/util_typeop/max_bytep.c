@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmp_uint32p.c                                      :+:      :+:    :+:   */
+/*   max_bytep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
-
-int		cmp_uint32p(const void *ap, const void *bp)
+void	*max_bytep(void *a, void *b)
 {
-	const uint32_t	a = *(uint32_t *)ap;
-	const uint32_t	b = *(uint32_t *)bp;
-
-	return ((a > b) - (a < b));
+	return (*(unsigned char *)a >= *(unsigned char *)b ? a : b);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmp_int32p.c                                       :+:      :+:    :+:   */
+/*   max_charp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
-
-int		cmp_int32p(const void *ap, const void *bp)
+void	*max_charp(void *a, void *b)
 {
-	const int32_t	a = *(int32_t *)ap;
-	const int32_t	b = *(int32_t *)bp;
-
-	return ((a > b) - (a < b));
+	return (*(char *)a >= *(char *)b ? a : b);
 }

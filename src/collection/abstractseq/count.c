@@ -12,7 +12,7 @@
 
 #include "collection/abstractobj.h"
 
-ssize_t	count(const t_obj *seq, bool (*p)(const void *))
+ssize_t	count(const t_obj *seq, t_pred p)
 {
 	ssize_t	n;
 	void	*it;

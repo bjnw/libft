@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "collection/abstractobj.h"
 #include "collection/abstractmeta.h"
 #include "filtermapitobj.h"
@@ -19,9 +17,9 @@
 
 void	*filtermap_next(t_obj *itobj)
 {
-	void	*(*f)(void *);
 	t_itobj	*cl;
 	t_state	*state;
+	t_f1	f;
 	void	*item;
 	size_t	itemsize;
 
@@ -31,10 +29,10 @@ void	*filtermap_next(t_obj *itobj)
 	itemsize = itobj->meta->itemsize;
 	while ((item = next(cl->nested)))
 	{
-		ft_memcpy(state->item, item, itemsize);
-		if ((*f)(state->item))
-			return (state->item);
+		ft_memcpy(state->data, item, itemsize);
+		if ((*f)(state->data))
+			return (state->data);
 	}
-	free(cl);
+	delete(itobj);
 	return (NULL);
 }

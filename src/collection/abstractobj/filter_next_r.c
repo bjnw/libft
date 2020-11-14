@@ -17,9 +17,9 @@
 
 void	*filter_next_r(t_obj *itobj)
 {
-	bool	(*p)(void *, const void *);
-	t_itobj	*cl;
-	void	*item;
+	t_itobj		*cl;
+	t_pred_r	p;
+	void		*item;
 
 	cl = (t_itobj *)itobj;
 	p = cl->state->callback;
@@ -28,6 +28,6 @@ void	*filter_next_r(t_obj *itobj)
 		if ((*p)(cl->state->ctx, item))
 			return (item);
 	}
-	free(cl);
+	delete(itobj);
 	return (NULL);
 }

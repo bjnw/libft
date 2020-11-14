@@ -10,12 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "collection/abstractobj.h"
 
-ssize_t	indexof_r(const t_obj *seq, const void *value, const void *ctx,
-			int (*cmp)(const void *, const void *, const void *))
+ssize_t	indexof_r(const t_obj *seq, const void *value,
+			const void *ctx, t_cmp_r cmp)
 {
 	ssize_t	index;
 	void	*it;
@@ -27,7 +25,7 @@ ssize_t	indexof_r(const t_obj *seq, const void *value, const void *ctx,
 	{
 		if ((*cmp)(ctx, item, value) == 0)
 		{
-			free(it);
+			delete(it);
 			return (index);
 		}
 		index++;
