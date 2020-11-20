@@ -13,7 +13,7 @@
 #ifndef TREEOBJ_H
 # define TREEOBJ_H
 
-# include "collection/generic.h"
+# include "collection/abstractobj.h"
 
 typedef struct s_node	t_node;
 struct		s_node {
@@ -35,13 +35,13 @@ void		*totree(const t_obj *obj);
 void		*tree(size_t itemsize);
 void		balance(t_obj *tree);
 
+void		*tree_iter(const t_obj *tree);
+void		*tree_next(t_obj *iterobj);
 void		*tree_add(t_obj *tree, va_list ap);
 void		*tree_get(const t_obj *tree, va_list ap);
 bool		tree_set(t_obj *tree, va_list ap);
 bool		tree_del(t_obj *tree, va_list ap);
-void		*tree_iter(const t_obj *tree);
-void		*tree_next(t_obj *iterobj);
-void		*tree_copy(const t_obj *src);
+void		*tree_empty(const t_obj *src);
 void		*tree_clone(const t_obj *src);
 void		tree_clear(t_obj *tree);
 

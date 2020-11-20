@@ -20,7 +20,6 @@ void	list_init(t_obj *list)
 	list->get = list_get;
 	list->set = list_set;
 	list->del = list_del;
-	list->copy = list_copy;
-	list->clone = list_clone;
+	list->empty = list_empty;
 	list->clear = list_clear;
 }

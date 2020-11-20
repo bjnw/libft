@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   takewhile.c                                        :+:      :+:    :+:   */
+/*   take_iter.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vectorobj.h"
+#include "collection/abstractobj.h"
+#include "collection/abstractmeta.h"
+#include "takedropobj.h"
 
-void	*takewhile(t_obj *vector, t_pred p)
+void	*take_iter(void *(*next)(t_obj *),
+			const t_obj *obj, ssize_t n, t_pred p)
 {
-	void	*it;
-	t_itobj	*nil;
-	void	*item;
-	ssize_t	n;
+	t_itobj *it;
 
-	n = 0;
-	it = iter(vector);
-	while ((item = next(it)))
-	{
-		if (!(*p)(item))
-			return (view(it, 0, n, 1));
-		n++;
-	}
-	nil = view(vector, 0, 0, 0);
-	return (nil);
+	it = itobj(obj, TAKE_STATE_SIZE + obj->meta->itemsize);
+	it->iterable.next = next;
+	it->iterable.clear = take_clear;
+	it->nested = iter(obj);
+	it->state->n = n;
+	it->state->p = p;
+	return (it);
 }

@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   take.c                                             :+:      :+:    :+:   */
+/*   take_next.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vectorobj.h"
+#include "collection/abstractobj.h"
+#include "takedropobj.h"
 
-void	*take(t_obj *vector, ssize_t size)
+void	*take_next(t_obj *itobj)
 {
-	t_itobj	*it;
-	ssize_t	n;
+	t_itobj *it;
 
-	n = vector->meta->size;
-	if (size > n)
-		size = n;
-	else if (size < 0)
-		size = 0;
-	it = view(vector, 0, size, 1);
-	return (it);
+	it = (void *)itobj;
+	if (it->state->n--)
+		return (next(it->nested));
+	return (NULL);
 }

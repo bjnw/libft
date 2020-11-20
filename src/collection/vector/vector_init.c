@@ -20,7 +20,7 @@ void	vector_init(t_obj *vector)
 	vector->get = vector_get;
 	vector->set = vector_set;
 	vector->del = vector_del;
-	vector->copy = vector_copy;
+	vector->empty = vector_empty;
 	vector->clone = vector_clone;
 	vector->clear = vector_clear;
 }

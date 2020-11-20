@@ -49,7 +49,7 @@ void	*vector_add(t_obj *vector, va_list ap);
 void	*vector_get(const t_obj *vector, va_list ap);
 bool	vector_set(t_obj *vector, va_list ap);
 bool	vector_del(t_obj *vector, va_list ap);
-void	*vector_copy(const t_obj *src);
+void	*vector_empty(const t_obj *src);
 void	*vector_clone(const t_obj *src);
 void	vector_clear(t_obj *vector);
 

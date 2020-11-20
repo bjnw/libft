@@ -12,7 +12,7 @@
 
 #include "collection/abstractobj.h"
 
-void	*reduce_r(const t_obj *obj, const void *ctx, t_f2_r op)
+void	*reduce_r(const t_obj *obj, const void *ctx, t_f3_r op)
 {
 	void *acc;
 	void *it;

@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_copy.c                                        :+:      :+:    :+:   */
+/*   takewhile.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "listobj.h"
+#include "collection/abstractobj.h"
+#include "takedropobj.h"
 
-void	*list_copy(const t_obj *src)
+void	*takewhile(const t_obj *obj, t_pred p)
 {
-	t_obj *new;
-
-	new = list(src->meta->itemsize);
-	new->dtor = src->dtor;
-	return (new);
+	return (take_iter(takewhile_next, obj, 0, p));
 }

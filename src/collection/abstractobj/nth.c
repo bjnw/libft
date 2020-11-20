@@ -11,22 +11,19 @@
 /* ************************************************************************** */
 
 #include "collection/abstractobj.h"
-#include "collection/abstractmeta.h"
+
+/*
+** TODO rev
+*/
 
 void	*nth(t_obj *itobj, ssize_t n)
 {
 	void *item;
 
 	if (n < 0)
-	{
-		n += itobj->meta->size;
-		if (n < 0)
-			n = 0;
-	}
+		n = 0;
 	item = next(itobj);
 	while (item && n--)
-	{
 		item = next(itobj);
-	}
 	return (item);
 }

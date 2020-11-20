@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filtermapitobj.h                                   :+:      :+:    :+:   */
+/*   filtermap_iter.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,30 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILTERMAPITOBJ_H
-# define FILTERMAPITOBJ_H
+#include "collection/abstractobj.h"
+#include "collection/abstractmeta.h"
+#include "filtermapobj.h"
 
-# include "collection/abstractobj.h"
+void	*filtermap_iter(void *(*next)(t_obj *),
+			const t_obj *obj, const void *ctx, void *callback)
+{
+	t_itobj *it;
 
-struct	s_iterator_state {
-	const void	*ctx;
-	void		*callback;
-	void		*data[];
-};
-
-# define FILTERMAP_STATE_SIZE	sizeof(t_state)
-
-/*
-** NOTE src/collection/abstractobj/util.c
-*/
-void	*fm_itobj(const t_obj *obj, void *(*next)(t_obj *),
-			const void *ctx, void *callback);
-
-void	*map_next(t_obj *itobj);
-void	*filter_next(t_obj *itobj);
-void	*filtermap_next(t_obj *itobj);
-void	*map_next_r(t_obj *itobj);
-void	*filter_next_r(t_obj *itobj);
-void	*filtermap_next_r(t_obj *itobj);
-
-#endif
+	it = itobj(obj, FILTERMAP_STATE_SIZE + obj->meta->itemsize);
+	it->iterable.next = next;
+	it->nested = iter(obj);
+	it->state->ctx = ctx;
+	it->state->callback = callback;
+	return (it);
+}

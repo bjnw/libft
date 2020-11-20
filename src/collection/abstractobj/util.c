@@ -12,7 +12,6 @@
 
 #include "collection/abstractobj.h"
 #include "collection/abstractmeta.h"
-#include "filtermapitobj.h"
 #include "libft.h"
 
 void	*obj(void (*init)(t_obj *), size_t itemsize, size_t metasize)
@@ -38,15 +37,17 @@ void	*itobj(const t_obj *obj, size_t statesize)
 	return (it);
 }
 
-void	*fm_itobj(const t_obj *obj, void *(*next)(t_obj *),
-			const void *ctx, void *callback)
+void	*null_next(t_obj *itobj)
 {
-	t_itobj *cl;
+	(void)itobj;
+	return (NULL);
+}
 
-	cl = itobj(obj, FILTERMAP_STATE_SIZE + obj->meta->itemsize);
-	cl->iterable.next = next;
-	cl->nested = iter(obj);
-	cl->state->ctx = ctx;
-	cl->state->callback = callback;
-	return (cl);
+void	*null_iter(const t_obj *obj)
+{
+	t_itobj *it;
+
+	it = itobj(obj, 0);
+	it->iterable.next = null_next;
+	return (it);
 }

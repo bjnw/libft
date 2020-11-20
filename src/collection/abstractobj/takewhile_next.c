@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_copy.c                                      :+:      :+:    :+:   */
+/*   takewhile_next.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "vectorobj.h"
+#include "collection/abstractobj.h"
+#include "takedropobj.h"
 
-void	*vector_copy(const t_obj *src)
+void	*takewhile_next(t_obj *itobj)
 {
-	t_obj *new;
+	t_itobj	*it;
+	t_pred	p;
+	void	*item;
 
-	new = vector(src->meta->itemsize);
-	new->dtor = src->dtor;
-	return (new);
+	it = (void *)itobj;
+	p = it->state->p;
+	item = next(it->nested);
+	if (item && (*p)(item))
+		return (item);
+	return (NULL);
 }

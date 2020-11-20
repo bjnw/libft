@@ -14,29 +14,29 @@
 
 #include "collection/abstractobj.h"
 
-bool	equals(const t_obj *lhs, const t_obj *rhs, t_cmp cmp)
+bool	equals(const t_obj *a, const t_obj *b, t_cmp cmp)
 {
-	void *itl;
-	void *itr;
-	void *iteml;
-	void *itemr;
+	void *ita;
+	void *itb;
+	void *itema;
+	void *itemb;
 
-	if (size(lhs) != size(rhs))
+	if (size(a) != size(b))
 		return (false);
-	itl = iter(lhs);
-	itr = iter(rhs);
+	ita = iter(a);
+	itb = iter(b);
 	while (true)
 	{
-		iteml = next(itl);
-		itemr = next(itr);
-		if (!iteml || !itemr || (*cmp)(iteml, itemr) != 0)
+		itema = next(ita);
+		itemb = next(itb);
+		if (!itema || !itemb || (*cmp)(itema, itemb) != 0)
 			break ;
 	}
-	if (!iteml && !itemr)
+	if (!itema && !itemb)
 		return (true);
-	if (iteml)
-		delete(itl);
-	if (itemr)
-		delete(itr);
+	if (itema)
+		delete(ita);
+	if (itemb)
+		delete(itb);
 	return (false);
 }

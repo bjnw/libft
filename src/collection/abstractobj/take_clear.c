@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_next.c                                        :+:      :+:    :+:   */
+/*   take_clear.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "listobj.h"
+#include "collection/abstractobj.h"
+#include "takedropobj.h"
 
-void	*list_next(t_obj *itobj)
+#include <stdlib.h>
+
+void	take_clear(t_obj *obj)
 {
-	t_itobj	*it;
-	t_state	*state;
-	void	*item;
+	t_itobj *it;
 
-	it = (void *)itobj;
-	state = it->state;
-	if (!state->node)
-		return (NULL);
-	item = state->node->item;
-	state->node = state->node->next;
-	return (item);
+	it = (void *)obj;
+	if (it->nested)
+		take_clear(it->nested);
+	free(it->nested);
 }

@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_next.c                                        :+:      :+:    :+:   */
+/*   take.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "listobj.h"
+#include "collection/abstractobj.h"
+#include "takedropobj.h"
 
-void	*list_next(t_obj *itobj)
+void	*take(const t_obj *obj, ssize_t n)
 {
-	t_itobj	*it;
-	t_state	*state;
-	void	*item;
-
-	it = (void *)itobj;
-	state = it->state;
-	if (!state->node)
-		return (NULL);
-	item = state->node->item;
-	state->node = state->node->next;
-	return (item);
+	if (n <= 0)
+		n = 0;
+	return (take_iter(take_next, obj, n, NULL));
 }

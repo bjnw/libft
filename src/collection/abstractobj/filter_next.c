@@ -11,21 +11,20 @@
 /* ************************************************************************** */
 
 #include "collection/abstractobj.h"
-#include "filtermapitobj.h"
+#include "filtermapobj.h"
 
 void	*filter_next(t_obj *itobj)
 {
-	t_itobj	*cl;
+	t_itobj	*it;
 	t_pred	p;
 	void	*item;
 
-	cl = (t_itobj *)itobj;
-	p = cl->state->callback;
-	while ((item = next(cl->nested)))
+	it = (void *)itobj;
+	p = it->state->callback;
+	while ((item = next(it->nested)))
 	{
 		if ((*p)(item))
 			return (item);
 	}
-	delete(itobj);
 	return (NULL);
 }

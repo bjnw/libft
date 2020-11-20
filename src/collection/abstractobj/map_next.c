@@ -12,25 +12,23 @@
 
 #include "collection/abstractobj.h"
 #include "collection/abstractmeta.h"
-#include "filtermapitobj.h"
+#include "filtermapobj.h"
 #include "libft.h"
 
 void	*map_next(t_obj *itobj)
 {
-	t_itobj	*cl;
+	t_itobj	*it;
 	t_state	*state;
 	t_f1s	f;
 	void	*item;
 
-	cl = (t_itobj *)itobj;
-	state = cl->state;
+	it = (void *)itobj;
+	item = next(it->nested);
+	if (!item)
+		return (NULL);
+	state = it->state;
 	f = state->callback;
-	if ((item = next(cl->nested)))
-	{
-		ft_memcpy(state->data, item, itobj->meta->itemsize);
-		(*f)(state->data);
-		return (state->data);
-	}
-	delete(itobj);
-	return (NULL);
+	ft_memcpy(state->data, item, itobj->meta->itemsize);
+	(*f)(state->data);
+	return (state->data);
 }

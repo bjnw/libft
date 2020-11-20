@@ -4,12 +4,10 @@
 #include <time.h>
 #include <stdint.h>
 
-#include "collection/abstractobj.h"
-#include "collection/functype.h"
 #include "collection/vector.h"
 #include "collection/list.h"
 #include "libft.h"
-#include "util_typeop.h"
+#include "util/typeop.h"
 
 void	myatoi(void *item, const char *begin, const char *end)
 {

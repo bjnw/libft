@@ -18,15 +18,12 @@ void	*vector_next(t_obj *itobj)
 	t_state	*state;
 	void	*item;
 
-	it = (t_itobj *)itobj;
+	it = (void *)itobj;
 	state = it->state;
-	if (state->size && item_exists(itobj, state->index))
-	{
-		item = vector_getitem(itobj, state->index);
-		state->index += state->step;
-		state->size--;
-		return (item);
-	}
-	delete(itobj);
-	return (NULL);
+	if (!state->size || !item_exists(itobj, state->index))
+		return (NULL);
+	item = vector_getitem(itobj, state->index);
+	state->index += state->step;
+	state->size--;
+	return (item);
 }

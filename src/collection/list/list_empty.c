@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drop.c                                             :+:      :+:    :+:   */
+/*   list_empty.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,18 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vectorobj.h"
+#include "listobj.h"
 
-void	*drop(t_obj *vector, ssize_t size)
+void	*list_empty(const t_obj *src)
 {
-	t_itobj	*it;
-	ssize_t	n;
+	t_obj *new;
 
-	n = vector->meta->size;
-	if (size > n)
-		size = n;
-	else if (size < 0)
-		size = 0;
-	it = view(vector, size, n - size, 1);
-	return (it);
+	new = list(src->meta->itemsize);
+	setattr_dtor(new, src->dtor);
+	return (new);
 }

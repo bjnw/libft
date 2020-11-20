@@ -12,11 +12,11 @@
 
 #include "collection/abstractobj.h"
 
-void	*concat(const t_obj *prefix, const t_obj *suffix)
+void	*concat(const t_obj *a, const t_obj *b)
 {
 	t_obj *new;
 
-	new = clone(prefix);
-	extend(new, suffix);
+	new = clone(a);
+	extend(new, b);
 	return (new);
 }

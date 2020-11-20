@@ -14,5 +14,11 @@
 
 void	*clone(const t_obj *obj)
 {
-	return (obj->clone(obj));
+	t_obj *new;
+
+	if (obj->clone)
+		return (obj->clone(obj));
+	new = empty(obj);
+	extend(new, obj);
+	return (new);
 }

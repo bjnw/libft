@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_typeop.h                                      :+:      :+:    :+:   */
+/*   typeop.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTIL_TYPEOP_H
-# define UTIL_TYPEOP_H
+#ifndef TYPEOP_H
+# define TYPEOP_H
 
 int		cmp_char(char a, char b);
 int		cmp_byte(unsigned char a, unsigned char b);

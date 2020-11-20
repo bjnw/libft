@@ -32,9 +32,7 @@ void	reverse(t_obj *vector);
 void	*reversed(t_obj *vector);
 void	*view(t_obj *vector, ssize_t from, ssize_t size, ssize_t step);
 void	*slice(t_obj *vector, ssize_t from, ssize_t until);
-void	*take(t_obj *vector, ssize_t size);
-void	*drop(t_obj *vector, ssize_t size);
-void	*takewhile(t_obj *vector, t_pred p);
+
 void	*dropwhile(t_obj *vector, t_pred p);
 
 #endif

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_next.c                                        :+:      :+:    :+:   */
+/*   vector_empty.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,19 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "listobj.h"
+#include "libft.h"
+#include "vectorobj.h"
 
-void	*list_next(t_obj *itobj)
+void	*vector_empty(const t_obj *src)
 {
-	t_itobj	*it;
-	t_state	*state;
-	void	*item;
+	t_obj *new;
 
-	it = (void *)itobj;
-	state = it->state;
-	if (!state->node)
-		return (NULL);
-	item = state->node->item;
-	state->node = state->node->next;
-	return (item);
+	new = vector(src->meta->itemsize);
+	setattr_dtor(new, src->dtor);
+	return (new);
 }

@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "collection/abstractobj.h"
-#include "filtermapitobj.h"
+#include "filtermapobj.h"
 
-void	*map_r(const t_obj *obj, const void *ctx, t_f1s_r f)
+void	*map_r(const t_obj *obj, const void *ctx, t_f2s_r f)
 {
-	return (fm_itobj(obj, map_next_r, ctx, f));
+	return (filtermap_iter(map_next_r, obj, ctx, f));
 }

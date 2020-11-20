@@ -14,5 +14,10 @@
 
 void	*next(t_obj *itobj)
 {
-	return (itobj->next(itobj));
+	void *item;
+
+	item = itobj->next(itobj);
+	if (!item)
+		delete(itobj);
+	return (item);
 }

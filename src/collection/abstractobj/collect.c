@@ -16,7 +16,7 @@ void	*collect(t_obj *itobj)
 {
 	t_obj *obj;
 
-	obj = copy(itobj);
+	obj = empty(itobj);
 	extend(obj, itobj);
 	return (obj);
 }
