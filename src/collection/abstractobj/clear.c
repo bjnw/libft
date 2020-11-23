@@ -14,5 +14,6 @@
 
 void	clear(t_obj *obj)
 {
-	obj->clear(obj);
+	if (obj->clear)
+		obj->clear(obj);
 }

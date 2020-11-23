@@ -14,10 +14,12 @@
 # define FILTERMAPOBJ_H
 
 # include "collection/abstractobj.h"
+# include "collection/abstractmeta.h"
 
 struct	s_iterator_state {
+	void		*inner;
 	const void	*ctx;
-	void		*callback;
+	const void	*func;
 	void		*data[];
 };
 
@@ -26,17 +28,19 @@ struct	s_iterator_state {
 /*
 ** NOTE src/collection/abstractobj/util.c
 */
-void	*obj(void (*init)(t_obj *), size_t itemsize, size_t metasize);
 void	*itobj(const t_obj *obj, size_t statesize);
 
 void	*filtermap_iter(void *(*next)(t_obj *),
-			const t_obj *obj, const void *ctx, void *callback);
-
+			const t_obj *obj, const void *ctx, void *func);
 void	*map_next(t_obj *itobj);
 void	*map_next_r(t_obj *itobj);
 void	*filter_next(t_obj *itobj);
 void	*filter_next_r(t_obj *itobj);
+void	*filternot_next(t_obj *itobj);
+void	*filternot_next_r(t_obj *itobj);
 void	*filtermap_next(t_obj *itobj);
 void	*filtermap_next_r(t_obj *itobj);
+
+void	inner_clear(t_obj *itobj);
 
 #endif

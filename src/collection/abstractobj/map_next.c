@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstractobj.h"
-#include "collection/abstractmeta.h"
 #include "filtermapobj.h"
 #include "libft.h"
 
@@ -23,11 +21,14 @@ void	*map_next(t_obj *itobj)
 	void	*item;
 
 	it = (void *)itobj;
-	item = next(it->nested);
+	item = next(it->state->inner);
 	if (!item)
+	{
+		it->state->inner = NULL;
 		return (NULL);
+	}
 	state = it->state;
-	f = state->callback;
+	f = state->func;
 	ft_memcpy(state->data, item, itobj->meta->itemsize);
 	(*f)(state->data);
 	return (state->data);

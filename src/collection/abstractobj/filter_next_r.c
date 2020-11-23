@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstractobj.h"
 #include "filtermapobj.h"
 
 void	*filter_next_r(t_obj *itobj)
@@ -20,11 +19,12 @@ void	*filter_next_r(t_obj *itobj)
 	void		*item;
 
 	it = (void *)itobj;
-	p = it->state->callback;
-	while ((item = next(it->nested)))
+	p = it->state->func;
+	while ((item = next(it->state->inner)))
 	{
 		if ((*p)(it->state->ctx, item))
 			return (item);
 	}
+	it->state->inner = NULL;
 	return (NULL);
 }

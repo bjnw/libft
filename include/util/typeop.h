@@ -26,6 +26,7 @@ int		cmp_longp(const void *a, const void *b);
 void	*min_charp(void *a, void *b);
 void	*min_bytep(void *a, void *b);
 void	*min_intp(void *a, void *b);
+void	*min_longp(void *a, void *b);
 
 void	*max_charp(void *a, void *b);
 void	*max_bytep(void *a, void *b);

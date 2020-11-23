@@ -18,12 +18,14 @@
 # include <stdbool.h>
 # include <stddef.h>
 
-# include "util/functype.h"
+# include "common/functype.h"
 
 typedef struct s_object_trait	t_obj;
 typedef struct s_object_meta	t_meta;
 typedef struct s_iterator_trait	t_itobj;
 typedef struct s_iterator_state	t_state;
+
+typedef struct s_zip	t_zip;
 
 struct	s_object_trait {
 	void	*(*iter)(const t_obj *);
@@ -42,8 +44,12 @@ struct	s_object_trait {
 
 struct	s_iterator_trait {
 	t_obj	iterable;
-	void	*nested;
 	t_state	*state;
+};
+
+struct	s_zip {
+	void	*a;
+	void	*b;
 };
 
 void	*add(t_obj *obj, ...);
@@ -54,7 +60,6 @@ bool	del(t_obj *obj, ...);
 /*
 ** TODO
 ** void	setattr_cmp(t_obj *obj, t_cmp cmp);
-** void	setattr_hash(t_obj *obj, uint64_t (*hash)(const void *, size_t));
 */
 void	setattr_dtor(t_obj *obj, void (*dtor)(void *));
 void	setattr_fallback(t_obj *obj, void *item);
@@ -74,29 +79,30 @@ void	clear(t_obj *obj);
 void	delete(t_obj *obj);
 
 /*
-** TODO peek(), hasnext()
+** TODO
+** void	*peek(const t_obj *itobj);
+** bool	hasnext(const t_obj *itobj;)
 */
 void	*iter(const t_obj *obj);
 void	*next(t_obj *itobj);
 void	*nth(t_obj *itobj, ssize_t n);
-void	*take(const t_obj *obj, ssize_t n);
-void	*drop(const t_obj *obj, ssize_t n);
-void	*takewhile(const t_obj *obj, t_pred p);
 void	*collect(t_obj *itobj);
 /*
 ** TODO
-** void	*dropwhile(const t_obj *obj, t_pred p);
 ** void	*cloned(const t_obj *itobj);
+** void	*chain(const t_obj *a, const t_obj *b);
 */
-
-/*
-** TODO
-** void	*zip(const t_obj *a, t_obj *b);
-*/
+void	*take(const t_obj *obj, ssize_t n);
+void	*drop(const t_obj *obj, ssize_t n);
+void	*takewhile(const t_obj *obj, t_pred p);
+void	*dropwhile(const t_obj *obj, t_pred p);
+void	*zip(const t_obj *a, const t_obj *b);
 void	*map(const t_obj *obj, t_f1s f);
 void	*map_r(const t_obj *obj, const void *ctx, t_f2s_r f);
 void	*filter(const t_obj *obj, t_pred p);
 void	*filter_r(const t_obj *obj, const void *ctx, t_pred_r p);
+void	*filternot(const t_obj *obj, t_pred p);
+void	*filternot_r(const t_obj *obj, const void *ctx, t_pred_r p);
 void	*filtermap(const t_obj *obj, t_f1 f);
 void	*filtermap_r(const t_obj *obj, const void *ctx, t_f2_r f);
 void	*reduce(const t_obj *obj, t_f2 op);

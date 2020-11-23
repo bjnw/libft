@@ -10,19 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "vectorobj.h"
 
 void	vector_clear(t_obj *vector)
 {
-	t_meta *meta;
-
-	meta = vector->meta;
 	if (vector->dtor)
 		foreach(vector, vector->dtor);
-	free(meta->data);
-	meta->size = 0;
-	meta->capacity = 0;
-	meta->data = NULL;
+	vector_resize(vector, 0);
 }

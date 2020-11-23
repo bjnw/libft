@@ -26,7 +26,7 @@ bool	list_del(t_obj *list, va_list ap)
 		return (false);
 	node = list_popnode(list, index);
 	if (list->dtor)
-		list->dtor(node->item);
+		list->dtor(node->data);
 	free(node);
 	return (true);
 }

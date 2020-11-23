@@ -10,19 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstractobj.h"
-#include "collection/abstractmeta.h"
 #include "filtermapobj.h"
 
 void	*filtermap_iter(void *(*next)(t_obj *),
-			const t_obj *obj, const void *ctx, void *callback)
+			const t_obj *obj, const void *ctx, void *func)
 {
-	t_itobj *it;
+	t_itobj	*it;
+	size_t	datasize;
 
-	it = itobj(obj, FILTERMAP_STATE_SIZE + obj->meta->itemsize);
+	datasize = 0;
+	if (next != filter_next && next != filternot_next &&
+		next != filter_next_r && next != filternot_next_r)
+		datasize = obj->meta->itemsize;
+	it = itobj(obj, FILTERMAP_STATE_SIZE + datasize);
 	it->iterable.next = next;
-	it->nested = iter(obj);
+	it->iterable.clear = inner_clear;
+	it->state->inner = iter(obj);
 	it->state->ctx = ctx;
-	it->state->callback = callback;
+	it->state->func = func;
 	return (it);
 }

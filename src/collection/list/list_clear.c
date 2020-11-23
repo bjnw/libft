@@ -26,7 +26,7 @@ void	list_clear(t_obj *list)
 	{
 		node = node->next;
 		if (list->dtor)
-			list->dtor(tmp->item);
+			list->dtor(tmp->data);
 		free(tmp);
 	}
 	meta->size = 0;

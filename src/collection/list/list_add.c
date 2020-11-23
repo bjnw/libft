@@ -32,5 +32,5 @@ void	*list_add(t_obj *list, va_list ap)
 		meta->first = node;
 	meta->last = node;
 	meta->size++;
-	return (node->item);
+	return (node->data);
 }

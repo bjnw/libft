@@ -12,8 +12,7 @@
 
 #include "vectorobj.h"
 
-void	*view(t_obj *vector, ssize_t from,
-			ssize_t size, ssize_t step)
+void	*view(t_obj *vector, ssize_t from, ssize_t size, ssize_t step)
 {
 	t_itobj	*it;
 	ssize_t	n;
@@ -33,7 +32,7 @@ void	*view(t_obj *vector, ssize_t from,
 		size = 1;
 	it = iter(vector);
 	it->state->index = from;
-	it->state->size = size;
+	it->state->count = size;
 	it->state->step = step;
 	return (it);
 }

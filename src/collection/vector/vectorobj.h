@@ -24,7 +24,7 @@ struct	s_object_meta {
 
 struct	s_iterator_state {
 	ssize_t	index;
-	ssize_t	size;
+	ssize_t	count;
 	ssize_t	step;
 };
 

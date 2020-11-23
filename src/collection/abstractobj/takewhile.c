@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstractobj.h"
-#include "takedropobj.h"
+#include "takeobj.h"
 
 void	*takewhile(const t_obj *obj, t_pred p)
 {
-	return (take_iter(takewhile_next, obj, 0, p));
+	return (take_iter(takewhile_next, obj, -1, p));
 }

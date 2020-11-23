@@ -17,7 +17,8 @@ void	*next(t_obj *itobj)
 	void *item;
 
 	item = itobj->next(itobj);
-	if (!item)
-		delete(itobj);
-	return (item);
+	if (item)
+		return (item);
+	delete(itobj);
+	return (NULL);
 }

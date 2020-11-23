@@ -71,9 +71,9 @@ void	vector_resize(t_obj *vector, ssize_t newsize)
 		meta->size = newsize;
 		return ;
 	}
-	capacity = (size_t)newsize + (newsize >> 1) + 6 & ~3;
+	capacity = ((size_t)newsize + (newsize >> 1) + 6) & ~3;
 	if (newsize - meta->size > capacity - newsize)
-		capacity = (size_t)newsize + 3 & ~3;
+		capacity = ((size_t)newsize + 3) & ~3;
 	else if (newsize == 0)
 		capacity = 0;
 	vector_reserve(vector, capacity);

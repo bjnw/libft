@@ -1,0 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   filternot_r.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
+/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "filtermapobj.h"
+
+void	*filternot_r(const t_obj *obj, const void *ctx, t_pred_r p)
+{
+	return (filtermap_iter(filternot_next_r, obj, ctx, p));
+}

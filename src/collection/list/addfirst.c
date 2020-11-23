@@ -30,5 +30,5 @@ void	*addfirst(t_obj *list, const void *val)
 		meta->last = node;
 	meta->first = node;
 	meta->size++;
-	return (node->item);
+	return (node->data);
 }

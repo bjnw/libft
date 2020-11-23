@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "collection/abstractobj.h"
 
 bool	forall(const t_obj *obj, t_pred p)
@@ -22,11 +20,10 @@ bool	forall(const t_obj *obj, t_pred p)
 	it = iter(obj);
 	while ((item = next(it)))
 	{
-		if (!(*p)(item))
-		{
-			delete(it);
-			return (false);
-		}
+		if ((*p)(item))
+			continue ;
+		delete(it);
+		return (false);
 	}
 	return (true);
 }

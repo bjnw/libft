@@ -19,9 +19,9 @@ void	*reversed(t_obj *vector)
 
 	it = iter(vector);
 	state = it->state;
-	if (state->size > 1)
+	if (state->count > 1)
 	{
-		state->index += state->step * (state->size - 1);
+		state->index += state->step * (state->count - 1);
 		state->step *= -1;
 	}
 	return (it);

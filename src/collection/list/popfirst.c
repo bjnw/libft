@@ -25,7 +25,7 @@ void	*popfirst(t_obj *list, void *out)
 		return (NULL);
 	node = list_popnode(list, 0);
 	if (out)
-		ft_memcpy(out, node->item, meta->itemsize);
+		ft_memcpy(out, node->data, meta->itemsize);
 	free(node);
 	return (out);
 }

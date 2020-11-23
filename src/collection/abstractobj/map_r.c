@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstractobj.h"
 #include "filtermapobj.h"
 
 void	*map_r(const t_obj *obj, const void *ctx, t_f2s_r f)

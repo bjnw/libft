@@ -23,5 +23,5 @@ void	*list_get(const t_obj *list, va_list ap)
 	if (!item_exists(list, index))
 		return (NULL);
 	node = list_getnode(list, index);
-	return (node->item);
+	return (node->data);
 }

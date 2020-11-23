@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstractobj.h"
-#include "takedropobj.h"
+#include "takeobj.h"
 
 void	*take(const t_obj *obj, ssize_t n)
 {
-	if (n <= 0)
+	if (n < 0)
 		n = 0;
 	return (take_iter(take_next, obj, n, NULL));
 }

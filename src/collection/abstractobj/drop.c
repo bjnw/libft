@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstractobj.h"
-#include "takedropobj.h"
+#include "dropobj.h"
 
 void	*drop(const t_obj *obj, ssize_t n)
 {

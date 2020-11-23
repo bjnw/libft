@@ -16,35 +16,41 @@
 # include "collection/abstractobj.h"
 
 typedef struct s_node	t_node;
-struct		s_node {
+
+struct	s_node {
 	t_node	*left;
 	t_node	*right;
+	void	*data[];
 };
 
-typedef struct {
-	t_obj	object;
+struct	s_object_meta {
+	size_t	itemsize;
+	ssize_t	size;
+	t_node	*root;
 	size_t	deletions;
-}	t_tree;
+};
 
-typedef struct {
-	t_tree	tree;
+struct	s_iterator_state {
 	t_node	current;
-}	t_iter;
+};
 
-void		*totree(const t_obj *obj);
-void		*tree(size_t itemsize);
-void		balance(t_obj *tree);
+/*
+** TODO
+** void	setattr_cmp(t_obj *obj, t_cmp cmp);
+** void	setattr_hash(t_obj *obj, uint64_t (*hash)(const void *, size_t));
+*/
+void	*totree(const t_obj *obj);
+void	*tree(size_t itemsize);
+void	balance(t_obj *tree);
 
-void		*tree_iter(const t_obj *tree);
-void		*tree_next(t_obj *iterobj);
-void		*tree_add(t_obj *tree, va_list ap);
-void		*tree_get(const t_obj *tree, va_list ap);
-bool		tree_set(t_obj *tree, va_list ap);
-bool		tree_del(t_obj *tree, va_list ap);
-void		*tree_empty(const t_obj *src);
-void		*tree_clone(const t_obj *src);
-void		tree_clear(t_obj *tree);
-
-void		tree_init(t_obj *obj);
+void	tree_init(t_obj *obj);
+void	*tree_iter(const t_obj *tree);
+void	*tree_next(t_obj *iterobj);
+void	*tree_add(t_obj *tree, va_list ap);
+void	*tree_get(const t_obj *tree, va_list ap);
+bool	tree_set(t_obj *tree, va_list ap);
+bool	tree_del(t_obj *tree, va_list ap);
+void	*tree_empty(const t_obj *src);
+void	tree_clear(t_obj *tree);
 
 #endif

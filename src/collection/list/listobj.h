@@ -20,7 +20,7 @@ typedef struct s_node	t_node;
 struct	s_node {
 	t_node	*next;
 	t_node	*prev;
-	void	*item[];
+	void	*data[];
 };
 
 struct	s_object_meta {
@@ -31,7 +31,7 @@ struct	s_object_meta {
 };
 
 struct	s_iterator_state {
-	t_node	*node;
+	t_node	*current;
 };
 
 # define LIST_META_SIZE		sizeof(t_meta)

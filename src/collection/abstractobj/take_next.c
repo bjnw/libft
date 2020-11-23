@@ -10,15 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstractobj.h"
-#include "takedropobj.h"
+#include "takeobj.h"
 
 void	*take_next(t_obj *itobj)
 {
-	t_itobj *it;
+	t_itobj	*it;
+	void	*item;
 
 	it = (void *)itobj;
-	if (it->state->n--)
-		return (next(it->nested));
-	return (NULL);
+	item = NULL;
+	if (it->state->count--)
+	{
+		item = next(it->state->inner);
+		if (!item)
+			it->state->inner = NULL;
+	}
+	return (item);
 }

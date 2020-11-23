@@ -10,19 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection/abstractobj.h"
-#include "takedropobj.h"
+#include "takeobj.h"
 
 void	*takewhile_next(t_obj *itobj)
 {
 	t_itobj	*it;
-	t_pred	p;
 	void	*item;
 
 	it = (void *)itobj;
-	p = it->state->p;
-	item = next(it->nested);
-	if (item && (*p)(item))
+	item = next(it->state->inner);
+	if (!item)
+	{
+		it->state->inner = NULL;
+		return (NULL);
+	}
+	if (it->state->pred(item))
 		return (item);
 	return (NULL);
 }

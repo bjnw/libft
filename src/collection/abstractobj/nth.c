@@ -12,18 +12,16 @@
 
 #include "collection/abstractobj.h"
 
-/*
-** TODO rev
-*/
-
 void	*nth(t_obj *itobj, ssize_t n)
 {
 	void *item;
 
 	if (n < 0)
 		n = 0;
-	item = next(itobj);
-	while (item && n--)
+	while (true)
+	{
 		item = next(itobj);
-	return (item);
+		if (!item || n-- == 0)
+			return (item);
+	}
 }

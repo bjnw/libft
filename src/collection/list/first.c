@@ -17,6 +17,6 @@ void	*first(const t_obj *list)
 	t_node *node;
 
 	if ((node = list->meta->first))
-		return (node->item);
+		return (node->data);
 	return (NULL);
 }

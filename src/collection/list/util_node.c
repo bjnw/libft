@@ -19,8 +19,8 @@ void	*list_newnode(const t_obj *list, const void *value)
 	size_t	itemsize;
 
 	itemsize = list->meta->itemsize;
-	node = xcalloc(1, sizeof(t_node) + itemsize);
-	ft_memcpy(node->item, value, itemsize);
+	node = xcalloc(1, sizeof(*node) + itemsize);
+	ft_memcpy(node->data, value, itemsize);
 	return (node);
 }
 

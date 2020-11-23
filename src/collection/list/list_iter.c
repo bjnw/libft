@@ -17,6 +17,6 @@ void	*list_iter(const t_obj *list)
 	t_itobj *it;
 
 	it = itobj(list, LIST_STATE_SIZE);
-	it->state->node = list->meta->first;
+	it->state->current = list->meta->first;
 	return (it);
 }

@@ -17,7 +17,7 @@ void	*vector_iter(const t_obj *vector)
 	t_itobj *it;
 
 	it = itobj(vector, VECTOR_STATE_SIZE);
-	it->state->size = vector->meta->size;
+	it->state->count = vector->meta->size;
 	it->state->step = 1;
 	return (it);
 }

@@ -20,9 +20,9 @@ void	*list_next(t_obj *itobj)
 
 	it = (void *)itobj;
 	state = it->state;
-	if (!state->node)
+	if (!state->current)
 		return (NULL);
-	item = state->node->item;
-	state->node = state->node->next;
+	item = state->current->data;
+	state->current = state->current->next;
 	return (item);
 }

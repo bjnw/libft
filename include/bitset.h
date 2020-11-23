@@ -17,17 +17,17 @@
 # include <stddef.h>
 # include <stdint.h>
 
-# include "asm.h"
-
-typedef uint64_t	t_chunk;
+typedef uintptr_t	t_chunk;
 
 # define CHUNK_EXP	6
-# define CHUNK_MASK	(sizeof(t_chunk) * CHAR_BIT - 1)
+# define CHUNK_BITS	(sizeof(t_chunk) * CHAR_BIT)
+# define CHUNK_MASK	(CHUNK_BITS - 1)
 
-void	*bs_new(size_t size);
-void	bs_flip(void *data, size_t index);
-void	bs_set(void *data, size_t index, int val);
-int		bs_get(void *data, size_t index);
-void	bs_delete(void *data);
+void	*bitset_new(size_t size);
+int		bitset_get(const void *bitset, size_t n);
+void	bitset_set(void *bitset, size_t n);
+void	bitset_clear(void *bitset, size_t n);
+void	bitset_toggle(void *bitset, size_t n);
+void	bitset_free(void *bitset);
 
 #endif

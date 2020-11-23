@@ -10,33 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "collection/abstractobj.h"
+
+/*
+** TODO make use of exists()
+*/
 
 bool	equals(const t_obj *a, const t_obj *b, t_cmp cmp)
 {
-	void *ita;
-	void *itb;
-	void *itema;
-	void *itemb;
+	void	*it;
+	t_zip	*pair;
 
 	if (size(a) != size(b))
 		return (false);
-	ita = iter(a);
-	itb = iter(b);
-	while (true)
+	it = zip(a, b);
+	while ((pair = next(it)))
 	{
-		itema = next(ita);
-		itemb = next(itb);
-		if (!itema || !itemb || (*cmp)(itema, itemb) != 0)
-			break ;
+		if ((*cmp)(pair->a, pair->b) == 0)
+			continue ;
+		delete(it);
+		return (false);
 	}
-	if (!itema && !itemb)
-		return (true);
-	if (itema)
-		delete(ita);
-	if (itemb)
-		delete(itb);
-	return (false);
+	return (true);
 }

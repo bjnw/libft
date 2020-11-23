@@ -10,19 +10,22 @@ OBJ := $(SRC:%.c=$(BUILD)/%.o)
 DEP := $(OBJ:%.o=%.d)
 
 # AR := llvm-ar
-# RANLIB := llvm-ranlib
 AR := ar
-RANLIB := ranlib
-
 CC := clang
+
+MAKEFLAGS += -j
+
 WFLAGS := -Wall -Wextra
-# WFLAGS += -Wpedantic
+# WFLAGS += -Wno-cast-function-type
+# WFLAGS += -Wno-bad-function-cast
 # WFLAGS += -Werror
+# WFLAGS += -Wpedantic
 OFLAGS := -O2 -march=native
 OFLAGS += -ftree-vectorize
-# OFLAGS += -flto=thin
+# OFLAGS += -flto
 CFLAGS := $(WFLAGS) $(OFLAGS) -MMD -I$(INCLUDE)
 # CFLAGS += -fPIC
+CFLAGS += -fpic
 
 vpath %.c %SRC_DIRS%
 
@@ -31,7 +34,6 @@ vpath %.c %SRC_DIRS%
 $(NAME): $(OBJ)
 	@printf "[$(NAME)] Linking objects...\n"
 	@$(AR) rcs $@ $?
-	@$(RANLIB) $@
 	@printf "\033[32;1m[$(NAME)] Done\033[0m\n"
 
 -include $(DEP)
@@ -52,7 +54,8 @@ fclean: clean
 	@rm -f $(NAME)
 	@rm -f $(NAME_SHARED)
 
-re: fclean all
+re: fclean
+	@make all
 
 test: all
 	@test/test.sh "$(CC)" "$(CFLAGS)" "-L./ $(NAME)"

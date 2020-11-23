@@ -28,8 +28,8 @@ bool	list_set(t_obj *list, va_list ap)
 		return (false);
 	node = list_getnode(list, index);
 	if (list->dtor)
-		list->dtor(node->item);
+		list->dtor(node->data);
 	value = va_arg(ap, const void *);
-	ft_memcpy(node->item, value, meta->itemsize);
+	ft_memcpy(node->data, value, meta->itemsize);
 	return (true);
 }
