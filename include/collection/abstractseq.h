@@ -31,6 +31,6 @@ ssize_t	count_r(const t_obj *seq, const void *ctx, t_pred_r p);
 ssize_t	indexof(const t_obj *seq, const void *value, t_cmp cmp);
 ssize_t	indexof_r(const t_obj *seq, const void *value,
 			const void *ctx, t_cmp_r cmp);
-void	patch(t_obj *dst, const t_obj *src, ssize_t from, ssize_t size);
+void	patch(t_obj *dst, const t_obj *src, ssize_t from, ssize_t count);
 
 #endif

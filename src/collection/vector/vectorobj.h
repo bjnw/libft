@@ -23,9 +23,9 @@ struct	s_object_meta {
 };
 
 struct	s_iterator_state {
-	ssize_t	index;
-	ssize_t	count;
-	ssize_t	step;
+	void	*ptr;
+	void	*end;
+	size_t	offset;
 };
 
 # define VECTOR_META_SIZE	sizeof(t_meta)
@@ -36,6 +36,7 @@ struct	s_iterator_state {
 */
 void	*obj(void (*init)(t_obj *), size_t itemsize, size_t metasize);
 void	*itobj(const t_obj *obj, size_t statesize);
+void	*null_iter(const t_obj *obj);
 
 /*
 ** NOTE src/collection/abstractseq/util.c
@@ -45,6 +46,7 @@ bool	item_exists(const t_obj *seq, ssize_t index);
 void	vector_init(t_obj *vector);
 void	*vector_iter(const t_obj *vector);
 void	*vector_next(t_obj *itobj);
+void	*vector_prev(t_obj *itobj);
 void	*vector_add(t_obj *vector, va_list ap);
 void	*vector_get(const t_obj *vector, va_list ap);
 bool	vector_set(t_obj *vector, va_list ap);

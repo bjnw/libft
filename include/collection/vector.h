@@ -30,6 +30,6 @@ void	reverse(t_obj *vector);
 
 void	*reversed(t_obj *vector);
 void	*slice(t_obj *vector, ssize_t from, ssize_t until);
-void	*view(t_obj *vector, ssize_t from, ssize_t size, ssize_t step);
+void	*view(t_obj *vector, ssize_t from, ssize_t count, ssize_t step);
 
 #endif

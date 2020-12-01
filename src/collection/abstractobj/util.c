@@ -49,5 +49,6 @@ void	*null_iter(const t_obj *obj)
 
 	it = itobj(obj, 0);
 	it->iterable.next = null_next;
+	it->state = NULL;
 	return (it);
 }

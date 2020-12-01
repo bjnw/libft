@@ -285,18 +285,16 @@ int		main(void)
 	foreach(takewhile(ints, int_pos), int_print);
 	printf("takewhile(ints, int_pos)\n\n");
 
-	foreach(dropwhile(drop(ints, 24), int_neg), int_print);
-	printf("dropwhile(drop(ints, 24), int_neg)\n\n");
+	foreach(dropwhile(drop(ints, size(ints) - 20), int_neg), int_print);
+	printf("dropwhile(drop(ints, size(ints) - 20), int_neg)\n\n");
 
 	foreach(drop(ints, 100), int_print);
 	printf("drop(ints, 100)  [nothing]\n\n");
 
-	foreach(drop(ints, 36), int_print);
-	printf("drop(ints, 36)\n\n");
+	foreach(drop(ints, size(ints) - 10), int_print);
+	printf("drop(ints, size(ints) - 10)\n\n");
 
-	// TODO take/drop/reverse closures
 	it = map(map(reversed(drop(ints, size(ints) - 10)), int_mul100), int_mul100);
-	// foreach(it, int_print);
 	patch(ints, it, 5, 10);
 	foreach(take(ints, 20), int_print);
 	printf("...\nints: patched items 5..15 with last 10 reversed "

@@ -20,10 +20,9 @@ void	*vector_next(t_obj *itobj)
 
 	it = (void *)itobj;
 	state = it->state;
-	if (state->count == 0 || !item_exists(itobj, state->index))
+	item = state->ptr;
+	state->ptr += state->offset;
+	if (item > state->end)
 		return (NULL);
-	item = vector_getitem(itobj, state->index);
-	state->index += state->step;
-	state->count--;
 	return (item);
 }
