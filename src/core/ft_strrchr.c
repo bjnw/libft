@@ -21,18 +21,18 @@
 char	*ft_strrchr(const char *s, int c)
 {
 	const char	*p;
-	size_t		word;
+	uintptr_t	word;
 
 	p = s + ft_strlen(s);
 	if (c == '\0')
 		return ((char *)p);
 	if (s + BYTES_MIN < p)
 	{
-		while ((size_t)p & WMASK)
+		while ((uintptr_t)p & WMASK)
 			if (*--p == (unsigned char)c)
 				return ((char *)p);
 		word = (unsigned char)c * MASK01;
-		while (!mw_testchar(*(size_t *)(p - WSIZE), word))
+		while (!mw_testchar(*(uintptr_t *)(p - WSIZE), word))
 			if ((p -= WSIZE) <= s)
 				return (NULL);
 	}

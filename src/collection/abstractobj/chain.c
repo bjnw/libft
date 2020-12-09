@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dropwhile_next.c                                   :+:      :+:    :+:   */
+/*   chain.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,22 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dropobj.h"
-#include "libft.h"
+#include "chainobj.h"
 
-void	*dropwhile_next(t_obj *itobj)
+void	*chain(const t_obj *a, const t_obj *b)
 {
-	t_itobj	*it;
-	void	*item;
-
-	it = (void *)itobj;
-	while ((item = next(it->state->inner)))
-	{
-		if (it->state->pred(item))
-			continue ;
-		it->iterable.next = inner_next;
-		return (item);
-	}
-	it->state->inner = NULL;
-	return (NULL);
+	return (chain_iter(a, b));
 }

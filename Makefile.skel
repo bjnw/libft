@@ -26,6 +26,7 @@ OFLAGS += -ftree-vectorize
 CFLAGS := $(WFLAGS) $(OFLAGS) -MMD -I$(INCLUDE)
 # CFLAGS += -fPIC
 CFLAGS += -fpic
+CFLAGS += -DUSEAVX
 
 vpath %.c %SRC_DIRS%
 

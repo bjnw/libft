@@ -15,13 +15,14 @@
 
 # include <stdbool.h>
 # include <stddef.h>
+# include <stdint.h>
 
 /*
 ** sizeof(void *)
 ** This is not correct on platforms like 360 and PS3 which are 64-bit,
 ** but pointers are 32-bit (ABI quirk to conserve space)
 */
-# define WSIZE		(sizeof(void *))
+# define WSIZE		(sizeof(uintptr_t))
 # define WMASK		(WSIZE - 1)
 # define BYTES_MIN	(WSIZE * 8)
 

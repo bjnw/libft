@@ -20,14 +20,14 @@ void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 {
 	unsigned char		*pd;
 	const unsigned char	*ps;
-	size_t				*wd;
-	const size_t		*ws;
+	uintptr_t			*wd;
+	const uintptr_t		*ws;
 
 	if (dst == src)
 		return (dst);
 	pd = dst;
 	ps = src;
-	if (n >= WSIZE && ((size_t)dst & ~WMASK) && ((size_t)src & ~WMASK))
+	if (n >= WSIZE && ((uintptr_t)dst & ~WMASK) && ((uintptr_t)src & ~WMASK))
 	{
 		wd = dst;
 		ws = src;

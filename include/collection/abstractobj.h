@@ -64,6 +64,7 @@ bool	del(t_obj *obj, ...);
 void	setattr_dtor(t_obj *obj, void (*dtor)(void *));
 void	setattr_fallback(t_obj *obj, void *item);
 
+void	tobuffer(void *buf, const t_obj *obj);
 void	*toarray(const t_obj *obj);
 
 ssize_t	size(const t_obj *obj);
@@ -86,11 +87,11 @@ void	delete(t_obj *obj);
 void	*iter(const t_obj *obj);
 void	*next(t_obj *itobj);
 void	*nth(t_obj *itobj, ssize_t n);
+void	*chain(const t_obj *a, const t_obj *b);
 void	*collect(t_obj *itobj);
 /*
 ** TODO
 ** void	*cloned(const t_obj *itobj);
-** void	*chain(const t_obj *a, const t_obj *b);
 */
 void	*take(const t_obj *obj, ssize_t n);
 void	*drop(const t_obj *obj, ssize_t n);

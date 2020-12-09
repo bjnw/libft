@@ -20,14 +20,14 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	const unsigned char	*p1;
 	const unsigned char	*p2;
-	const size_t		*w1;
-	const size_t		*w2;
+	const uintptr_t		*w1;
+	const uintptr_t		*w2;
 
 	if (s1 == s2)
 		return (0);
 	p1 = s1;
 	p2 = s2;
-	if (n >= WSIZE && ((size_t)s1 & ~WMASK) && ((size_t)s2 & ~WMASK))
+	if (n >= WSIZE && ((uintptr_t)s1 & ~WMASK) && ((uintptr_t)s2 & ~WMASK))
 	{
 		w1 = s1;
 		w2 = s2;

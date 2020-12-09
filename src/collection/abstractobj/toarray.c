@@ -16,17 +16,9 @@
 
 void	*toarray(const t_obj *obj)
 {
-	void	*data;
-	t_meta	*meta;
-	void	*it;
-	void	*item;
-	void	*p;
+	void *array;
 
-	meta = obj->meta;
-	data = xmalloc(meta->size * meta->itemsize);
-	p = data;
-	it = iter(obj);
-	while ((item = next(it)))
-		p = ft_mempcpy(p, item, meta->itemsize);
-	return (data);
+	array = xmalloc(obj->meta->size * obj->meta->itemsize);
+	tobuffer(array, obj);
+	return (array);
 }

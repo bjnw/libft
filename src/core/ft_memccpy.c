@@ -20,13 +20,13 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
 	unsigned char		*pd;
 	const unsigned char	*ps;
-	size_t				*wd;
-	const size_t		*ws;
-	size_t				word;
+	uintptr_t			*wd;
+	const uintptr_t		*ws;
+	uintptr_t			word;
 
 	pd = dst;
 	ps = src;
-	if (n >= BYTES_MIN && ((size_t)pd & ~WMASK) && ((size_t)ps & ~WMASK))
+	if (n >= BYTES_MIN && ((uintptr_t)pd & ~WMASK) && ((uintptr_t)ps & ~WMASK))
 	{
 		wd = dst;
 		ws = src;

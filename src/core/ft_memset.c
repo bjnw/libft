@@ -19,17 +19,17 @@
 void	*ft_memset(void *s, int c, size_t n)
 {
 	unsigned char	*p;
-	size_t			word;
+	uintptr_t		word;
 
 	p = s;
 	if (n >= BYTES_MIN)
 	{
-		while (((size_t)p & WMASK) && n--)
+		while (((uintptr_t)p & WMASK) && n--)
 			*p++ = (unsigned char)c;
 		word = (unsigned char)c * MASK01;
 		while (n >= WSIZE)
 		{
-			*(size_t *)p = word;
+			*(uintptr_t *)p = word;
 			p += WSIZE;
 			n -= WSIZE;
 		}

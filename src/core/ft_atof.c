@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dropwhile_next.c                                   :+:      :+:    :+:   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
+/*   Created: 2019/09/10 11:42:49 by ourgot            #+#    #+#             */
+/*   Updated: 2019/11/25 11:09:50 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dropobj.h"
+#include <stdbool.h>
+
 #include "libft.h"
 
-void	*dropwhile_next(t_obj *itobj)
-{
-	t_itobj	*it;
-	void	*item;
+/*
+** TODO handle exp
+*/
 
-	it = (void *)itobj;
-	while ((item = next(it->state->inner)))
+double	ft_atof(const char *s)
+{
+	double	val;
+	double	frac;
+	bool	neg;
+
+	while (ft_isspace(*s))
+		s++;
+	neg = *s == '+' ^ *s == '-' && *s++ == '-';
+	val = 0.0;
+	while (ft_isdigit(*s))
+		val = val * 10.0 + (*s++ - '0');
+	if (*s == '.')
 	{
-		if (it->state->pred(item))
-			continue ;
-		it->iterable.next = inner_next;
-		return (item);
+		frac = 0.1;
+		while (ft_isdigit(*++s))
+		{
+			val += (*s - '0') * frac;
+			frac *= 0.1;
+		}
 	}
-	it->state->inner = NULL;
-	return (NULL);
+	return (neg ? -val : val);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dropwhile_next.c                                   :+:      :+:    :+:   */
+/*   chainobj.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,22 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dropobj.h"
-#include "libft.h"
+#ifndef CHAINOBJ_H
+# define CHAINOBJ_H
 
-void	*dropwhile_next(t_obj *itobj)
-{
-	t_itobj	*it;
-	void	*item;
+# include "collection/abstractobj.h"
 
-	it = (void *)itobj;
-	while ((item = next(it->state->inner)))
-	{
-		if (it->state->pred(item))
-			continue ;
-		it->iterable.next = inner_next;
-		return (item);
-	}
-	it->state->inner = NULL;
-	return (NULL);
-}
+struct	s_iterator_state {
+	void	*innera;
+	void	*innerb;
+};
+
+# define CHAIN_STATE_SIZE	sizeof(t_state)
+
+/*
+** NOTE src/collection/abstractobj/util.c
+*/
+void	*itobj(const t_obj *obj, size_t statesize);
+
+void	*chain_iter(const t_obj *a, const t_obj *b);
+void	*chain_next(t_obj *itobj);
+
+#endif

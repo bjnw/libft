@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dropwhile_next.c                                   :+:      :+:    :+:   */
+/*   tobuffer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,22 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dropobj.h"
+#include "collection/abstractobj.h"
+#include "collection/abstractmeta.h"
 #include "libft.h"
 
-void	*dropwhile_next(t_obj *itobj)
+void	tobuffer(void *buf, const t_obj *obj)
 {
-	t_itobj	*it;
+	void	*it;
 	void	*item;
+	size_t	itemsize;
 
-	it = (void *)itobj;
-	while ((item = next(it->state->inner)))
-	{
-		if (it->state->pred(item))
-			continue ;
-		it->iterable.next = inner_next;
-		return (item);
-	}
-	it->state->inner = NULL;
-	return (NULL);
+	it = iter(obj);
+	itemsize = obj->meta->itemsize;
+	while ((item = next(it)))
+		buf = ft_mempcpy(buf, item, itemsize);
 }

@@ -16,21 +16,20 @@
 
 # include "memword.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, uintptr_t n)
 {
-	const unsigned char	*p;
-	size_t				word;
+	const unsigned char	*p = s;
+	uintptr_t			word;
 
-	p = s;
 	if (n >= BYTES_MIN)
 	{
-		while ((size_t)p & WMASK)
+		while ((uintptr_t)p & WMASK)
 			if (*p++ == (unsigned char)c)
 				return ((void *)--p);
 			else if (n-- == 0)
 				return (NULL);
 		word = (unsigned char)c * MASK01;
-		while (n >= WSIZE && !mw_testchar(*(size_t *)p, word))
+		while (n >= WSIZE && !mw_testchar(*(uintptr_t *)p, word))
 		{
 			p += WSIZE;
 			n -= WSIZE;
@@ -46,12 +45,14 @@ void	*ft_memchr(const void *s, int c, size_t n)
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	const unsigned char	*p;
+	const unsigned char	*p = s;
 
-	p = s;
 	while (n--)
-		if (*p++ == (unsigned char)c)
-			return ((void *)--p);
+	{
+		if (*p == (unsigned char)c)
+			return ((void *)p);
+		p++;
+	}
 	return (NULL);
 }
 

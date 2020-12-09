@@ -42,6 +42,7 @@ intmax_t	ft_imin(intmax_t a, intmax_t b);
 intmax_t	ft_imax(intmax_t a, intmax_t b);
 uintmax_t	ft_umin(uintmax_t a, uintmax_t b);
 uintmax_t	ft_umax(uintmax_t a, uintmax_t b);
+double		ft_atof(const char *s);
 intmax_t	ft_atoi(const char *s);
 uintmax_t	ft_atou(const char *s);
 char		*ft_itoa(char *s, intmax_t n);
