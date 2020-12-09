@@ -23,8 +23,8 @@ void	*chain_next(t_obj *itobj)
 		return (item);
 	if (!it->state->innerb)
 		return (NULL);
-	it->state->innera = NULL;
-	ft_swap(&it->state->innera, &it->state->innerb, sizeof(void *));
+	it->state->innera = it->state->innerb;
+	it->state->innerb = NULL;
 	item = next(it->state->innera);
 	return (item);
 }
