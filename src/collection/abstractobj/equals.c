@@ -18,18 +18,19 @@
 
 bool	equals(const t_obj *a, const t_obj *b, t_cmp cmp)
 {
-	void	*it;
+	t_obj	*it;
+	void	*(*next)(t_obj *);
 	t_zip	*pair;
 
 	if (size(a) != size(b))
 		return (false);
 	it = zip(a, b);
-	while ((pair = next(it)))
+	next = it->next;
+	while ((pair = (*next)(it)))
 	{
-		if ((*cmp)(pair->a, pair->b) == 0)
-			continue ;
-		delete(it);
-		return (false);
+		if ((*cmp)(pair->a, pair->b) != 0)
+			break ;
 	}
-	return (true);
+	delete(it);
+	return (!pair);
 }

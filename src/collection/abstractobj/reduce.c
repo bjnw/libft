@@ -14,13 +14,16 @@
 
 void	*reduce(const t_obj *obj, t_f2 op)
 {
-	void *acc;
-	void *it;
-	void *item;
+	void	*acc;
+	t_obj	*it;
+	void	*(*next)(t_obj *);
+	void	*item;
 
 	it = iter(obj);
-	acc = next(it);
-	while ((item = next(it)))
+	next = it->next;
+	acc = (*next)(it);
+	while ((item = (*next)(it)))
 		acc = (*op)(acc, item);
+	delete(it);
 	return (acc);
 }

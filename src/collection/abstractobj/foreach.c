@@ -14,10 +14,13 @@
 
 void	foreach(t_obj *obj, t_f1s f)
 {
-	void *it;
-	void *item;
+	t_obj	*it;
+	void	*(*next)(t_obj *);
+	void	*item;
 
 	it = iter(obj);
-	while ((item = next(it)))
+	next = it->next;
+	while ((item = (*next)(it)))
 		(*f)(item);
+	delete(it);
 }

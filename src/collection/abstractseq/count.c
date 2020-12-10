@@ -15,15 +15,18 @@
 ssize_t	count(const t_obj *seq, t_pred p)
 {
 	ssize_t	n;
-	void	*it;
+	t_obj	*it;
+	void	*(*next)(t_obj *);
 	void	*item;
 
 	n = 0;
 	it = iter(seq);
-	while ((item = next(it)))
+	next = it->next;
+	while ((item = (*next)(it)))
 	{
 		if ((*p)(item))
 			n++;
 	}
+	delete(it);
 	return (n);
 }

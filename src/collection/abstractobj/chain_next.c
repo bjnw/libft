@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "chainobj.h"
-#include "libft.h"
 
 void	*chain_next(t_obj *itobj)
 {

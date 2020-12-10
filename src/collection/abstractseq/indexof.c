@@ -15,19 +15,21 @@
 ssize_t	indexof(const t_obj *seq, const void *value, t_cmp cmp)
 {
 	ssize_t	index;
-	void	*it;
+	t_obj	*it;
+	void	*(*next)(t_obj *);
 	void	*item;
 
 	index = 0;
 	it = iter(seq);
-	while ((item = next(it)))
+	next = it->next;
+	while ((item = (*next)(it)))
 	{
 		if ((*cmp)(item, value) == 0)
-		{
-			delete(it);
-			return (index);
-		}
+			break ;
 		index++;
 	}
+	delete(it);
+	if (item)
+		return (index);
 	return (-1);
 }

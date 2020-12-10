@@ -14,10 +14,13 @@
 
 void	extend(t_obj *dst, const t_obj *src)
 {
-	void *it;
-	void *item;
+	t_obj	*it;
+	void	*(*next)(t_obj *);
+	void	*item;
 
 	it = iter(src);
-	while ((item = next(it)))
+	next = it->next;
+	while ((item = (*next)(it)))
 		add(dst, item);
+	delete(it);
 }

@@ -16,12 +16,15 @@
 
 void	patch(t_obj *dst, const t_obj *src, ssize_t from, ssize_t count)
 {
-	void	*it;
+	t_obj	*it;
+	void	*(*next)(t_obj *);
 	t_zip	*pair;
 	size_t	itemsize;
 
-	itemsize = src->meta->itemsize;
 	it = zip(drop(dst, from), take(src, count));
-	while ((pair = next(it)))
+	next = it->next;
+	itemsize = src->meta->itemsize;
+	while ((pair = (*next)(it)))
 		ft_memcpy(pair->a, pair->b, itemsize);
+	delete(it);
 }

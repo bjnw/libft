@@ -14,17 +14,17 @@
 
 bool	exists(const t_obj *obj, t_pred p)
 {
-	void *it;
-	void *item;
+	t_obj	*it;
+	void	*(*next)(t_obj *);
+	void	*item;
 
 	it = iter(obj);
-	while ((item = next(it)))
+	next = it->next;
+	while ((item = (*next)(it)))
 	{
 		if ((*p)(item))
-		{
-			delete(it);
-			return (true);
-		}
+			break ;
 	}
-	return (false);
+	delete(it);
+	return (item);
 }

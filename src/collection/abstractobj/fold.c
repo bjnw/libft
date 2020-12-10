@@ -14,13 +14,16 @@
 
 void	*fold(const t_obj *obj, void *init, t_f2 op)
 {
-	void *acc;
-	void *it;
-	void *item;
+	void	*acc;
+	t_obj	*it;
+	void	*(*next)(t_obj *);
+	void	*item;
 
-	it = iter(obj);
 	acc = init;
-	while ((item = next(it)))
+	it = iter(obj);
+	next = it->next;
+	while ((item = (*next)(it)))
 		acc = (*op)(acc, item);
+	delete(it);
 	return (acc);
 }

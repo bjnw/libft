@@ -14,16 +14,17 @@
 
 bool	forall(const t_obj *obj, t_pred p)
 {
-	void *it;
-	void *item;
+	t_obj	*it;
+	void	*(*next)(t_obj *);
+	void	*item;
 
 	it = iter(obj);
-	while ((item = next(it)))
+	next = it->next;
+	while ((item = (*next)(it)))
 	{
-		if ((*p)(item))
-			continue ;
-		delete(it);
-		return (false);
+		if (!(*p)(item))
+			break ;
 	}
-	return (true);
+	delete(it);
+	return (!item);
 }

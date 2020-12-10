@@ -14,14 +14,17 @@
 
 void	*nth(t_obj *itobj, ssize_t n)
 {
+	void *(*next)(t_obj *);
 	void *item;
 
 	if (n < 0)
 		n = 0;
-	while (true)
+	next = itobj->next;
+	while ((item = (*next)(itobj)))
 	{
-		item = next(itobj);
-		if (!item || n-- == 0)
+		if (n-- == 0)
 			return (item);
 	}
+	delete(itobj);
+	return (NULL);
 }

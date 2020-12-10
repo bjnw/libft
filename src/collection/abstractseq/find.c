@@ -14,16 +14,19 @@
 
 void	*find(const t_obj *seq, const void *value, t_cmp cmp)
 {
-	void *it;
-	void *item;
+	t_obj	*it;
+	void	*(*next)(t_obj *);
+	void	*item;
 
 	it = iter(seq);
-	while ((item = next(it)))
+	next = it->next;
+	while ((item = (*next)(it)))
 	{
-		if ((*cmp)(item, value))
-			continue ;
-		delete(it);
-		return (item);
+		if ((*cmp)(item, value) == 0)
+			break ;
 	}
+	delete(it);
+	if (item)
+		return (item);
 	return (seq->fallback);
 }
