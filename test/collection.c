@@ -303,7 +303,6 @@ int		main(void)
 	foreach(filtermap(ints, int_neg_mul1693), int_print);
 	printf("filtermap(ints, int_neg_mul1693)\n\n");
 
-
 	begin = clock();
 	for (ssize_t i = 0; i < MAX_ITEMS; i++) {
 		add(ints, &i);
@@ -399,7 +398,6 @@ int		main(void)
 	// foreach(flt, int_print);
 	printf("flt = collect(filter(ints, int_even)):  %fs\n"
 		"size(flt): %ld\n\n", TIME_DIFF(begin, end), size(flt));
-
 
 	begin = clock();
 	it = slice(flt, 1122, 94780);

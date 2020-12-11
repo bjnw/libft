@@ -22,7 +22,7 @@ void	*stack_pop(t_stack *stack, void *out)
 	if ((node = stack->top) == NULL)
 		return (NULL);
 	if (out)
-	    ft_memcpy(out, node->data, stack->itemsize);
+		ft_memcpy(out, node->data, stack->itemsize);
 	stack->top = node->next;
 	free(node);
 	return (out);

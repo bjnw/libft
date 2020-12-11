@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "vectorobj.h"
-#include "libft.h"
+
 void	*view(t_obj *vector, ssize_t from, ssize_t count, ssize_t step)
 {
 	t_itobj	*it;

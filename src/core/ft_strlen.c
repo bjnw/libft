@@ -12,6 +12,10 @@
 
 #include <stddef.h>
 
+#if defined(MEMWORD)
+# include "memword.h"
+#endif
+
 #if defined(USEAVX)
 
 # include <immintrin.h>
@@ -44,8 +48,6 @@ size_t	ft_strlen(const char *s)
 }
 
 #elif defined(MEMWORD)
-
-# include "memword.h"
 
 size_t	ft_strlen(const char *s)
 {
