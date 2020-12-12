@@ -18,7 +18,7 @@
 [src/collection/vector](https://github.com/bjnw/libft/blob/master/src/collection/vector)
 
 ### Thread pool
-Thread pool provides a convenient way for dispatching asynchronous tasks. Group of pre-instantiated, idle threads which stand ready to work preferred over instantiating new threads for each task when there are numerous quick tasks rather than a few long ones. This prevents having to incur the overhead of creating a thread many times.
+Thread pool is a convenient way for dispatching queue of asynchronous tasks. Group of pre-instantiated, idle threads, which stand ready to work, prevents having to incur the overhead of creating a thread many times for each task.
 
 [include/pthreadpool.h](https://github.com/bjnw/libft/blob/master/include/pthreadpool.h)
 
