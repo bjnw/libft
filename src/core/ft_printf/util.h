@@ -18,7 +18,7 @@
 
 # include "bigint.h"
 
-# define BUFF_SIZE 16069
+# define BUFF_SIZE	1024
 # define ON		1
 # define OFF	0
 # define UNDEF	-1

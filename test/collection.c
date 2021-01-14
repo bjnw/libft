@@ -112,15 +112,32 @@ void	str_dup(void *item, void *s)
 	*(char **)item = ft_strdup(s);
 }
 
+void	char_print(void *c)
+{
+	printf("%c ", *(char *)c);
+}
+
 typedef struct {
 	int		i;
 	char	c;
 }	t_struct;
 
-void	lst_print(void *item)
+void	struct_print(void *item)
 {
 	t_struct *st = item;
 	printf("{ c = '%c', i = %d }\n", st->c, st->i);
+}
+
+void	*fm_struct_i(void *item)
+{
+	t_struct *data = item;
+	return (&data->i);
+}
+
+void	*fm_struct_c(void *item)
+{
+	t_struct *data = item;
+	return (&data->c);
 }
 
 void	lst_fn(void *item)
@@ -185,7 +202,7 @@ int		main(void)
 	}
 	end = clock();
 	// foreach(lst, lst_fn);
-	// foreach(lst, lst_print);
+	// foreach(lst, struct_print);
 	printf("lst: added %ld items:  %fs\n", size(lst), TIME_DIFF(begin, end));
 
 	// begin = clock();
@@ -247,11 +264,21 @@ int		main(void)
 	printf("lst: poped items:  %fs\n", TIME_DIFF(begin, end));
 	printf("size(lst): %ld\n", size(lst));
 
-	foreach(lst, lst_print);
+	foreach(lst, struct_print);
 
 	delete(lst);
 // */
 // /**
+
+	// void *tst = vector(sizeof(t_struct));
+	// for (int i = 0; i <= 'z' - 'a'; i++) {
+	// 	add(tst, &(t_struct){i, 'a' + i});
+	// }
+
+	// foreach(tst, struct_print);
+	// foreach(flatmap(tst, fm_struct_i), int_print);
+	// foreach(flatmap(tst, fm_struct_c), char_print);
+
 	void *ints = split(
 		"42,,1,  2,3,4 , 000  ,4, 5,6   ,7,8  ,9,    10"
 		",,,,  00123,  +456,   -1122  ,7890  ,-_-, zzz,"
@@ -423,6 +450,11 @@ int		main(void)
 	// // foreach(flt, int_print);
 	// printf("flt: inserted to -1..-%ld:  %fs\n", size(flt) / 4, TIME_DIFF(begin, end));
 	// printf("size(flt): %ld\n\n", size(flt));
+
+	begin = clock();
+	val = reduce(chain(flt, ints), max_intp);
+	end = clock();
+	printf("reduce(chain(flt, ints), max_intp): %d\ntime: %f\n\n", *val, TIME_DIFF(begin, end));
 
 	begin = clock();
 	extend(ints, flt);

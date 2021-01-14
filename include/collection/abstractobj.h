@@ -100,6 +100,8 @@ void	*dropwhile(const t_obj *obj, t_pred p);
 void	*zip(const t_obj *a, const t_obj *b);
 void	*map(const t_obj *obj, t_f1s f);
 void	*map_r(const t_obj *obj, const void *ctx, t_f2s_r f);
+void	*flatmap(const t_obj *obj, t_f1 f);
+void	*flatmap_r(const t_obj *obj, const void *ctx, t_f2_r f);
 void	*filter(const t_obj *obj, t_pred p);
 void	*filter_r(const t_obj *obj, const void *ctx, t_pred_r p);
 void	*filternot(const t_obj *obj, t_pred p);
