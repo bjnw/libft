@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "flatmapobj.h"
+#include "flattenobj.h"
 
 void	*flatmap(const t_obj *obj, t_f1 f)
 {
-	return (flatmap_iter(flatmap_next, obj, NULL, f));
+	return (flatten_iter(flatmap_next, obj, f, NULL));
 }

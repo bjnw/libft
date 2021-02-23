@@ -16,16 +16,18 @@
 void	*dropwhile_next(t_obj *itobj)
 {
 	t_itobj	*it;
+	t_state	*state;
 	void	*item;
 
 	it = (void *)itobj;
-	while ((item = next(it->state->inner)))
+	state = it->state;
+	while ((item = next(state->inner)))
 	{
-		if (it->state->pred(item))
+		if (state->pred(item))
 			continue ;
 		it->iterable.next = inner_next;
 		return (item);
 	}
-	it->state->inner = NULL;
+	state->inner = NULL;
 	return (NULL);
 }

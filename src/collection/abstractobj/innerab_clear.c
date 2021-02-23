@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zip_clear.c                                        :+:      :+:    :+:   */
+/*   innerab_clear.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "zipobj.h"
+#include "innerabobj.h"
 
-void	zip_clear(t_obj *itobj)
+void	innerab_clear(t_obj *itobj)
 {
 	t_itobj *it;
 
 	it = (void *)itobj;
-	if (it->state->pair.a)
+	if (it->state->innera)
 		delete(it->state->innera);
-	if (it->state->pair.b)
+	if (it->state->innerb)
 		delete(it->state->innerb);
 }

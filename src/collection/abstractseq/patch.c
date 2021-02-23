@@ -18,7 +18,7 @@ void	patch(t_obj *dst, const t_obj *src, ssize_t from, ssize_t count)
 {
 	t_obj	*it;
 	void	*(*next)(t_obj *);
-	t_zip	*pair;
+	t_pair	*pair;
 	size_t	itemsize;
 
 	it = zip(drop(dst, from), take(src, count));

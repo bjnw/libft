@@ -14,7 +14,7 @@
 
 void	*take(const t_obj *obj, ssize_t n)
 {
-	if (n < 0)
-		n = 0;
-	return (take_iter(take_next, obj, n, NULL));
+	if (n > 0)
+		return (take_iter(take_next, obj, n, NULL));
+	return (null_iter(obj));
 }

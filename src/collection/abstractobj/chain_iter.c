@@ -18,6 +18,7 @@ void	*chain_iter(const t_obj *a, const t_obj *b)
 
 	it = itobj(a, CHAIN_STATE_SIZE);
 	it->iterable.next = chain_next;
+	it->iterable.clear = innerab_clear;
 	it->state->innera = iter(a);
 	it->state->innerb = iter(b);
 	return (it);

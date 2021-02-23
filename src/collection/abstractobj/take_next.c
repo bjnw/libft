@@ -15,15 +15,17 @@
 void	*take_next(t_obj *itobj)
 {
 	t_itobj	*it;
+	t_state	*state;
 	void	*item;
 
 	it = (void *)itobj;
+	state = it->state;
 	item = NULL;
-	if (it->state->count--)
+	if (state->count--)
 	{
-		item = next(it->state->inner);
+		item = next(state->inner);
 		if (!item)
-			it->state->inner = NULL;
+			state->inner = NULL;
 	}
 	return (item);
 }

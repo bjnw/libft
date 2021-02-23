@@ -18,7 +18,7 @@
 struct	s_iterator_state {
 	void	*innera;
 	void	*innerb;
-	t_zip	pair;
+	t_pair	pair;
 };
 
 # define ZIP_STATE_SIZE	sizeof(t_state)
@@ -30,6 +30,7 @@ void	*itobj(const t_obj *obj, size_t statesize);
 
 void	*zip_iter(const t_obj *a, const t_obj *b);
 void	*zip_next(t_obj *itobj);
-void	zip_clear(t_obj *itobj);
+
+void	innerab_clear(t_obj *itobj);
 
 #endif

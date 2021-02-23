@@ -15,16 +15,18 @@
 void	*filter_next(t_obj *itobj)
 {
 	t_itobj	*it;
+	t_state	*state;
 	t_pred	p;
 	void	*item;
 
 	it = (void *)itobj;
-	p = it->state->func;
-	while ((item = next(it->state->inner)))
+	state = it->state;
+	p = state->func;
+	while ((item = next(state->inner)))
 	{
 		if ((*p)(item))
 			return (item);
 	}
-	it->state->inner = NULL;
+	state->inner = NULL;
 	return (NULL);
 }

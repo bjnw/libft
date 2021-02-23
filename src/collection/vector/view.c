@@ -15,6 +15,7 @@
 void	*view(t_obj *vector, ssize_t from, ssize_t count, ssize_t step)
 {
 	t_itobj	*it;
+	t_state	*state;
 	ssize_t	to;
 	ssize_t	n;
 
@@ -27,8 +28,9 @@ void	*view(t_obj *vector, ssize_t from, ssize_t count, ssize_t step)
 	if (to >= n)
 		to = n - 1;
 	it = iter(vector);
-	it->state->ptr = vector_getitem(vector, from);
-	it->state->end = vector_getitem(vector, to);
-	it->state->offset = vector->meta->itemsize * step;
+	state = it->state;
+	state->ptr = vector_getitem(vector, from);
+	state->end = vector_getitem(vector, to);
+	state->offset = vector->meta->itemsize * step;
 	return (it);
 }

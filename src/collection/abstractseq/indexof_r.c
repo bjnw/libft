@@ -13,7 +13,7 @@
 #include "collection/abstractobj.h"
 
 ssize_t	indexof_r(const t_obj *seq, const void *value,
-			const void *ctx, t_cmp_r cmp)
+			t_cmp_r cmp, const void *ctx)
 {
 	ssize_t	index;
 	t_obj	*it;

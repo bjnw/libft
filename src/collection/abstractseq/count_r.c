@@ -12,7 +12,7 @@
 
 #include "collection/abstractobj.h"
 
-ssize_t	count_r(const t_obj *seq, const void *ctx, t_pred_r p)
+ssize_t	count_r(const t_obj *seq, t_pred_r p, const void *ctx)
 {
 	ssize_t	n;
 	t_obj	*it;

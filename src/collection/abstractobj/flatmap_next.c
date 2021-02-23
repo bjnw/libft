@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "flatmapobj.h"
+#include "flattenobj.h"
+#include "libft.h"
 
 void	*flatmap_next(t_obj *itobj)
 {
@@ -18,15 +19,25 @@ void	*flatmap_next(t_obj *itobj)
 	t_state	*state;
 	t_f1	f;
 	void	*item;
+	void	**itp;
 
 	it = (void *)itobj;
 	state = it->state;
-	item = next(state->inner);
-	if (!item)
+	while (true)
 	{
-		state->inner = NULL;
-		return (NULL);
+		item = next(state->innerb);
+		if (item)
+		{
+			f = state->func;
+			ft_memcpy(state->data, item, itobj->meta->itemsize);
+			return ((*f)(state->data));
+		}
+		itp = next(state->innera);
+		if (!itp)
+			break ;
+		state->innerb = iter(*itp);
 	}
-	f = state->func;
-	return ((*f)(item));
+	state->innera = NULL;
+	state->innerb = NULL;
+	return (NULL);
 }

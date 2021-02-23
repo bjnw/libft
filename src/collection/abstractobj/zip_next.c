@@ -15,13 +15,19 @@
 void	*zip_next(t_obj *itobj)
 {
 	t_itobj	*it;
-	t_zip	*pair;
+	t_state	*state;
+	t_pair	*pair;
 
 	it = (void *)itobj;
-	pair = &it->state->pair;
-	pair->a = next(it->state->innera);
-	pair->b = next(it->state->innerb);
+	state = it->state;
+	pair = &state->pair;
+	pair->a = next(state->innera);
+	pair->b = next(state->innerb);
 	if (pair->a && pair->b)
 		return (pair);
+	if (!state->pair.a)
+		state->innera = NULL;
+	if (!state->pair.b)
+		state->innerb = NULL;
 	return (NULL);
 }

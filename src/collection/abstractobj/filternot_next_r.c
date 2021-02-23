@@ -15,16 +15,18 @@
 void	*filternot_next_r(t_obj *itobj)
 {
 	t_itobj		*it;
+	t_state		*state;
 	t_pred_r	p;
 	void		*item;
 
 	it = (void *)itobj;
-	p = it->state->func;
-	while ((item = next(it->state->inner)))
+	state = it->state;
+	p = state->func;
+	while ((item = next(state->inner)))
 	{
-		if (!(*p)(it->state->ctx, item))
+		if (!(*p)(state->ctx, item))
 			return (item);
 	}
-	it->state->inner = NULL;
+	state->inner = NULL;
 	return (NULL);
 }

@@ -18,8 +18,8 @@
 
 struct	s_iterator_state {
 	void		*inner;
-	const void	*ctx;
 	const void	*func;
+	const void	*ctx;
 	void		*data[];
 };
 
@@ -31,7 +31,7 @@ struct	s_iterator_state {
 void	*itobj(const t_obj *obj, size_t statesize);
 
 void	*filtermap_iter(void *(*next)(t_obj *),
-			const t_obj *obj, const void *ctx, void *func);
+			const t_obj *obj, void *func, const void *ctx);
 void	*map_next(t_obj *itobj);
 void	*map_next_r(t_obj *itobj);
 void	*filter_next(t_obj *itobj);

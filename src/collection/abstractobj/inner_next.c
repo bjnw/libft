@@ -15,11 +15,14 @@
 void	*inner_next(t_obj *itobj)
 {
 	t_itobj	*it;
+	t_state	*state;
 	void	*item;
 
 	it = (void *)itobj;
-	item = next(it->state->inner);
-	if (!item)
-		it->state->inner = NULL;
-	return (item);
+	state = it->state;
+	item = next(state->inner);
+	if (item)
+		return (item);
+	state->inner = NULL;
+	return (NULL);
 }

@@ -13,7 +13,7 @@
 #include "collection/abstractobj.h"
 
 void	*find_r(const t_obj *seq, const void *value,
-			const void *ctx, t_cmp_r cmp)
+			t_cmp_r cmp, const void *ctx)
 {
 	t_obj	*it;
 	void	*(*next)(t_obj *);

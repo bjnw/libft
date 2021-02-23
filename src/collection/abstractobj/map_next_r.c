@@ -16,18 +16,18 @@
 void	*map_next_r(t_obj *itobj)
 {
 	t_itobj	*it;
-	t_f2s_r	f;
+	t_state	*state;
+	t_f2_r	f;
 	void	*item;
 
 	it = (void *)itobj;
-	item = next(it->state->inner);
-	if (!item)
+	state = it->state;
+	if ((item = next(state->inner)))
 	{
-		it->state->inner = NULL;
-		return (NULL);
+		f = state->func;
+		ft_memcpy(state->data, item, itobj->meta->itemsize);
+		return ((*f)(state->ctx, state->data));
 	}
-	f = it->state->func;
-	ft_memcpy(it->state->data, item, itobj->meta->itemsize);
-	(*f)(it->state->ctx, it->state->data);
-	return (it->state->data);
+	state->inner = NULL;
+	return (NULL);
 }

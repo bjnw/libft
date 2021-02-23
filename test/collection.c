@@ -52,14 +52,16 @@ bool	int_distinct(void *ctx, const void *item)
 	return (true);
 }
 
-void	int_mul100(void *item)
+void	*int_mul100(void *item)
 {
 	*(int *)item *= 100;
+	return (item);
 }
 
-void	int_mul1693(void *item)
+void	*int_mul1693(void *item)
 {
 	*(int *)item *= 1693;
+	return (item);
 }
 
 void	*int_neg_mul1693(void *item)
@@ -75,7 +77,7 @@ void	int_print(void *item)
 	printf("[%10d]\n", *(int *)item);
 }
 
-void	intzip_print(t_zip *pair)
+void	intzip_print(t_pair *pair)
 {
 	printf("(%d,%d)\n", *(int *)pair->a, *(int *)pair->b);
 }
@@ -150,6 +152,30 @@ void	lst_fn(void *item)
 int		obj_cmp(void *item1, void *item2)
 {
 	return (ft_memcmp(item1, item2, sizeof(t_struct)));
+}
+
+void	void_func(void *item)
+{
+	(void)item;
+}
+
+void	void_r_func(const void *ctx, void *item)
+{
+	(void)ctx;
+	(void)item;
+}
+
+bool	pred_func(const void *item)
+{
+	(void)item;
+	return (true);
+}
+
+bool	pred_r_func(const void *ctx, const void *item)
+{
+	(void)ctx;
+	(void)item;
+	return (true);
 }
 
 // __attribute__((noinline))
@@ -276,8 +302,12 @@ int		main(void)
 	// }
 
 	// foreach(tst, struct_print);
-	// foreach(flatmap(tst, fm_struct_i), int_print);
-	// foreach(flatmap(tst, fm_struct_c), char_print);
+	// foreach(map(tst, fm_struct_i), int_print);
+	// foreach(map(tst, fm_struct_c), char_print);
+	// exit(0);
+
+	// int ez[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+	// foreach(filter(stream(ez, 20, sizeof(int)), int_odd), int_print);
 
 	void *ints = split(
 		"42,,1,  2,3,4 , 000  ,4, 5,6   ,7,8  ,9,    10"
@@ -290,6 +320,15 @@ int		main(void)
 	foreach(ints, int_print);
 	printf("ints = split(\"42,,1,  2,3 ... \", ',', sizeof(int), myatoi)\n");
 	printf("size(ints): %ld\n\n", size(ints));
+
+	// void *nested = vector(sizeof(void *));
+	// add(nested, &(void *){filter(ints, int_even)});
+	// add(nested, &(void *){filternot(ints, int_even)});
+	// add(nested, &(void *){filter(ints, int_even)});
+	// foreach(take(flatmap(nested, int_mul100), 10), int_print);
+	// delete(ints);
+	// delete(nested);
+	// exit(0);
 
     begin = clock();
 	for (ssize_t i = -10; i <= 10; i++) {
@@ -351,7 +390,7 @@ int		main(void)
 		"average time for fold:  %fs\n\n", acc, TIME_DIFF(begin, end));
 
 	begin = clock();
-	foreach(ints, int_mul100);
+	foreach(ints, (t_f1s)int_mul100);
 	end = clock();
 	printf("foreach(ints, int_mul100):  %fs\n"
 		"size(ints): %ld\n\n", TIME_DIFF(begin, end), size(ints));
@@ -544,9 +583,9 @@ int		main(void)
 	del(str, 3);
 	del(str, -4L);
 
-	emplace(str, "~~dummy!\n", str_dup);
-	emplace(str, "Frankly, my dear, I don't give a damn", str_dup);
-	emplace(str, "shake your bytes", str_dup);
+	emplace(str, str_dup, "~~dummy!\n");
+	emplace(str, str_dup, "Frankly, my dear, I don't give a damn");
+	emplace(str, str_dup, "shake your bytes");
 	foreach(str, str_print);
 	printf("str: emplaced 3 items\n");
 	printf("size(str): %ld\n\n", size(str));

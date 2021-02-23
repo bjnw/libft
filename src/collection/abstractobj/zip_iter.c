@@ -18,7 +18,7 @@ void	*zip_iter(const t_obj *a, const t_obj *b)
 
 	it = itobj(a, ZIP_STATE_SIZE);
 	it->iterable.next = zip_next;
-	it->iterable.clear = zip_clear;
+	it->iterable.clear = innerab_clear;
 	it->state->innera = iter(a);
 	it->state->innerb = iter(b);
 	return (it);

@@ -12,7 +12,7 @@
 
 #include "filtermapobj.h"
 
-void	*filternot_r(const t_obj *obj, const void *ctx, t_pred_r p)
+void	*filternot_r(const t_obj *obj, t_pred_r p, const void *ctx)
 {
-	return (filtermap_iter(filternot_next_r, obj, ctx, p));
+	return (filtermap_iter(filternot_next_r, obj, p, ctx));
 }

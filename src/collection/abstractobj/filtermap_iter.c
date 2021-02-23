@@ -13,7 +13,7 @@
 #include "filtermapobj.h"
 
 void	*filtermap_iter(void *(*next)(t_obj *),
-			const t_obj *obj, const void *ctx, void *func)
+			const t_obj *obj, void *func, const void *ctx)
 {
 	t_itobj	*it;
 	size_t	datasize;

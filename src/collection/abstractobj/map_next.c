@@ -17,19 +17,17 @@ void	*map_next(t_obj *itobj)
 {
 	t_itobj	*it;
 	t_state	*state;
-	t_f1s	f;
+	t_f1	f;
 	void	*item;
 
 	it = (void *)itobj;
-	item = next(it->state->inner);
-	if (!item)
-	{
-		it->state->inner = NULL;
-		return (NULL);
-	}
 	state = it->state;
-	f = state->func;
-	ft_memcpy(state->data, item, itobj->meta->itemsize);
-	(*f)(state->data);
-	return (state->data);
+	if ((item = next(state->inner)))
+	{
+		f = state->func;
+		ft_memcpy(state->data, item, itobj->meta->itemsize);
+		return ((*f)(state->data));
+	}
+	state->inner = NULL;
+	return (NULL);
 }

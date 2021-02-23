@@ -15,15 +15,18 @@
 void	*chain_next(t_obj *itobj)
 {
 	t_itobj	*it;
+	t_state	*state;
 	void	*item;
 
 	it = (void *)itobj;
-	if ((item = next(it->state->innera)))
-		return (item);
-	if (!it->state->innerb)
-		return (NULL);
-	it->state->innera = it->state->innerb;
-	it->state->innerb = NULL;
-	item = next(it->state->innera);
-	return (item);
+	state = it->state;
+	while (state->innera)
+	{
+		item = next(state->innera);
+		if (item)
+			return (item);
+		state->innera = state->innerb;
+		state->innerb = NULL;
+	}
+	return (NULL);
 }

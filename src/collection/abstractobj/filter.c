@@ -14,5 +14,5 @@
 
 void	*filter(const t_obj *obj, t_pred p)
 {
-	return (filtermap_iter(filter_next, obj, NULL, p));
+	return (filtermap_iter(filter_next, obj, p, NULL));
 }

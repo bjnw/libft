@@ -14,5 +14,5 @@
 
 void	*filternot(const t_obj *obj, t_pred p)
 {
-	return (filtermap_iter(filternot_next, obj, NULL, p));
+	return (filtermap_iter(filternot_next, obj, p, NULL));
 }

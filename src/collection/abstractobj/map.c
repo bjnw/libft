@@ -12,7 +12,7 @@
 
 #include "filtermapobj.h"
 
-void	*map(const t_obj *obj, t_f1s f)
+void	*map(const t_obj *obj, t_f1 f)
 {
-	return (filtermap_iter(map_next, obj, NULL, f));
+	return (filtermap_iter(map_next, obj, f, NULL));
 }

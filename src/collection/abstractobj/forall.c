@@ -26,5 +26,5 @@ bool	forall(const t_obj *obj, t_pred p)
 			break ;
 	}
 	delete(it);
-	return (!item);
+	return (item == NULL);
 }

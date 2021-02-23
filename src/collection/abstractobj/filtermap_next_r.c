@@ -16,19 +16,21 @@
 void	*filtermap_next_r(t_obj *itobj)
 {
 	t_itobj	*it;
+	t_state	*state;
 	t_f2_r	f;
 	void	*item;
 	size_t	itemsize;
 
 	it = (void *)itobj;
-	f = it->state->func;
+	state = it->state;
+	f = state->func;
 	itemsize = itobj->meta->itemsize;
-	while ((item = next(it->state->inner)))
+	while ((item = next(state->inner)))
 	{
-		ft_memcpy(it->state->data, item, itemsize);
-		if ((*f)(it->state->ctx, it->state->data))
-			return (it->state->data);
+		ft_memcpy(state->data, item, itemsize);
+		if ((item = (*f)(state->ctx, state->data)))
+			return (item);
 	}
-	it->state->inner = NULL;
+	state->inner = NULL;
 	return (NULL);
 }

@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flatmap_iter.c                                     :+:      :+:    :+:   */
+/*   stream.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ourgot <ourgot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 06:49:27 by ourgot            #+#    #+#             */
-/*   Updated: 2020/03/10 06:49:27 by ourgot           ###   ########.fr       */
+/*   Updated: 2020/03/10 10:28:33 by ourgot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "flatmapobj.h"
+#include "vectorobj.h"
 
-void	*flatmap_iter(void *(*next)(t_obj *),
-			const t_obj *obj, const void *ctx, void *func)
+void	*stream(void *data, ssize_t size, size_t itemsize)
 {
-	t_itobj *it;
+	t_obj	tmp;
+	t_itobj	*it;
+	t_meta	*meta;
+	t_state	*state;
 
-	it = itobj(obj, FLATMAP_STATE_SIZE);
-	it->iterable.next = next;
-	it->iterable.clear = inner_clear;
-	it->state->inner = iter(obj);
-	it->state->ctx = ctx;
-	it->state->func = func;
+	vector_init(&tmp);
+	it = itobj(&tmp, VECTOR_META_SIZE + VECTOR_STATE_SIZE);
+	meta = (void *)((char *)&it->state + VECTOR_STATE_SIZE);
+	meta->itemsize = itemsize;
+	meta->size = size;
+	meta->capacity = size;
+	meta->data = data;
+	it->iterable.meta = meta;
+	state = it->state;
+	state->ptr = vector_getitem((void *)it, 0);
+	state->end = vector_getitem((void *)it, meta->size - 1);
+	state->offset = meta->itemsize;
 	return (it);
 }

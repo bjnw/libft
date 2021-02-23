@@ -20,7 +20,7 @@ bool	equals(const t_obj *a, const t_obj *b, t_cmp cmp)
 {
 	t_obj	*it;
 	void	*(*next)(t_obj *);
-	t_zip	*pair;
+	t_pair	*pair;
 
 	if (size(a) != size(b))
 		return (false);

@@ -14,13 +14,17 @@
 
 void	*vector_iter(const t_obj *vector)
 {
-	t_itobj *it;
+	t_meta	*meta;
+	t_itobj	*it;
+	t_state	*state;
 
-	if (vector->meta->size == 0)
+	meta = vector->meta;
+	if (meta->size == 0)
 		return (null_iter(vector));
 	it = itobj(vector, VECTOR_STATE_SIZE);
-	it->state->ptr = vector_getitem(vector, 0);
-	it->state->end = vector_getitem(vector, vector->meta->size - 1);
-	it->state->offset = vector->meta->itemsize;
+	state = it->state;
+	state->ptr = vector_getitem(vector, 0);
+	state->end = vector_getitem(vector, meta->size - 1);
+	state->offset = meta->itemsize;
 	return (it);
 }

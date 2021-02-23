@@ -30,4 +30,6 @@ void	*itobj(const t_obj *obj, size_t statesize);
 void	*chain_iter(const t_obj *a, const t_obj *b);
 void	*chain_next(t_obj *itobj);
 
+void	innerab_clear(t_obj *itobj);
+
 #endif

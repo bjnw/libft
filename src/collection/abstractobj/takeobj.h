@@ -27,6 +27,7 @@ struct	s_iterator_state {
 ** NOTE src/collection/abstractobj/util.c
 */
 void	*itobj(const t_obj *obj, size_t statesize);
+void	*null_iter(const t_obj *obj);
 
 void	*take_iter(void *(*next)(t_obj *),
 			const t_obj *obj, ssize_t n, t_pred p);
