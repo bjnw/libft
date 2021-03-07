@@ -12,13 +12,13 @@
 
 #include <stddef.h>
 
-#include "bigint.h"
+#include "bigintdecl.h"
 
 void	bi_mul(const t_bigint *a, const t_bigint *b, t_bigint *c)
 {
-	size_t size;
-	size_t k;
-	size_t p;
+	size_t	size;
+	size_t	k;
+	size_t	p;
 
 	size = a->size + b->size;
 	k = 0;

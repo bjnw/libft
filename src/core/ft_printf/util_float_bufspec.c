@@ -15,10 +15,10 @@
 #include "libft.h"
 #include "util.h"
 
-void	buf_prefix(char **buf, t_flag *orig, int len)
+void	buf_prefix(char **buf, t_flags *orig, int len)
 {
 	char	prefix[2];
-	t_flag	flags;
+	t_flags	flags;
 
 	if (!get_prefix(prefix, orig, 10))
 		return ;
@@ -36,7 +36,7 @@ void	buf_prefix(char **buf, t_flag *orig, int len)
 	buf_copy(buf, prefix, ft_strlen(prefix), &flags);
 }
 
-void	buf_special(char **buf, char *s, t_flag *flags)
+void	buf_special(char **buf, char *s, t_flags *flags)
 {
 	flags->precision = UNDEF;
 	flags->zero = OFF;

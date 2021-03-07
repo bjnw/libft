@@ -12,7 +12,7 @@
 
 #include <stddef.h>
 
-#include "bigint.h"
+#include "bigintdecl.h"
 
 static int	bi_cmp_magnitude(const t_bigint *a, const t_bigint *b)
 {
@@ -21,9 +21,9 @@ static int	bi_cmp_magnitude(const t_bigint *a, const t_bigint *b)
 	size_t			size;
 
 	if (a->size > b->size)
-		return (BI_GREATER);
+		return (1);
 	if (a->size < b->size)
-		return (BI_LOWER);
+		return (-1);
 	size = a->size;
 	comp_a = a->comps + size;
 	comp_b = b->comps + size;
@@ -32,17 +32,21 @@ static int	bi_cmp_magnitude(const t_bigint *a, const t_bigint *b)
 		comp_a--;
 		comp_b--;
 		if (*comp_a > *comp_b)
-			return (BI_GREATER);
-		if (*comp_a < *comp_b)
-			return (BI_LOWER);
+			return (1);
+		else if (*comp_a < *comp_b)
+			return (-1);
 	}
-	return (BI_EQUAL);
+	return (0);
 }
 
-int			bi_cmp(const t_bigint *a, const t_bigint *b)
+int	bi_cmp(const t_bigint *a, const t_bigint *b)
 {
 	if (a->negative != b->negative)
-		return (a->negative ? BI_LOWER : BI_GREATER);
+	{
+		if (a->negative)
+			return (-1);
+		return (1);
+	}
 	if (a->negative)
 		return (bi_cmp_magnitude(b, a));
 	return (bi_cmp_magnitude(a, b));

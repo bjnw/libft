@@ -12,7 +12,33 @@
 
 #include "vectorobj.h"
 
+void	*vector_impl(void)
+{
+	static const t_impl	impl = {
+		.clone = vector_clone,
+		.fold = vector_fold,
+		.fold_r = vector_fold_r,
+		.foreach = vector_foreach,
+		.foreach_r = vector_foreach_r,
+	};
+
+	return ((void *)&impl);
+}
+
+void	vector_init(t_obj *this)
+{
+	this->type = Vector;
+	this->iter = vector_iter;
+	this->next = vector_next;
+	this->add = vector_add;
+	this->get = vector_get;
+	this->set = vector_set;
+	this->del = vector_del;
+	this->clear = vector_clear;
+	this->impl = vector_impl();
+}
+
 void	*vector(size_t itemsize)
 {
-	return (obj(vector_init, itemsize, VECTOR_META_SIZE));
+	return (object(vector_init, META_SIZE, itemsize));
 }

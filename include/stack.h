@@ -23,7 +23,6 @@ void	stack_push(t_stack *stack, void *item);
 void	*stack_pop(t_stack *stack, void *out);
 void	*stack_peek(const t_stack *stack);
 bool	stack_isempty(const t_stack *stack);
-void	stack_free(t_stack *stack);
-void	stack_destroy(t_stack *stack, void (*dtor)(void *));
+void	stack_destroy(t_stack *stack);
 
 #endif

@@ -14,11 +14,11 @@
 
 #include "vectorobj.h"
 
-void	*unwrap(t_obj *vector)
+void	*unwrap(t_obj *vect)
 {
-	void *data;
+	void	*data;
 
-	data = vector->meta->data;
-	free(vector);
+	data = vect->meta->data;
+	free(vect);
 	return (data);
 }

@@ -15,7 +15,7 @@
 
 t_fifo	*fifo_new(size_t itemsize)
 {
-	t_fifo *fifo;
+	t_fifo	*fifo;
 
 	fifo = xcalloc(1, sizeof(*fifo));
 	fifo->itemsize = itemsize;

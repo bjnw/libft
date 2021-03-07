@@ -12,9 +12,9 @@
 
 #include "vectorobj.h"
 
-void	vector_clear(t_obj *vector)
+void	vector_clear(t_obj *this)
 {
-	if (vector->dtor)
-		foreach(vector, vector->dtor);
-	vector_resize(vector, 0);
+	if (this->free)
+		vector_foreach(this, this->free);
+	vector_resize(this, 0);
 }

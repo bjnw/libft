@@ -13,54 +13,54 @@
 #ifndef VECTOROBJ_H
 # define VECTOROBJ_H
 
+# include <stddef.h>
+
 # include "collection/vector.h"
+# include "collection/internal/object.h"
 
 struct	s_object_meta {
 	size_t	itemsize;
-	ssize_t	size;
-	ssize_t	capacity;
+	long	size;
+	long	capacity;
 	void	*data;
 };
 
 struct	s_iterator_state {
-	void	*ptr;
-	void	*end;
-	size_t	offset;
+	void		*ptr;
+	long		n;
+	ptrdiff_t	offset;
 };
 
-# define VECTOR_META_SIZE	sizeof(t_meta)
-# define VECTOR_STATE_SIZE	sizeof(t_state)
+void	*vector_impl(void);
+void	*vector_iter_impl(void);
 
-/*
-** NOTE src/collection/abstractobj/util.c
-*/
-void	*obj(void (*init)(t_obj *), size_t itemsize, size_t metasize);
-void	*itobj(const t_obj *obj, size_t statesize);
-void	*null_iter(const t_obj *obj);
-
-/*
-** NOTE src/collection/abstractseq/util.c
-*/
-bool	item_exists(const t_obj *seq, ssize_t index);
-
-void	vector_init(t_obj *vector);
-void	*vector_iter(const t_obj *vector);
-void	*vector_next(t_obj *itobj);
-void	*vector_prev(t_obj *itobj);
-void	*vector_add(t_obj *vector, va_list ap);
-void	*vector_get(const t_obj *vector, va_list ap);
-bool	vector_set(t_obj *vector, va_list ap);
-bool	vector_del(t_obj *vector, va_list ap);
-void	*vector_empty(const t_obj *src);
+void	vector_init(t_obj *this);
+void	*vector_iter(const t_obj *this);
+void	*vector_next(t_obj *it);
+void	*vector_add(t_obj *this, va_list ap);
+void	*vector_get(const t_obj *this, va_list ap);
+bool	vector_set(t_obj *this, va_list ap);
+bool	vector_del(t_obj *this, va_list ap);
 void	*vector_clone(const t_obj *src);
-void	vector_clear(t_obj *vector);
+void	vector_clear(t_obj *this);
 
-void	*vector_getitem(const t_obj *vector, ssize_t index);
-void	*vector_setitem(t_obj *vector, ssize_t index, const void *value);
+void	vector_foreach(t_obj *this, t_f1s f);
+void	vector_foreach_r(t_obj *this, t_f2s_r f, const void *arg);
+void	*vector_fold(const t_obj *this, void *init, t_f2 op);
+void	*vector_fold_r(const t_obj *this, void *init,
+			t_f3_r op, const void *arg);
+
+void	vector_iter_foreach(t_obj *it, t_f1s f);
+void	vector_iter_foreach_r(t_obj *it, t_f2s_r f, const void *arg);
+void	*vector_iter_fold(const t_obj *it, void *init, t_f2 op);
+void	*vector_iter_fold_r(const t_obj *it, void *init,
+			t_f3_r op, const void *arg);
+
+void	vector_reserve(t_obj *this, long capacity);
+void	vector_resize(t_obj *this, long newsize);
+void	*vector_getitem(const t_obj *this, long index);
+void	vector_lshitems(t_obj *this, long index);
+void	vector_rshitems(t_obj *this, long index);
 void	vector_copyitems(t_obj *dst, const t_obj *src);
-void	vector_lshitems(t_obj *vector, ssize_t index);
-void	vector_rshitems(t_obj *vector, ssize_t index);
-void	vector_reserve(t_obj *vector, ssize_t capacity);
-void	vector_resize(t_obj *vector, ssize_t newsize);
 
 #endif

@@ -14,19 +14,19 @@
 
 #include "listobj.h"
 
-bool	list_del(t_obj *list, va_list ap)
+bool	list_del(t_obj *this, va_list ap)
 {
-	ssize_t	index;
 	t_node	*node;
+	long	index;
 
-	index = va_arg(ap, ssize_t);
+	index = va_arg(ap, long);
 	if (index < 0)
-		index += list->meta->size;
-	if (!item_exists(list, index))
+		index += this->meta->size;
+	if (!item_exists(this, index))
 		return (false);
-	node = list_popnode(list, index);
-	if (list->dtor)
-		list->dtor(node->data);
+	node = list_popnode(this, index);
+	if (this->free)
+		this->free(node->item);
 	free(node);
 	return (true);
 }

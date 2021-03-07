@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bigint.h"
+#include "bigintdecl.h"
 #include "libft.h"
 
 t_bigint	*bi_clone(const t_bigint *bi)
 {
-	t_bigint *clone;
+	t_bigint	*new;
 
-	clone = ft_memdup(bi, sizeof(t_bigint));
-	return (clone);
+	new = memdup(bi, sizeof(*new));
+	return (new);
 }

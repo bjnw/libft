@@ -14,10 +14,9 @@
 
 #include "util.h"
 
-static uintmax_t
-	get_signed(t_flag *flags, va_list ap)
+static uintmax_t	get_signed(t_flags *flags, va_list ap)
 {
-	intmax_t val;
+	intmax_t	val;
 
 	if (flags->modifier == hh)
 		val = (char)va_arg(ap, int);
@@ -34,11 +33,12 @@ static uintmax_t
 	else
 		val = va_arg(ap, int);
 	flags->negative = val < 0;
-	return (flags->negative ? -val : val);
+	if (flags->negative)
+		return (-val);
+	return (val);
 }
 
-void
-	print_signed(char **buf, char fmt, t_flag *flags, va_list ap)
+void	print_signed(char **buf, char fmt, t_flags *flags, va_list ap)
 {
 	uintmax_t	val;
 	uint8_t		base;

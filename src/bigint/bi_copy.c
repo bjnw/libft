@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bigint.h"
+#include "bigintdecl.h"
 #include "libft.h"
 
 void	bi_copy(t_bigint *dst, const t_bigint *src)

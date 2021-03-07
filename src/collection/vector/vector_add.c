@@ -12,15 +12,14 @@
 
 #include "vectorobj.h"
 
-void	*vector_add(t_obj *vector, va_list ap)
+void	*vector_add(t_obj *this, va_list ap)
 {
-	const void	*value;
-	void		*item;
-	ssize_t		n;
+	void	*dst;
+	long	n;
 
-	n = vector->meta->size;
-	vector_resize(vector, n + 1);
-	value = va_arg(ap, const void *);
-	item = vector_setitem(vector, n, value);
-	return (item);
+	n = this->meta->size;
+	vector_resize(this, n + 1);
+	dst = vector_getitem(this, n);
+	this->put(dst, ap, this->meta);
+	return (dst);
 }

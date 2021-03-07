@@ -12,17 +12,15 @@
 
 #include "vectorobj.h"
 
-void	*vector_next(t_obj *itobj)
+void	*vector_next(t_obj *it)
 {
-	t_itobj	*it;
 	t_state	*state;
 	void	*item;
 
-	it = (void *)itobj;
 	state = it->state;
 	item = state->ptr;
 	state->ptr += state->offset;
-	if (item > state->end)
+	if (state->n-- == 0)
 		return (NULL);
 	return (item);
 }

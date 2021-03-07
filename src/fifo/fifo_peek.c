@@ -14,9 +14,10 @@
 
 void	*fifo_peek(const t_fifo *fifo)
 {
-	t_node *node;
+	t_node	*node;
 
-	if ((node = fifo->first) == NULL)
+	node = fifo->first;
+	if (node == NULL)
 		return (NULL);
-	return (node->data);
+	return (node->item);
 }

@@ -12,16 +12,18 @@
 
 #include "util.h"
 
-void	buf_copy(char **buf, const char *s, int len, t_flag *flags)
+void	buf_copy(char **buf, const char *s, int len, t_flags *flags)
 {
 	char	pad;
 
-	pad = flags->zero ? '0' : ' ';
-	if (flags->precision != UNDEF)
-		len = len < flags->precision ? len : flags->precision;
+	pad = " 0"[flags->zero];
+	if (flags->precision != UNDEF && len > flags->precision)
+		len = flags->precision;
 	if (!flags->left)
+	{
 		while (flags->width-- > len)
 			*((*buf)++) = pad;
+	}
 	flags->width -= len;
 	while (len--)
 		*((*buf)++) = *s++;

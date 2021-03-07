@@ -13,21 +13,28 @@
 #ifndef BITSET_H
 # define BITSET_H
 
-# include <limits.h>
 # include <stddef.h>
-# include <stdint.h>
 
-typedef uintptr_t	t_chunk;
+typedef struct s_bitset	t_bitset;
 
-# define CHUNK_EXP	6
-# define CHUNK_BITS	(sizeof(t_chunk) * CHAR_BIT)
-# define CHUNK_MASK	(CHUNK_BITS - 1)
+t_bitset	*bitset_new(size_t nbits);
+t_bitset	*bitset_wrap(void *data, size_t nbits);
+void		*bitset_unwrap(t_bitset *bset);
+void		bitset_resize(t_bitset *bset, size_t newbits);
+void		bitset_clear(t_bitset *bset);
+void		bitset_destroy(t_bitset *bset);
 
-void	*bitset_new(size_t size);
-int		bitset_get(const void *bitset, size_t n);
-void	bitset_set(void *bitset, size_t n);
-void	bitset_clear(void *bitset, size_t n);
-void	bitset_toggle(void *bitset, size_t n);
-void	bitset_free(void *bitset);
+int			bitset_test(const t_bitset *bset, size_t pos);
+void		bitset_set(t_bitset *bset, size_t pos);
+void		bitset_put(t_bitset *bset, size_t pos, int val);
+void		bitset_reset(t_bitset *bset, size_t pos);
+void		bitset_flip(t_bitset *bset, size_t pos);
+
+void		bitset_not(t_bitset *bset);
+void		bitset_or(t_bitset *lhs, const t_bitset *rhs);
+void		bitset_xor(t_bitset *lhs, const t_bitset *rhs);
+void		bitset_and(t_bitset *lhs, const t_bitset *rhs);
+void		bitset_andnot(t_bitset *lhs, const t_bitset *rhs);
+int			bitset_eq(t_bitset *lhs, const t_bitset *rhs);
 
 #endif

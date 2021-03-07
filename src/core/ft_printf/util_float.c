@@ -24,9 +24,7 @@ t_bigint	*calc_intpart(int64_t power, uint64_t mantissa)
 	return (intpart);
 }
 
-/*
-** TODO exponentiation limits?
-*/
+// TODO exp limits?
 
 t_bigint	*calc_fracpart(int64_t power, uint64_t mantissa)
 {
@@ -44,7 +42,7 @@ t_bigint	*calc_fracpart(int64_t power, uint64_t mantissa)
 	return (fracpart);
 }
 
-void		calc_guts(const t_dbl *dbl, t_guts *guts)
+void	calc_guts(const t_dbl *dbl, t_guts *guts)
 {
 	uint64_t	power;
 	int64_t		exponent;
@@ -72,12 +70,12 @@ void		calc_guts(const t_dbl *dbl, t_guts *guts)
 	}
 }
 
-void		buf_bigint(char **buf, t_bigint *bi)
+void	buf_bigint(char **buf, t_bigint *bi)
 {
 	t_comp	*comp;
-	t_flag	flags;
+	t_flags	flags;
 
-	ft_memset(&flags, 0, sizeof(t_flag));
+	ft_memset(&flags, 0, sizeof(t_flags));
 	flags.width = UNDEF;
 	flags.precision = UNDEF;
 	comp = bi->comps + bi->size - 1;
@@ -87,9 +85,9 @@ void		buf_bigint(char **buf, t_bigint *bi)
 		number(buf, *comp, 10, &flags);
 }
 
-void		buf_guts(char **buf, t_guts *guts, t_flag *flags)
+void	buf_guts(char **buf, t_guts *guts, t_flags *flags)
 {
-	int blen;
+	int	blen;
 
 	if (guts->intpart)
 		buf_bigint(buf, guts->intpart);

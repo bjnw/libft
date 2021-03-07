@@ -13,23 +13,23 @@
 #include "libft.h"
 #include "vectorobj.h"
 
-void	*split(const char *s, int delim, size_t itemsize,
+void	*split(const char *s, const char *delim, size_t itemsize,
 			void (*f)(void *, const char *, const char *))
 {
 	t_obj	*new;
 	void	*it;
 	void	*item;
-	ssize_t	n;
-	char	*s0;
+	long	n;
+	char	*p;
 
-	n = ft_strelems(s, delim);
+	n = strtokens(s, delim);
 	new = vector(itemsize);
 	vector_resize(new, n);
-	it = iter(new);
+	it = vector_iter(new);
 	while ((item = next(it)))
 	{
-		s0 = ft_strjmp(&s, delim);
-		(*f)(item, s0, s);
+		p = strtoken(s, delim, (char **)&s);
+		(*f)(item, p, s);
 	}
 	return (new);
 }

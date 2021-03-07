@@ -13,16 +13,16 @@
 #include "libft.h"
 #include "util.h"
 
-void	print_pointer(char **buf, char fmt, t_flag *flags, va_list ap)
+void	print_pointer(char **buf, char fmt, t_flags *flags, va_list ap)
 {
-	const void *ptr;
+	const void	*ptr;
 
 	(void)fmt;
 	ptr = va_arg(ap, const void *);
 	if (ptr == NULL && flags->precision == 0)
 	{
 		flags->precision = 2;
-		buf_copy(buf, "0x", ft_strlen("0x"), flags);
+		buf_copy(buf, "0x", 2, flags);
 		return ;
 	}
 	flags->alter = ON;

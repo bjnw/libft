@@ -13,20 +13,19 @@
 #include "libft.h"
 #include "vectorobj.h"
 
-void	reverse(t_obj *vector)
+void	reverse(t_obj *vect)
 {
-	size_t	itemsize;
-	ssize_t	low;
-	ssize_t	high;
+	void		*lo;
+	void		*hi;
+	ptrdiff_t	offset;
 
-	itemsize = vector->meta->itemsize;
-	low = 0;
-	high = vector->meta->size - 1;
-	while (low < high)
+	lo = vector_getitem(vect, 0);
+	hi = vector_getitem(vect, vect->meta->size);
+	offset = vect->meta->itemsize;
+	while (lo < hi)
 	{
-		ft_swap(vector_getitem(vector, low), vector_getitem(vector, high),
-			itemsize);
-		low++;
-		high--;
+		hi -= offset;
+		swap(lo, hi, offset);
+		lo += offset;
 	}
 }

@@ -12,24 +12,21 @@
 
 #include "vectorobj.h"
 
-void	*stream(void *data, ssize_t size, size_t itemsize)
+void	*stream(void *data, long size, size_t itemsize)
 {
+	t_obj	*it;
 	t_obj	tmp;
-	t_itobj	*it;
-	t_meta	*meta;
-	t_state	*state;
 
 	vector_init(&tmp);
-	it = itobj(&tmp, VECTOR_META_SIZE + VECTOR_STATE_SIZE);
-	meta = (void *)((char *)&it->state + VECTOR_STATE_SIZE);
-	meta->itemsize = itemsize;
-	meta->size = size;
-	meta->capacity = size;
-	meta->data = data;
-	it->iterable.meta = meta;
-	state = it->state;
-	state->ptr = vector_getitem((void *)it, 0);
-	state->end = vector_getitem((void *)it, meta->size - 1);
-	state->offset = meta->itemsize;
+	it = iterator(vector_next, &tmp, META_SIZE + STATE_SIZE);
+	it->meta = (void *)it->tag;
+	it->meta->itemsize = itemsize;
+	it->meta->size = size;
+	it->meta->capacity = size;
+	it->meta->data = data;
+	it->state = (void *)it->tag + META_SIZE;
+	it->state->ptr = data;
+	it->state->n = size;
+	it->state->offset = itemsize;
 	return (it);
 }

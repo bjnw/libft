@@ -14,19 +14,20 @@
 
 #include "listobj.h"
 
-void	list_clear(t_obj *list)
+void	list_clear(t_obj *this)
 {
 	t_meta	*meta;
 	t_node	*node;
 	t_node	*tmp;
 
-	meta = list->meta;
+	meta = this->meta;
 	node = meta->first;
-	while ((tmp = node))
+	while (node)
 	{
+		tmp = node;
 		node = node->next;
-		if (list->dtor)
-			list->dtor(tmp->data);
+		if (this->free)
+			this->free(tmp->item);
 		free(tmp);
 	}
 	meta->size = 0;

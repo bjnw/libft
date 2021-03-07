@@ -16,10 +16,10 @@
 # include <stddef.h>
 # include <stdint.h>
 
-# define FNV1A32_PRIME			0x01000193u
-# define FNV1A32_OFFSET_BASIS	0x811c9dc5u
+# define FNV1A32_PRIME			0x01000193UL
+# define FNV1A32_OFFSET_BASIS	0x811c9dc5UL
 
-# define FNV1A64_PRIME			0x100000001b3ul
-# define FNV1A64_OFFSET_BASIS	0xcbf29ce484222325ul
+# define FNV1A64_PRIME			0x100000001b3UL
+# define FNV1A64_OFFSET_BASIS	0xcbf29ce484222325UL
 
 #endif

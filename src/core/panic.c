@@ -15,8 +15,12 @@
 
 #include "libft.h"
 
-void	panic(const char *msg)
+void	panic(const char *msg, ...)
 {
-	ft_putendl_fd(msg, STDERR_FILENO);
+	va_list	ap;
+
+	va_start(ap, msg);
+	ft_vdprintf(STDERR_FILENO, msg, ap);
+	va_end(ap);
 	exit(EXIT_FAILURE);
 }

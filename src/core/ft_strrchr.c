@@ -10,35 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-
 #include "libft.h"
+#include "util_bytes.h"
 
-#if defined(MEMWORD)
-
-# include "memword.h"
+#if defined(USEAVX2)
 
 char	*ft_strrchr(const char *s, int c)
 {
-	const char	*p;
-	uintptr_t	word;
+	const char		*p;
+	__m256i			r0;
+	__m256i			r1;
+	unsigned int	mask;
 
 	p = s + ft_strlen(s);
 	if (c == '\0')
 		return ((char *)p);
-	if (s + BYTES_MIN < p)
+	r0 = _mm256_set1_epi8(c);
+	while (s + SIZE <= p)
 	{
-		while ((uintptr_t)p & WMASK)
-			if (*--p == (unsigned char)c)
-				return ((char *)p);
-		word = (unsigned char)c * MASK01;
-		while (!mw_testchar(*(uintptr_t *)(p - WSIZE), word))
-			if ((p -= WSIZE) <= s)
-				return (NULL);
+		p -= SIZE;
+		r1 = _mm256_lddqu_si256((__m256i *)p);
+		r1 = _mm256_cmpeq_epi8(r1, r0);
+		mask = _mm256_movemask_epi8(r1);
+		if (mask != 0)
+			return ((char *)p + __builtin_ctz(mask));
 	}
 	while (s < p)
+	{
 		if (*--p == (unsigned char)c)
 			return ((char *)p);
+	}
 	return (NULL);
 }
 
@@ -46,14 +47,46 @@ char	*ft_strrchr(const char *s, int c)
 
 char	*ft_strrchr(const char *s, int c)
 {
-	const char *p;
+	const char	*p;
+	uintptr_t	w;
 
 	p = s + ft_strlen(s);
 	if (c == '\0')
 		return ((char *)p);
+	if (s + SIZE_MIN < p)
+	{
+		while ((uintptr_t)p & MASK)
+			if (*--p == (unsigned char)c)
+				return ((char *)p);
+		w = (unsigned char)c * MASK01;
+		while (!testchar(*(uintptr_t *)(p - SIZE), w))
+		{
+			p -= SIZE;
+			if (p <= s)
+				return (NULL);
+		}
+	}
 	while (s < p)
 		if (*--p == (unsigned char)c)
 			return ((char *)p);
+	return (NULL);
+}
+
+#endif
+
+#if 0
+
+char	*ft_strrchr(const char *s, int c)
+{
+	const char	*p = s + ft_strlen(s);
+
+	if (c == '\0')
+		return ((char *)p);
+	while (s < p)
+	{
+		if (*--p == (unsigned char)c)
+			return ((char *)p);
+	}
 	return (NULL);
 }
 

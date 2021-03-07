@@ -14,7 +14,7 @@
 
 char	*ft_strlwr(char *s)
 {
-	char *p;
+	char	*p;
 
 	p = s;
 	while (*p)

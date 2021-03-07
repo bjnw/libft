@@ -17,12 +17,13 @@
 
 void	*stack_pop(t_stack *stack, void *out)
 {
-	t_node *node;
+	t_node	*node;
 
-	if ((node = stack->top) == NULL)
+	node = stack->top;
+	if (node == NULL)
 		return (NULL);
 	if (out)
-		ft_memcpy(out, node->data, stack->itemsize);
+		ft_memcpy(out, node->item, stack->itemsize);
 	stack->top = node->next;
 	free(node);
 	return (out);

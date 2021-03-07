@@ -10,34 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-
 #include "libft.h"
 
-/*
-** TODO handle exp
-*/
-
-double	ft_atof(const char *s)
+float	ft_atof(const char *s)
 {
-	double	val;
-	double	frac;
-	bool	neg;
-
-	while (ft_isspace(*s))
-		s++;
-	neg = *s == '+' ^ *s == '-' && *s++ == '-';
-	val = 0.0;
-	while (ft_isdigit(*s))
-		val = val * 10.0 + (*s++ - '0');
-	if (*s == '.')
-	{
-		frac = 0.1;
-		while (ft_isdigit(*++s))
-		{
-			val += (*s - '0') * frac;
-			frac *= 0.1;
-		}
-	}
-	return (neg ? -val : val);
+	return (ft_strtod(s, NULL));
 }

@@ -12,11 +12,11 @@
 
 #include <stddef.h>
 
-#if defined(MEMWORD)
+#if defined(USEWORD)
 
-# include "memword.h"
+# include "util_bytes.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned char		*pd;
 	const unsigned char	*ps;
@@ -27,14 +27,14 @@ void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 		return (dst);
 	pd = dst;
 	ps = src;
-	if (n >= WSIZE && ((uintptr_t)dst & ~WMASK) && ((uintptr_t)src & ~WMASK))
+	if (n >= SIZE && ((uintptr_t)dst & ~MASK) && ((uintptr_t)src & ~MASK))
 	{
 		wd = dst;
 		ws = src;
-		while (n >= WSIZE)
+		while (n >= SIZE)
 		{
 			*wd++ = *ws++;
-			n -= WSIZE;
+			n -= SIZE;
 		}
 		pd = (unsigned char *)wd;
 		ps = (const unsigned char *)ws;
@@ -46,7 +46,7 @@ void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 
 #else
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned char		*pd;
 	const unsigned char	*ps;

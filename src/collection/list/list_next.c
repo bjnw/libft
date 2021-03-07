@@ -12,17 +12,15 @@
 
 #include "listobj.h"
 
-void	*list_next(t_obj *itobj)
+void	*list_next(t_obj *it)
 {
-	t_itobj	*it;
 	t_state	*state;
 	void	*item;
 
-	it = (void *)itobj;
 	state = it->state;
-	if (!state->current)
+	if (state->current == NULL)
 		return (NULL);
-	item = state->current->data;
+	item = state->current->item;
 	state->current = state->current->next;
 	return (item);
 }

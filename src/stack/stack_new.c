@@ -15,7 +15,7 @@
 
 t_stack	*stack_new(size_t itemsize)
 {
-	t_stack *stack;
+	t_stack	*stack;
 
 	stack = xcalloc(1, sizeof(*stack));
 	stack->itemsize = itemsize;

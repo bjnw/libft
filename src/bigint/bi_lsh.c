@@ -13,30 +13,25 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "bigint.h"
+#include "bigintdecl.h"
 #include "libft.h"
 
-/*
-** TODO realloc
-** TODO overflow
-*/
+// TODO realloc
+// TODO overflow
 
 void	bi_lsh(t_bigint *bi, uintmax_t i)
 {
-	t_comp *dst;
-	t_comp *src;
-	size_t size;
+	t_comp	*dst;
+	t_comp	*src;
+	size_t	size;
 
 	if (i >= BI_COMPS)
-		bi_set(bi, 0);
-	else
-	{
-		size = bi->size - 1;
-		dst = bi->comps + size + i;
-		src = bi->comps + size;
-		while (size--)
-			*dst-- = *src--;
-		bi->size += i;
-		ft_memset(bi->comps, 0, sizeof(t_comp) * i);
-	}
+		return (bi_set(bi, 0));
+	size = bi->size - 1;
+	dst = bi->comps + size + i;
+	src = bi->comps + size;
+	while (size--)
+		*dst-- = *src--;
+	bi->size += i;
+	ft_memset(bi->comps, 0, sizeof(t_comp) * i);
 }

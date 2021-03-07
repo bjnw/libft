@@ -14,9 +14,9 @@
 
 void	*vector_clone(const t_obj *src)
 {
-	t_obj *new;
+	t_obj	*new;
 
-	new = vector_empty(src);
+	new = copy(src);
 	vector_resize(new, src->meta->size);
 	vector_copyitems(new, src);
 	return (new);

@@ -12,16 +12,16 @@
 
 #include "listobj.h"
 
-void	*list_get(const t_obj *list, va_list ap)
+void	*list_get(const t_obj *this, va_list ap)
 {
-	ssize_t	index;
 	t_node	*node;
+	long	index;
 
-	index = va_arg(ap, ssize_t);
+	index = va_arg(ap, long);
 	if (index < 0)
-		index += list->meta->size;
-	if (!item_exists(list, index))
+		index += this->meta->size;
+	if (!item_exists(this, index))
 		return (NULL);
-	node = list_getnode(list, index);
-	return (node->data);
+	node = list_getnode(this, index);
+	return (node->item);
 }

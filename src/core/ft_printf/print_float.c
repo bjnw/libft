@@ -15,17 +15,17 @@
 #include "libft.h"
 #include "util.h"
 
-size_t			get_blen(t_bigint *bi)
+int	get_blen(t_bigint *bi)
 {
 	size_t	blen;
 
 	if (bi == NULL)
 		return (0);
 	blen = bi->size - 1;
-	return (bi->negative + blen * BI_COMP_LEN + ft_intlen(bi->comps[blen]));
+	return (bi->negative + blen * BI_COMP_LEN + ilen(bi->comps[blen]));
 }
 
-static t_dbl	get_float(t_flag *flags, va_list ap)
+static t_dbl	get_float(t_flags *flags, va_list ap)
 {
 	t_dbl	dbl;
 
@@ -45,7 +45,7 @@ static t_dbl	get_float(t_flag *flags, va_list ap)
 ** you're so fuckin' special
 */
 
-static bool		float_so_especial(char **buf, t_dbl *dbl, t_flag *flags)
+static bool	float_so_especial(char **buf, t_dbl *dbl, t_flags *flags)
 {
 	char		*s;
 	long double	d;
@@ -57,15 +57,15 @@ static bool		float_so_especial(char **buf, t_dbl *dbl, t_flag *flags)
 		flags->plus = OFF;
 		flags->negative = OFF;
 		flags->space = OFF;
-		s = flags->uppercase ? "NAN" : "nan";
+		s = (char *[]){"nan", "NAN"}[flags->uppercase];
 	}
 	else if (d == 1.0 / 0.0)
-		s = flags->uppercase ? "INF" : "inf";
+		s = (char *[]){"inf", "INF"}[flags->uppercase];
 	else if (d == -1.0 / 0.0)
 	{
-		s = flags->uppercase ? "INF" : "inf";
 		flags->sign = ON;
 		flags->negative = ON;
+		s = (char *[]){"inf", "INF"}[flags->uppercase];
 	}
 	if (s)
 		buf_special(buf, s, flags);
@@ -77,7 +77,7 @@ static bool		float_so_especial(char **buf, t_dbl *dbl, t_flag *flags)
 ** when i'm not around
 */
 
-static void		round_float(char *first, char **last)
+static void	round_float(char *first, char **last)
 {
 	const char	*digits = "1234567890";
 	char		*cur;
@@ -105,7 +105,7 @@ static void		round_float(char *first, char **last)
 	(*last)++;
 }
 
-void			print_float(char **buf, char fmt, t_flag *flags, va_list ap)
+void	print_float(char **buf, char fmt, t_flags *flags, va_list ap)
 {
 	t_dbl	dbl;
 	t_guts	guts;
@@ -120,8 +120,8 @@ void			print_float(char **buf, char fmt, t_flag *flags, va_list ap)
 		return ;
 	ft_memset(&guts, 0, sizeof(t_guts));
 	calc_guts(&dbl, &guts);
-	s = xmalloc(get_blen(guts.intpart) +
-			ft_imax(guts.fracsize, flags->precision) + 1 + 1);
+	s = xmalloc(get_blen(guts.intpart)
+			+ imax(guts.fracsize, flags->precision) + 1 + 1);
 	p = s;
 	buf_guts(&p, &guts, flags);
 	if (guts.fracpart)

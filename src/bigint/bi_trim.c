@@ -12,11 +12,11 @@
 
 #include <stdbool.h>
 
-#include "bigint.h"
+#include "bigintdecl.h"
 
 void	bi_trim(t_bigint *bi)
 {
-	t_comp *comp;
+	t_comp	*comp;
 
 	comp = bi->comps + BI_COMPS - 1;
 	while (*comp == 0 && comp > bi->comps)

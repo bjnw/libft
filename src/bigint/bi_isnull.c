@@ -12,7 +12,7 @@
 
 #include <stdbool.h>
 
-#include "bigint.h"
+#include "bigintdecl.h"
 
 bool	bi_isnull(const t_bigint *bi)
 {

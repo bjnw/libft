@@ -12,26 +12,26 @@
 
 #include <stddef.h>
 
-#if defined(MEMWORD)
+#if defined(USEWORD)
 
-# include "memword.h"
+# include "util_bytes.h"
 
 void	*ft_memset(void *s, int c, size_t n)
 {
 	unsigned char	*p;
-	uintptr_t		word;
+	uintptr_t		w;
 
 	p = s;
-	if (n >= BYTES_MIN)
+	if (n >= SIZE_MIN)
 	{
-		while (((uintptr_t)p & WMASK) && n--)
+		while (((uintptr_t)p & MASK) && n--)
 			*p++ = (unsigned char)c;
-		word = (unsigned char)c * MASK01;
-		while (n >= WSIZE)
+		w = (unsigned char)c * MASK01;
+		while (n >= SIZE)
 		{
-			*(uintptr_t *)p = word;
-			p += WSIZE;
-			n -= WSIZE;
+			*(uintptr_t *)p = w;
+			p += SIZE;
+			n -= SIZE;
 		}
 	}
 	while (n--)
@@ -43,7 +43,7 @@ void	*ft_memset(void *s, int c, size_t n)
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	unsigned char *p;
+	unsigned char	*p;
 
 	p = s;
 	while (n--)

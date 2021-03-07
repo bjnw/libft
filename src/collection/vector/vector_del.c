@@ -12,21 +12,21 @@
 
 #include "vectorobj.h"
 
-bool	vector_del(t_obj *vector, va_list ap)
+bool	vector_del(t_obj *this, va_list ap)
 {
-	ssize_t index;
-	ssize_t n;
+	long	index;
+	long	n;
 
-	index = va_arg(ap, ssize_t);
-	n = vector->meta->size;
+	index = va_arg(ap, long);
+	n = this->meta->size;
 	if (index < 0)
 		index += n;
-	if (!item_exists(vector, index))
+	if (!item_exists(this, index))
 		return (false);
-	if (vector->dtor)
-		vector->dtor(vector_getitem(vector, index));
+	if (this->free)
+		this->free(vector_getitem(this, index));
 	if (index + 1 < n)
-		vector_lshitems(vector, index);
-	vector_resize(vector, n - 1);
+		vector_lshitems(this, index);
+	vector_resize(this, n - 1);
 	return (true);
 }

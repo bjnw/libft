@@ -12,7 +12,7 @@
 
 #include <stddef.h>
 
-#include "bigint.h"
+#include "bigintdecl.h"
 #include "libft.h"
 
 void	bi_add(const t_bigint *a, const t_bigint *b, t_bigint *c)
@@ -27,7 +27,7 @@ void	bi_add(const t_bigint *a, const t_bigint *b, t_bigint *c)
 	comp_b = b->comps;
 	comp_c = c->comps;
 	carry = 0;
-	k = ft_umax(a->size, b->size) + 1;
+	k = umax(a->size, b->size) + 1;
 	while (k--)
 	{
 		*comp_c = carry + *comp_a++ + *comp_b++;

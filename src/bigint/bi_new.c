@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bigint.h"
+#include "bigintdecl.h"
 #include "libft.h"
 
 t_bigint	*bi_new(void)
 {
-	t_bigint *bi;
+	t_bigint	*bi;
 
 	bi = xcalloc(1, sizeof(t_bigint));
 	return (bi);

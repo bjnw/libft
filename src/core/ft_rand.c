@@ -14,14 +14,14 @@
 ** "Linear Congruential Generator"
 */
 
-static unsigned g_seed;
+static unsigned int	g_seed;
 
 void	ft_srand(int seed)
 {
 	g_seed = seed;
 }
 
-int		ft_rand(void)
+int	ft_rand(void)
 {
 	g_seed = 214013 * g_seed + 2531011;
 	return (g_seed >> 16 & 0x7FFF);

@@ -14,9 +14,10 @@
 
 void	*stack_peek(const t_stack *stack)
 {
-	t_node *node;
+	t_node	*node;
 
-	if ((node = stack->top) == NULL)
+	node = stack->top;
+	if (node == NULL)
 		return (NULL);
-	return (node->data);
+	return (node->item);
 }

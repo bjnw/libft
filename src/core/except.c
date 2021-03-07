@@ -10,10 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <unistd.h>
+
 #include "libft.h"
 
-void	except(bool expr, const char *msg)
+void	except(bool expr, const char *msg, ...)
 {
-	if (expr)
-		panic(msg);
+	va_list	ap;
+
+	if (!expr)
+		return ;
+	va_start(ap, msg);
+	ft_vdprintf(STDERR_FILENO, msg, ap);
+	va_end(ap);
+	exit(EXIT_FAILURE);
 }

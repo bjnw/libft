@@ -13,7 +13,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "bigint.h"
+#include "bigintdecl.h"
 
 void	bi_imul(t_bigint *bi, uintmax_t i)
 {
@@ -39,7 +39,7 @@ void	bi_imul(t_bigint *bi, uintmax_t i)
 		bi_set(b0, i);
 		bi_mul(bi, b0, ret);
 		bi_copy(bi, ret);
-		bi_delete(ret);
-		bi_delete(b0);
+		bi_destroy(ret);
+		bi_destroy(b0);
 	}
 }

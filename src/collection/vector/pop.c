@@ -13,23 +13,21 @@
 #include "libft.h"
 #include "vectorobj.h"
 
-void	*pop(t_obj *vector, ssize_t index, void *out)
+void	*pop(t_obj *vect, long index, void *out)
 {
-	t_meta	*meta;
 	void	*item;
-	ssize_t	n;
+	long	n;
 
-	meta = vector->meta;
-	n = meta->size;
+	n = vect->meta->size;
 	if (index < 0)
 		index += n;
-	if (!item_exists(vector, index))
+	if (!item_exists(vect, index))
 		return (NULL);
-	item = vector_getitem(vector, index);
+	item = vector_getitem(vect, index);
 	if (out)
-		ft_memcpy(out, item, meta->itemsize);
+		ft_memcpy(out, item, vect->meta->itemsize);
 	if (index + 1 < n)
-		vector_lshitems(vector, index + 1);
-	vector_resize(vector, n - 1);
+		vector_lshitems(vect, index + 1);
+	vector_resize(vect, n - 1);
 	return (out);
 }

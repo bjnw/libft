@@ -17,13 +17,12 @@
 ** % [parameter] [flags] [width] [.precision] [length] type
 */
 
-void		parse_fmt(const char **fmt, t_flag *flags, va_list ap)
+void	parse_fmt(const char **fmt, t_flags *flags, va_list ap)
 {
-	ft_bzero(flags, sizeof(t_flag));
+	ft_bzero(flags, sizeof(t_flags));
 	flags->width = UNDEF;
 	flags->precision = UNDEF;
-	while (ft_memchr(VALID_FLAGS, **fmt,
-				sizeof(VALID_FLAGS) - 1))
+	while (ft_memchr(VALID_FLAGS, **fmt, FLAGS_LEN))
 	{
 		get_flags(fmt, flags);
 		get_width(fmt, flags, ap);

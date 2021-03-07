@@ -12,8 +12,7 @@
 
 #include "util.h"
 
-static uintmax_t
-	get_unsigned(t_length modifier, va_list ap)
+static uintmax_t	get_unsigned(t_length modifier, va_list ap)
 {
 	if (modifier == hh)
 		return ((unsigned char)va_arg(ap, unsigned));
@@ -30,8 +29,7 @@ static uintmax_t
 	return (va_arg(ap, unsigned));
 }
 
-void
-	print_unsigned(char **buf, char fmt, t_flag *flags, va_list ap)
+void	print_unsigned(char **buf, char fmt, t_flags *flags, va_list ap)
 {
 	uintmax_t	val;
 	int			base;

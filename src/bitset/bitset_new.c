@@ -10,13 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bitset.h"
+#include "bitsetdecl.h"
 #include "libft.h"
 
-void	*bitset_new(size_t size)
+t_bitset	*bitset_new(size_t nbits)
 {
-	void *bitset;
+	t_bitset	*bset;
 
-	bitset = xcalloc(1, ((size >> CHUNK_EXP) + 1) << 3);
-	return (bitset);
+	bset = xmalloc(sizeof(*bset));
+	bset->array = xcalloc(1, ((nbits >> BASE_LOG2) + 1) * CHAR_BIT);
+	bset->nbits = nbits;
+	return (bset);
 }

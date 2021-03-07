@@ -12,36 +12,26 @@
 
 #include <stddef.h>
 
-#if defined(MEMWORD)
+#include "libft.h"
+#include "util_bytes.h"
 
-# include "memword.h"
+#if defined(USEAVX2)
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
 	unsigned char		*pd;
 	const unsigned char	*ps;
-	uintptr_t			*wd;
-	const uintptr_t		*ws;
-	uintptr_t			word;
+	const unsigned char	*ch;
 
 	pd = dst;
 	ps = src;
-	if (n >= BYTES_MIN && ((uintptr_t)pd & ~WMASK) && ((uintptr_t)ps & ~WMASK))
-	{
-		wd = dst;
-		ws = src;
-		word = (unsigned char)c * MASK01;
-		while (n >= WSIZE && !mw_testchar(*ws, word))
-		{
-			*wd++ = *ws++;
-			n -= WSIZE;
-		}
-		pd = (unsigned char *)wd;
-		ps = (const unsigned char *)ws;
-	}
+	ch = ft_memchr(src, c, n);
+	if (ch != NULL)
+		n -= ch - (const unsigned char *)src + 1;
 	while (n--)
-		if ((*pd++ = *ps++) == (unsigned char)c)
-			return (pd);
+		*pd++ = *ps++;
+	if (ch != NULL)
+		return (pd);
 	return (NULL);
 }
 
@@ -51,12 +41,47 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
 	unsigned char		*pd;
 	const unsigned char	*ps;
+	uintptr_t			*wd;
+	const uintptr_t		*ws;
+	uintptr_t			w;
+
+	pd = dst;
+	ps = src;
+	if (n >= SIZE_MIN && ((uintptr_t)pd & ~MASK) && ((uintptr_t)ps & ~MASK))
+	{
+		wd = dst;
+		ws = src;
+		w = (unsigned char)c * MASK01;
+		while (n >= SIZE && !testchar(*ws, w))
+		{
+			*wd++ = *ws++;
+			n -= SIZE;
+		}
+		pd = (unsigned char *)wd;
+		ps = (const unsigned char *)ws;
+	}
+	while (n--)
+		if ((*pd++ = *ps++) == (char)c)
+			return (pd);
+	return (NULL);
+}
+
+#endif
+
+#if 0
+
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
+{
+	unsigned char		*pd;
+	const unsigned char	*ps;
 
 	pd = dst;
 	ps = src;
 	while (n--)
-		if ((*pd++ = *ps++) == (unsigned char)c)
+	{
+		if ((*pd++ = *ps++) == (char)c)
 			return (pd);
+	}
 	return (NULL);
 }
 

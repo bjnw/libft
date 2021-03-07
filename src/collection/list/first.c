@@ -14,9 +14,10 @@
 
 void	*first(const t_obj *list)
 {
-	t_node *node;
+	t_node	*node;
 
-	if ((node = list->meta->first))
-		return (node->data);
-	return (NULL);
+	node = list->meta->first;
+	if (node == NULL)
+		return (NULL);
+	return (node->item);
 }

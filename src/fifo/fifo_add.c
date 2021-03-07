@@ -15,10 +15,10 @@
 
 void	fifo_add(t_fifo *fifo, void *item)
 {
-	t_node *node;
+	t_node	*node;
 
 	node = xcalloc(1, sizeof(*node) + fifo->itemsize);
-	ft_memcpy(node->data, item, fifo->itemsize);
+	ft_memcpy(node->item, item, fifo->itemsize);
 	if (fifo->last == NULL)
 		fifo->first = node;
 	else

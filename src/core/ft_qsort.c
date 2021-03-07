@@ -12,58 +12,86 @@
 
 #include <stddef.h>
 
+#include "common/tuple.h"
 #include "libft.h"
 
-static void	*lomuto(void *left, void *right, size_t size,
-		int (*cmp)(const void *, const void *))
-{
-	void *pivot;
-	void *i;
-	void *j;
+// NOTE approx. MAX_RUN_DEPTH is log(SIZE_MAX) - log(ISORT_THRESHOLD)
+// FIXME too slooow if sorted
 
-	pivot = right;
-	i = left;
-	j = left;
-	while (j < right)
+#define ISORT_THRESHOLD	16
+#define MAX_RUN_DEPTH	42
+
+static void	*hoare(void *lo, void *hi, size_t es,
+				int (*cmp)(const void *, const void *))
+{
+	void	*piv;
+	void	*i;
+	void	*j;
+
+	piv = lo;
+	i = lo - es;
+	j = hi + es;
+	while (true)
 	{
-		if ((*cmp)(pivot, j) > 0)
-		{
-			ft_swap(i, j, size);
-			i += size;
-		}
-		j += size;
+		i += es;
+		while ((*cmp)(i, piv) < 0)
+			i += es;
+		j -= es;
+		while ((*cmp)(j, piv) > 0)
+			j -= es;
+		if (i >= j)
+			return (j);
+		swap(i, j, es);
 	}
-	ft_swap(i, right, size);
-	return (i);
 }
 
-static void	quicksort(void *left, void *right, size_t size,
-		int (*cmp)(const void *, const void *))
+static void	isort(void *lo, void *hi, size_t es,
+				int (*cmp)(const void *, const void *))
 {
-	void *pivot;
+	void	*i;
+	void	*j;
 
-	if (left < right)
+	i = lo + es;
+	while (i <= hi)
 	{
-		pivot = lomuto(left, right, size, cmp);
-		quicksort(left, pivot - size, size, cmp);
-		quicksort(pivot + size, right, size, cmp);
+		j = i;
+		while (j > lo && (*cmp)(j - es, j) > 0)
+		{
+			swap(j - es, j, es);
+			j -= es;
+		}
+		i += es;
 	}
 }
 
 /*
-** @data: pointer to array
-** @len:  amount of elements
-** @size: element's sizeof
-** @cmp:  compare function
+** @a:		array pointer
+** @n:		number of elements
+** @es:		element size
+** @cmp:	compare function
 */
 
-void		ft_qsort(void *data, size_t len, size_t size,
-		int (*cmp)(const void *, const void *))
+void	ft_qsort(void *a, size_t n, size_t es,
+			int (*cmp)(const void *, const void *))
 {
-	void *left;
-	void *right;
+	t_pair	base[MAX_RUN_DEPTH];
+	t_pair	*ctx;
+	void	*piv;
+	void	*lo;
+	void	*hi;
 
-	left = data;
-	right = data + (len - 1) * size;
-	quicksort(left, right, size, cmp);
+	ctx = base;
+	*ctx++ = (t_pair){a, a + (n - 1) * es};
+	while (ctx-- > base)
+	{
+		lo = ctx->a;
+		hi = ctx->b;
+		while ((hi - lo) / es > ISORT_THRESHOLD)
+		{
+			piv = hoare(lo, hi, es, cmp);
+			*ctx++ = (t_pair){piv + es, hi};
+			hi = piv;
+		}
+		isort(lo, hi, es, cmp);
+	}
 }

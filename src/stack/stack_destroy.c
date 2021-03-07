@@ -14,16 +14,16 @@
 
 #include "stackdecl.h"
 
-void	stack_destroy(t_stack *stack, void (*dtor)(void *))
+void	stack_destroy(t_stack *stack)
 {
-	t_node *node;
-	t_node *tmp;
+	t_node	*node;
+	t_node	*tmp;
 
 	node = stack->top;
-	while ((tmp = node))
+	while (node)
 	{
+		tmp = node;
 		node = node->next;
-		(*dtor)(tmp->data);
 		free(tmp);
 	}
 	free(stack);

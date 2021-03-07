@@ -25,7 +25,7 @@ void	*poplast(t_obj *list, void *out)
 		return (NULL);
 	node = list_popnode(list, meta->size - 1);
 	if (out)
-		ft_memcpy(out, node->data, meta->itemsize);
+		ft_memcpy(out, node->item, meta->itemsize);
 	free(node);
 	return (out);
 }

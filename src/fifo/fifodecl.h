@@ -19,7 +19,7 @@ typedef struct s_node	t_node;
 
 struct	s_node {
 	t_node	*next;
-	void	*data[];
+	void	*item[];
 };
 
 struct	s_fifo {

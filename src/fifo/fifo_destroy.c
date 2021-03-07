@@ -14,16 +14,16 @@
 
 #include "fifodecl.h"
 
-void	fifo_destroy(t_fifo *fifo, void (*dtor)(void *))
+void	fifo_destroy(t_fifo *fifo)
 {
-	t_node *node;
-	t_node *tmp;
+	t_node	*node;
+	t_node	*tmp;
 
 	node = fifo->first;
-	while ((tmp = node))
+	while (node)
 	{
+		tmp = node;
 		node = node->next;
-		(*dtor)(tmp->data);
 		free(tmp);
 	}
 	free(fifo);

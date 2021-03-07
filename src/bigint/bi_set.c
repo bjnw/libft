@@ -13,12 +13,12 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "bigint.h"
+#include "bigintdecl.h"
 #include "libft.h"
 
 void	bi_set(t_bigint *bi, uintmax_t i)
 {
-	t_comp *comp;
+	t_comp	*comp;
 
 	ft_memset(bi, 0, sizeof(t_bigint));
 	comp = bi->comps;

@@ -24,7 +24,6 @@ void	*fifo_poll(t_fifo *fifo, void *out);
 void	*fifo_peek(const t_fifo *fifo);
 bool	fifo_isempty(const t_fifo *fifo);
 void	fifo_iter(t_fifo *fifo, void (*func)(void *));
-void	fifo_free(t_fifo *fifo);
-void	fifo_destroy(t_fifo *fifo, void (*dtor)(void *));
+void	fifo_destroy(t_fifo *fifo);
 
 #endif

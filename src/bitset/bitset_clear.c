@@ -10,12 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bitset.h"
+#include "bitsetdecl.h"
+#include "libft.h"
 
-void	bitset_clear(void *bitset, size_t n)
+void	bitset_clear(t_bitset *bset)
 {
-	t_chunk *chunk;
-
-	chunk = (t_chunk *)bitset + (n >> CHUNK_EXP);
-	*chunk &= ~((t_chunk)1 << (n % CHUNK_BITS));
+	ft_memset(bset->array, 0, sizeof(t_base) * bset->size);
 }

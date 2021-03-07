@@ -14,7 +14,7 @@
 
 #include "libft.h"
 
-char		*ft_strtrim(char const *s)
+char	*ft_strtrim(char const *s)
 {
 	const char	*p;
 	char		*dst;
@@ -30,10 +30,8 @@ char		*ft_strtrim(char const *s)
 	while (*p == ' ' || *p == '\t' || *p == '\n')
 		p--;
 	len = p - s + 1;
-	if ((dst = xmalloc(len + 1)))
-	{
-		ft_memcpy(dst, s, len);
-		dst[len] = '\0';
-	}
+	dst = xmalloc(len + 1);
+	ft_memcpy(dst, s, len);
+	dst[len] = '\0';
 	return (dst);
 }

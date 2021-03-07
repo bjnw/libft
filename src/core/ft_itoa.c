@@ -11,32 +11,23 @@
 /* ************************************************************************** */
 
 #include <stdbool.h>
-#include <stdint.h>
 
 #include "libft.h"
 
-char	*ft_itoa(char *s, intmax_t n)
+char	*ft_itoa(char *s, int n)
 {
-	char		*p;
-	uintmax_t	n0;
-	bool		negative;
+	char	*p;
+	bool	neg;
 
 	p = s;
-	if (n == 0)
+	neg = n < 0;
+	while (n != 0)
 	{
-		*p++ = '0';
-		*p = '\0';
-		return (s);
+		*p++ = iabs(n % 10) + '0';
+		n /= 10;
 	}
-	negative = n < 0;
-	n0 = negative ? ft_abs(n) : (uintmax_t)n;
-	while (n0)
-	{
-		*p++ = n0 % 10 + '0';
-		n0 /= 10;
-	}
-	if (negative)
+	if (neg)
 		*p++ = '-';
 	*p = '\0';
-	return (ft_strrev(s));
+	return (strrev(s));
 }

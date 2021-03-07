@@ -17,8 +17,10 @@
 
 size_t	ft_strnlen(const char *s, size_t n)
 {
-	void *eol;
+	void	*eol;
 
 	eol = ft_memchr(s, '\0', n);
-	return (eol ? (uintptr_t)eol - (uintptr_t)s : n);
+	if (eol == NULL)
+		return (n);
+	return ((uintptr_t)eol - (uintptr_t)s);
 }

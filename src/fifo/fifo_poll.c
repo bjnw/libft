@@ -17,13 +17,15 @@
 
 void	*fifo_poll(t_fifo *fifo, void *out)
 {
-	t_node *node;
+	t_node	*node;
 
-	if ((node = fifo->first) == NULL)
+	node = fifo->first;
+	if (node == NULL)
 		return (NULL);
 	if (out)
-		ft_memcpy(out, node->data, fifo->itemsize);
-	if ((fifo->first = node->next) == NULL)
+		ft_memcpy(out, node->item, fifo->itemsize);
+	fifo->first = node->next;
+	if (fifo->first == NULL)
 		fifo->last = NULL;
 	free(node);
 	return (out);

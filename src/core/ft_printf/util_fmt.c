@@ -17,9 +17,9 @@
 ** % [parameter] [flags] [width] [.precision] [length] type
 */
 
-int		get_atoi(const char **fmt)
+int	get_atoi(const char **fmt)
 {
-	int		num;
+	int	num;
 
 	num = 0;
 	while (ft_isdigit(**fmt))
@@ -27,7 +27,7 @@ int		get_atoi(const char **fmt)
 	return (num);
 }
 
-void	get_width(const char **fmt, t_flag *flags, va_list ap)
+void	get_width(const char **fmt, t_flags *flags, va_list ap)
 {
 	if (**fmt == '*')
 	{
@@ -38,7 +38,7 @@ void	get_width(const char **fmt, t_flag *flags, va_list ap)
 		flags->width = get_atoi(fmt);
 }
 
-void	get_precision(const char **fmt, t_flag *flags, va_list ap)
+void	get_precision(const char **fmt, t_flags *flags, va_list ap)
 {
 	while (**fmt == '.')
 	{
@@ -53,9 +53,9 @@ void	get_precision(const char **fmt, t_flag *flags, va_list ap)
 	}
 }
 
-void	get_modifier(const char **fmt, t_flag *flags)
+void	get_modifier(const char **fmt, t_flags *flags)
 {
-	t_length modifier;
+	t_length	modifier;
 
 	modifier = none;
 	if (**fmt == 'h')
@@ -81,7 +81,7 @@ void	get_modifier(const char **fmt, t_flag *flags)
 		flags->modifier = modifier;
 }
 
-void	get_flags(const char **fmt, t_flag *flags)
+void	get_flags(const char **fmt, t_flags *flags)
 {
 	while (true)
 	{

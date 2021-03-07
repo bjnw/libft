@@ -12,14 +12,14 @@
 
 #include "vectorobj.h"
 
-void	*vector_get(const t_obj *vector, va_list ap)
+void	*vector_get(const t_obj *this, va_list ap)
 {
-	ssize_t index;
+	long	index;
 
-	index = va_arg(ap, ssize_t);
+	index = va_arg(ap, long);
 	if (index < 0)
-		index += vector->meta->size;
-	if (item_exists(vector, index))
-		return (vector_getitem(vector, index));
+		index += this->meta->size;
+	if (item_exists(this, index))
+		return (vector_getitem(this, index));
 	return (NULL);
 }

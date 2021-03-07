@@ -12,17 +12,15 @@
 
 #include <stddef.h>
 
-#include "bigint.h"
+#include "bigintdecl.h"
 
-/*
-** FIXME k = bi->size;
-*/
+// FIXME k = bi->size;
 
 void	bi_normalize(t_bigint *bi)
 {
-	t_comp *comp;
-	t_comp carry;
-	size_t k;
+	t_comp	*comp;
+	t_comp	carry;
+	size_t	k;
 
 	comp = bi->comps;
 	k = BI_COMPS;

@@ -12,14 +12,18 @@
 
 #include "vectorobj.h"
 
-void	*emplace(t_obj *vector, t_f2s_r f, void *ctx)
-{
-	void	*item;
-	ssize_t	n;
+/*
+** TODO make it applicable for any collection
+*/
 
-	n = vector->meta->size;
-	vector_resize(vector, n + 1);
-	item = vector_getitem(vector, n);
-	(*f)(ctx, item);
-	return (item);
+void	*emplace(t_obj *vect, t_f2s_r f, const void *arg)
+{
+	void	*dst;
+	long	n;
+
+	n = vect->meta->size;
+	vector_resize(vect, n + 1);
+	dst = vector_getitem(vect, n);
+	(*f)(arg, dst);
+	return (dst);
 }

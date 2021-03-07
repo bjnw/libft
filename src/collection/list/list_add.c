@@ -12,25 +12,21 @@
 
 #include "listobj.h"
 
-void	*list_add(t_obj *list, va_list ap)
+void	*list_add(t_obj *this, va_list ap)
 {
-	t_meta		*meta;
-	const void	*value;
-	t_node		*node;
-	t_node		*last;
+	t_meta	*meta;
+	t_node	*node;
+	t_node	*last;
 
-	meta = list->meta;
-	value = va_arg(ap, const void *);
-	node = list_newnode(list, value);
+	meta = this->meta;
+	node = list_newnode(this, ap);
 	last = meta->last;
+	node->prev = last;
 	if (last)
-	{
 		last->next = node;
-		node->prev = last;
-	}
 	else
 		meta->first = node;
 	meta->last = node;
 	meta->size++;
-	return (node->data);
+	return (node->item);
 }

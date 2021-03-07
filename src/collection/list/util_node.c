@@ -13,51 +13,49 @@
 #include "libft.h"
 #include "listobj.h"
 
-void	*list_newnode(const t_obj *list, const void *value)
+void	*list_newnode(const t_obj *this, va_list ap)
 {
 	t_node	*node;
-	size_t	itemsize;
 
-	itemsize = list->meta->itemsize;
-	node = xcalloc(1, sizeof(*node) + itemsize);
-	ft_memcpy(node->data, value, itemsize);
+	node = xcalloc(1, sizeof(*node) + this->meta->itemsize);
+	this->put(node->item, ap, this->meta);
 	return (node);
 }
 
-void	*list_getnode(const t_obj *list, ssize_t index)
+void	*list_nthforw(t_node *node, long n)
 {
-	t_node	*node;
-	ssize_t	n;
-
-	n = list->meta->size;
-	if (index <= n >> 1)
-	{
-		node = list->meta->first;
-		while (index--)
-			node = node->next;
-	}
-	else
-	{
-		index = n - index;
-		node = list->meta->last;
-		while (--index)
-			node = node->prev;
-	}
+	while (n--)
+		node = node->next;
 	return (node);
 }
 
-void	*list_popnode(t_obj *list, ssize_t index)
+void	*list_nthbackw(t_node *node, long n)
+{
+	while (n--)
+		node = node->prev;
+	return (node);
+}
+
+void	*list_getnode(const t_obj *this, long index)
+{
+	long	n;
+
+	n = this->meta->size;
+	if (index < n / 2)
+		return (list_nthforw(this->meta->first, index));
+	return (list_nthbackw(this->meta->last, n - index));
+}
+
+void	*list_popnode(t_obj *this, long index)
 {
 	t_node	*node;
-	t_meta	*meta;
 
-	meta = list->meta;
-	node = list_getnode(list, index);
+	node = list_getnode(this, index);
 	if (node->prev)
 		node->prev->next = node->next;
 	else
 	{
-		meta->first = node->next;
+		this->meta->first = node->next;
 		if (node->next)
 			node->next->prev = NULL;
 	}
@@ -65,10 +63,10 @@ void	*list_popnode(t_obj *list, ssize_t index)
 		node->next->prev = node->prev;
 	else
 	{
-		meta->last = node->prev;
+		this->meta->last = node->prev;
 		if (node->prev)
 			node->prev->next = NULL;
 	}
-	meta->size--;
+	this->meta->size--;
 	return (node);
 }

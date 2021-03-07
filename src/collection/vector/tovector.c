@@ -14,7 +14,7 @@
 
 void	*tovector(const t_obj *obj)
 {
-	t_obj *new;
+	t_obj	*new;
 
 	new = vector(obj->meta->itemsize);
 	vector_reserve(new, obj->meta->size);

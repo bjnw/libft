@@ -12,7 +12,7 @@
 
 #include "util.h"
 
-void	print_percent(char **buf, char fmt, t_flag *flags, va_list ap)
+void	print_percent(char **buf, char fmt, t_flags *flags, va_list ap)
 {
 	(void)fmt;
 	(void)ap;

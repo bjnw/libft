@@ -12,12 +12,13 @@
 
 #include "vectorobj.h"
 
-void	*wrap(void *data, ssize_t size, size_t itemsize)
+void	*wrap(void *data, long size, size_t itemsize)
 {
-	t_obj *new;
+	t_obj	*new;
 
 	new = vector(itemsize);
 	new->meta->size = size;
+	new->meta->capacity = size;
 	new->meta->data = data;
 	return (new);
 }

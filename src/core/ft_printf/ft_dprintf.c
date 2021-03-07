@@ -15,19 +15,25 @@
 #include "libft.h"
 #include "util.h"
 
-/*
-** TODO g_bufcpy with overflow/flush
-*/
+// TODO bufcpy with overflow/flush
 
-int		ft_dprintf(int fd, const char *fmt, ...)
+int	ft_dprintf(int fd, const char *fmt, ...)
+{
+	va_list	ap;
+	int		ret;
+
+	va_start(ap, fmt);
+	ret = ft_vdprintf(fd, fmt, ap);
+	va_end(ap);
+	return (ret);
+}
+
+int	ft_vdprintf(int fd, const char *fmt, va_list ap)
 {
 	char	buf[BUFF_SIZE];
 	int		ret;
-	va_list	ap;
 
-	va_start(ap, fmt);
 	ret = ft_vsprintf(buf, fmt, ap);
-	va_end(ap);
 	write(fd, buf, ret);
 	return (ret);
 }

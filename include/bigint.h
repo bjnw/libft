@@ -17,35 +17,28 @@
 # include <stddef.h>
 # include <stdint.h>
 
-# define BI_RADIX 1000000000
-# define BI_COMPS 550
+# define BI_COMPS		550
+# define BI_COMP_LEN	9
 
-# define BI_GREATER	1
-# define BI_EQUAL	0
-# define BI_LOWER	-1
+typedef struct s_bigint	t_bigint;
 
-# define BI_COMP_LEN 9
+typedef uintptr_t		t_comp;
 
-typedef uint64_t	t_comp;
-
-typedef struct {
-	t_comp	comps[BI_COMPS];
+struct	s_bigint {
 	size_t	size;
 	bool	negative;
-}	t_bigint;
+	t_comp	comps[BI_COMPS];
+};
 
 t_bigint	*bi_new(void);
 t_bigint	*bi_clone(const t_bigint *bi);
 void		bi_copy(t_bigint *dst, const t_bigint *src);
 void		bi_set(t_bigint *bi, uintmax_t i);
-void		bi_delete(t_bigint *bi);
+void		bi_destroy(t_bigint *bi);
 
 void		bi_print(const t_bigint *bi);
 void		bi_import(t_bigint *bi, const char *s);
 void		bi_export(char *s, const t_bigint *bi);
-
-void		bi_normalize(t_bigint *bi);
-void		bi_trim(t_bigint *bi);
 
 bool		bi_isnull(const t_bigint *bi);
 int			bi_cmp(const t_bigint *a, const t_bigint *b);

@@ -13,13 +13,17 @@
 #ifndef LIST_H
 # define LIST_H
 
-# include "collection/abstractseq.h"
+# include "collection/abstract.h"
+
+typedef t_obj	t_list;
 
 void	*tolist(const t_obj *obj);
 void	*list(size_t itemsize);
-void	*addfirst(t_obj *list, const void *value);
+
+void	*addfirst(t_obj *list, ...);
 void	*popfirst(t_obj *list, void *out);
 void	*poplast(t_obj *list, void *out);
+
 void	*first(const t_obj *list);
 void	*last(const t_obj *list);
 

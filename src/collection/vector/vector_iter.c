@@ -12,19 +12,27 @@
 
 #include "vectorobj.h"
 
-void	*vector_iter(const t_obj *vector)
+void	*vector_iter_impl(void)
 {
-	t_meta	*meta;
-	t_itobj	*it;
-	t_state	*state;
+	static const t_impl	impl = {
+		.clone = generic_clone,
+		.fold = vector_iter_fold,
+		.fold_r = vector_iter_fold_r,
+		.foreach = vector_iter_foreach,
+		.foreach_r = vector_iter_foreach_r,
+	};
 
-	meta = vector->meta;
-	if (meta->size == 0)
-		return (null_iter(vector));
-	it = itobj(vector, VECTOR_STATE_SIZE);
-	state = it->state;
-	state->ptr = vector_getitem(vector, 0);
-	state->end = vector_getitem(vector, meta->size - 1);
-	state->offset = meta->itemsize;
+	return ((void *)&impl);
+}
+
+void	*vector_iter(const t_obj *this)
+{
+	t_obj	*it;
+
+	it = iterator(vector_next, this, STATE_SIZE);
+	it->impl = vector_iter_impl();
+	it->state->ptr = this->meta->data;
+	it->state->n = this->meta->size;
+	it->state->offset = this->meta->itemsize;
 	return (it);
 }

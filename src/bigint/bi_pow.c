@@ -12,16 +12,14 @@
 
 #include <stdlib.h>
 
-#include "bigint.h"
+#include "bigintdecl.h"
 
-/*
-** FIXME wtf
-*/
+// FIXME wtf
 
 void	bi_pow(const t_bigint *a, const t_bigint *b, t_bigint *c)
 {
-	t_bigint *tmp;
-	t_bigint *b0;
+	t_bigint	*tmp;
+	t_bigint	*b0;
 
 	if (bi_isnull(b))
 		bi_set(c, 1);

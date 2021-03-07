@@ -10,24 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "vectorobj.h"
 
-void	*reversed(t_obj *vector)
+void	*reversed(t_obj *vect)
 {
-	t_itobj *it;
+	t_obj	*it;
 
-	if (vector->meta->size == 0)
-	{
-		if (vector->iter)
-			return (null_iter(vector));
-		return (vector);
-	}
-	it = iter(vector);
-	if (it->iterable.next == vector_next)
-		it->iterable.next = vector_prev;
-	else
-		it->iterable.next = vector->next;
-	ft_swap(&it->state->ptr, &it->state->end, sizeof(void *));
+	it = iter(vect);
+	it->state->ptr += (it->state->n - 1) * it->state->offset;
+	it->state->offset *= -1;
 	return (it);
 }

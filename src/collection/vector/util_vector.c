@@ -13,69 +13,31 @@
 #include "libft.h"
 #include "vectorobj.h"
 
-void	vector_copyitems(t_obj *dst, const t_obj *src)
+void	vector_reserve(t_obj *this, long capacity)
 {
 	t_meta	*meta;
-	void	*dst_data;
-	void	*src_data;
 
-	meta = src->meta;
-	dst_data = vector_getitem(dst, 0);
-	src_data = vector_getitem(src, 0);
-	ft_memcpy(dst_data, src_data, meta->size * meta->itemsize);
-}
-
-void	vector_lshitems(t_obj *vector, ssize_t index)
-{
-	t_meta	*meta;
-	void	*dst_data;
-	void	*src_data;
-
-	meta = vector->meta;
-	dst_data = vector_getitem(vector, index);
-	src_data = vector_getitem(vector, index + 1);
-	ft_memcpy(dst_data, src_data, (meta->size - index) * meta->itemsize);
-}
-
-void	vector_rshitems(t_obj *vector, ssize_t index)
-{
-	t_meta	*meta;
-	void	*dst_data;
-	void	*src_data;
-
-	meta = vector->meta;
-	dst_data = vector_getitem(vector, index + 1);
-	src_data = vector_getitem(vector, index);
-	ft_memmove(dst_data, src_data, (meta->size - index) * meta->itemsize);
-}
-
-void	vector_reserve(t_obj *vector, ssize_t capacity)
-{
-	t_meta *meta;
-
-	meta = vector->meta;
+	meta = this->meta;
 	meta->data = xrealloc(
-		meta->data, capacity * meta->itemsize, meta->size * meta->itemsize);
+			meta->data, capacity * meta->itemsize, meta->size * meta->itemsize);
 	meta->capacity = capacity;
 }
 
-void	vector_resize(t_obj *vector, ssize_t newsize)
+void	vector_resize(t_obj *this, long newsize)
 {
 	t_meta	*meta;
-	ssize_t	capacity;
+	long	capacity;
 
-	meta = vector->meta;
+	meta = this->meta;
 	capacity = meta->capacity;
-	if (newsize <= capacity && newsize >= capacity >> 1)
+	if (__builtin_expect(newsize > capacity || newsize < capacity >> 1, 0))
 	{
-		meta->size = newsize;
-		return ;
+		capacity = ((size_t)newsize + (newsize >> 1) + 6) & ~3;
+		if (newsize - meta->size > capacity - newsize)
+			capacity = ((size_t)newsize + 3) & ~3;
+		else if (newsize == 0)
+			capacity = 0;
+		vector_reserve(this, capacity);
 	}
-	capacity = ((size_t)newsize + (newsize >> 1) + 6) & ~3;
-	if (newsize - meta->size > capacity - newsize)
-		capacity = ((size_t)newsize + 3) & ~3;
-	else if (newsize == 0)
-		capacity = 0;
-	vector_reserve(vector, capacity);
 	meta->size = newsize;
 }

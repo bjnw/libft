@@ -13,7 +13,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "bigint.h"
+#include "bigintdecl.h"
 
 void	bi_ipow(t_bigint *bi, uintmax_t i)
 {
@@ -35,7 +35,7 @@ void	bi_ipow(t_bigint *bi, uintmax_t i)
 			bi_set(ret, 0);
 			k++;
 		}
-		bi_delete(ret);
-		bi_delete(b0);
+		bi_destroy(ret);
+		bi_destroy(b0);
 	}
 }

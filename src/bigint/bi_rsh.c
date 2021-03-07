@@ -13,25 +13,22 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "bigint.h"
+#include "bigintdecl.h"
 #include "libft.h"
 
 void	bi_rsh(t_bigint *bi, uintmax_t i)
 {
-	t_comp *dst;
-	t_comp *src;
-	size_t size;
+	t_comp	*dst;
+	t_comp	*src;
+	size_t	n;
 
 	if (i >= bi->size)
-		bi_set(bi, 0);
-	else
-	{
-		dst = bi->comps;
-		src = bi->comps + i;
-		size = bi->size - i;
-		while (size--)
-			*dst++ = *src++;
-		bi->size -= i;
-		ft_memset(dst, 0, sizeof(t_comp) * i);
-	}
+		return (bi_set(bi, 0));
+	dst = bi->comps;
+	src = bi->comps + i;
+	n = bi->size - i;
+	while (n--)
+		*dst++ = *src++;
+	bi->size -= i;
+	ft_memset(dst, 0, sizeof(t_comp) * i);
 }

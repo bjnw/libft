@@ -12,19 +12,19 @@
 
 #include "vectorobj.h"
 
-bool	vector_set(t_obj *vector, va_list ap)
+bool	vector_set(t_obj *this, va_list ap)
 {
-	ssize_t		index;
-	const void	*value;
+	void	*dst;
+	long	index;
 
-	index = va_arg(ap, ssize_t);
+	index = va_arg(ap, long);
 	if (index < 0)
-		index += vector->meta->size;
-	if (!item_exists(vector, index))
+		index += this->meta->size;
+	if (!item_exists(this, index))
 		return (false);
-	if (vector->dtor)
-		vector->dtor(vector_getitem(vector, index));
-	value = va_arg(ap, const void *);
-	vector_setitem(vector, index, value);
+	dst = vector_getitem(this, index);
+	if (this->free)
+		this->free(dst);
+	this->put(dst, ap, this->meta);
 	return (true);
 }

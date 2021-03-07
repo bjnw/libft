@@ -16,7 +16,7 @@
 
 char	*ft_stpcpy(char *dst, const char *src)
 {
-	size_t len;
+	size_t	len;
 
 	len = ft_strlen(src);
 	ft_memcpy(dst, src, len + 1);

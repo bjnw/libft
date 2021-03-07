@@ -16,17 +16,18 @@ CC := clang
 MAKEFLAGS += -j
 
 WFLAGS := -Wall -Wextra
+WFLAGS += -Werror
+# WFLAGS += -Wpedantic
 # WFLAGS += -Wno-cast-function-type
 # WFLAGS += -Wno-bad-function-cast
-# WFLAGS += -Werror
-# WFLAGS += -Wpedantic
+# OFLAGS := -O1 -g -fsanitize=address -fno-omit-frame-pointer
 OFLAGS := -O2 -march=native
+OFLAGS += -finline-functions
 OFLAGS += -ftree-vectorize
+# CFLAGS += -fpic
 # OFLAGS += -flto
 CFLAGS := $(WFLAGS) $(OFLAGS) -MMD -I$(INCLUDE)
-# CFLAGS += -fPIC
-CFLAGS += -fpic
-CFLAGS += -DUSEAVX
+# CFLAGS += -DUSEAVX2
 
 vpath %.c %SRC_DIRS%
 

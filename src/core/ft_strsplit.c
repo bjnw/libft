@@ -16,20 +16,22 @@
 
 char	**ft_strsplit(const char *s, int delim)
 {
-	char	**pv;
-	char	**p;
-	char	*s0;
-	size_t	n;
+	const char	d[] = {delim, '\0'};
+	char		**strv;
+	char		**strp;
+	char		*p;
+	size_t		n;
 
-	if ((n = ft_strelems(s, delim)) == 0)
+	n = strtokens(s, d);
+	if (n == 0)
 		return (NULL);
-	pv = xmalloc((n + 1) * sizeof(char *));
-	p = pv;
+	strv = xmalloc((n + 1) * sizeof(char *));
+	strp = strv;
 	while (n--)
 	{
-		s0 = ft_strjmp(&s, delim);
-		*p++ = ft_strndup(s0, s - s0);
+		p = strtoken(s, d, (char **)&s);
+		*strp++ = ft_strndup(p, s - p);
 	}
-	*p = NULL;
-	return (pv);
+	*strp = NULL;
+	return (strv);
 }

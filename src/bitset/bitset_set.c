@@ -10,12 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bitset.h"
+#include "bitsetdecl.h"
 
-void	bitset_set(void *bitset, size_t n)
+void	bitset_set(t_bitset *bset, size_t pos)
 {
-	t_chunk *chunk;
-
-	chunk = (t_chunk *)bitset + (n >> CHUNK_EXP);
-	*chunk |= (t_chunk)1 << (n % CHUNK_BITS);
+	bset->array[pos >> BASE_LOG2] |= 1UL << (pos & BITMASK);
 }

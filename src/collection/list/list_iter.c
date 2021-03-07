@@ -12,11 +12,11 @@
 
 #include "listobj.h"
 
-void	*list_iter(const t_obj *list)
+void	*list_iter(const t_obj *this)
 {
-	t_itobj *it;
+	t_obj	*it;
 
-	it = itobj(list, LIST_STATE_SIZE);
-	it->state->current = list->meta->first;
+	it = iterator(list_next, this, STATE_SIZE);
+	it->state->current = this->meta->first;
 	return (it);
 }

@@ -13,7 +13,7 @@
 #include "libft.h"
 #include "util.h"
 
-static void	get_itoa_base(char *buf, uintmax_t num, int base, t_flag *flags)
+static void	get_itoa_base(char *buf, uintmax_t num, int base, t_flags *flags)
 {
 	const char	*digits = "0123456789abcdef";
 	char		*p;
@@ -29,10 +29,10 @@ static void	get_itoa_base(char *buf, uintmax_t num, int base, t_flag *flags)
 	*p = '\0';
 	if (flags->uppercase)
 		ft_strupr(buf);
-	ft_strrev(buf);
+	strrev(buf);
 }
 
-int			get_prefix(char *prefix, t_flag *flags, int base)
+int	get_prefix(char *prefix, t_flags *flags, int base)
 {
 	char	*p;
 
@@ -52,22 +52,22 @@ int			get_prefix(char *prefix, t_flag *flags, int base)
 		if (base == 2)
 			*prefix++ = 'b';
 		if (base == 16)
-			*prefix++ = flags->uppercase ? 'X' : 'x';
+			*prefix++ = "xX"[flags->uppercase];
 	}
 	*prefix = '\0';
 	return (prefix - p);
 }
 
-void		memset_leap(char **buf, int pad, int width)
+void	memset_leap(char **buf, int pad, int width)
 {
 	if (width > 0)
 	{
-		ft_memset((void*)*buf, pad, width);
+		ft_memset(*buf, pad, width);
 		*buf += width;
 	}
 }
 
-void		number(char **buf, uintmax_t num, int base, t_flag *flags)
+void	number(char **buf, uintmax_t num, int base, t_flags *flags)
 {
 	char	tmp[65];
 	char	prefix[3];
@@ -79,7 +79,7 @@ void		number(char **buf, uintmax_t num, int base, t_flag *flags)
 	tlen = ft_strlen(tmp);
 	if (base == 8 && flags->precision > tlen)
 		flags->width += plen;
-	flags->precision = ft_imax(tlen, flags->precision);
+	flags->precision = imax(tlen, flags->precision);
 	flags->width -= plen + flags->precision;
 	if (!flags->left && !flags->zero)
 		memset_leap(buf, ' ', flags->width);
@@ -95,19 +95,16 @@ void		number(char **buf, uintmax_t num, int base, t_flag *flags)
 		memset_leap(buf, ' ', flags->width);
 }
 
-void		zero(char **buf, int base, t_flag *flags)
+void	zero(char **buf, int base, t_flags *flags)
 {
 	char	prefix[3];
 	int		plen;
 
 	if (base != 8 || flags->precision)
 		flags->alter = OFF;
-	if (flags->precision == 0)
-	{
-		plen = get_prefix(prefix, flags, base);
-		flags->precision += plen;
-		buf_copy(buf, prefix, plen, flags);
-		return ;
-	}
-	number(buf, 0, base, flags);
+	if (flags->precision != 0)
+		return (number(buf, 0, base, flags));
+	plen = get_prefix(prefix, flags, base);
+	flags->precision += plen;
+	buf_copy(buf, prefix, plen, flags);
 }

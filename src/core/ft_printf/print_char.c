@@ -12,9 +12,9 @@
 
 #include "util.h"
 
-void	print_char(char **buf, char fmt, t_flag *flags, va_list ap)
+void	print_char(char **buf, char fmt, t_flags *flags, va_list ap)
 {
-	char c;
+	char	c;
 
 	(void)fmt;
 	c = va_arg(ap, int);

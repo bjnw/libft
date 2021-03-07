@@ -16,6 +16,10 @@
 # include <stddef.h>
 # include <stdint.h>
 
+/*
+** https://github.com/skeeto/hash-prospector
+*/
+
 uint32_t	lowbias32(uint32_t n);
 uint32_t	triple32(uint32_t n);
 

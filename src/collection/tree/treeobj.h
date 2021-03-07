@@ -13,7 +13,8 @@
 #ifndef TREEOBJ_H
 # define TREEOBJ_H
 
-# include "collection/abstractobj.h"
+# include "collection/abstract.h"
+# include "collection/internal/object.h"
 
 typedef struct s_node	t_node;
 
@@ -25,7 +26,7 @@ struct	s_node {
 
 struct	s_object_meta {
 	size_t	itemsize;
-	ssize_t	size;
+	long	size;
 	t_node	*root;
 	size_t	deletions;
 };

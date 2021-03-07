@@ -14,7 +14,7 @@
 
 uint64_t	fnv1a64s(const char *s)
 {
-	uint64_t ret;
+	uint64_t	ret;
 
 	ret = FNV1A64_OFFSET_BASIS;
 	while (*s)

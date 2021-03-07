@@ -13,9 +13,9 @@
 #include "libft.h"
 #include "util.h"
 
-void	print_string(char **buf, char fmt, t_flag *flags, va_list ap)
+void	print_string(char **buf, char fmt, t_flags *flags, va_list ap)
 {
-	const char *s;
+	const char	*s;
 
 	(void)fmt;
 	s = va_arg(ap, const char *);

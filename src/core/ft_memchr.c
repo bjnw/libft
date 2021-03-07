@@ -12,36 +12,71 @@
 
 #include <stddef.h>
 
-#if defined(MEMWORD)
+#include "util_bytes.h"
 
-# include "memword.h"
+#if defined(USEAVX2)
 
-void	*ft_memchr(const void *s, int c, uintptr_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
 	const unsigned char	*p = s;
-	uintptr_t			word;
+	__m256i				r0;
+	__m256i				r1;
+	unsigned int		mask;
 
-	if (n >= BYTES_MIN)
+	r0 = _mm256_set1_epi8(c);
+	while (n >= SIZE)
 	{
-		while ((uintptr_t)p & WMASK)
-			if (*p++ == (unsigned char)c)
-				return ((void *)--p);
-			else if (n-- == 0)
-				return (NULL);
-		word = (unsigned char)c * MASK01;
-		while (n >= WSIZE && !mw_testchar(*(uintptr_t *)p, word))
-		{
-			p += WSIZE;
-			n -= WSIZE;
-		}
+		r1 = _mm256_lddqu_si256((__m256i *)p);
+		r1 = _mm256_cmpeq_epi8(r1, r0);
+		mask = _mm256_movemask_epi8(r1);
+		if (mask)
+			return ((char *)p + __builtin_ctz(mask));
+		p += SIZE;
+		n -= SIZE;
 	}
 	while (n--)
-		if (*p++ == (unsigned char)c)
-			return ((void *)--p);
+	{
+		if (*p == (unsigned char)c)
+			return ((char *)p);
+		p++;
+	}
 	return (NULL);
 }
 
 #else
+
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	const unsigned char	*p = s;
+	uintptr_t			w;
+
+	if (n >= SIZE_MIN)
+	{
+		while ((uintptr_t)p & MASK)
+		{
+			if (*p++ == (unsigned char)c)
+				return ((void *)--p);
+			else if (n-- == 0)
+				return (NULL);
+		}
+		w = (unsigned char)c * MASK01;
+		while (n >= SIZE && !testchar(*(uintptr_t *)p, w))
+		{
+			p += SIZE;
+			n -= SIZE;
+		}
+	}
+	while (n--)
+	{
+		if (*p++ == (unsigned char)c)
+			return ((void *)--p);
+	}
+	return (NULL);
+}
+
+#endif
+
+#if 0
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {

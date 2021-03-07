@@ -14,9 +14,10 @@
 
 void	*last(const t_obj *list)
 {
-	t_node *node;
+	t_node	*node;
 
-	if ((node = list->meta->last))
-		return (node->data);
-	return (NULL);
+	node = list->meta->last;
+	if (node == NULL)
+		return (NULL);
+	return (node->item);
 }

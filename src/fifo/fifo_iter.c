@@ -14,12 +14,12 @@
 
 void	fifo_iter(t_fifo *fifo, void (*func)(void *))
 {
-	t_node *node;
+	t_node	*node;
 
 	node = fifo->first;
 	while (node)
 	{
-		(*func)(node->data);
+		(*func)(node->item);
 		node = node->next;
 	}
 }

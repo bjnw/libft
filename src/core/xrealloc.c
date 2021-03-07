@@ -15,7 +15,7 @@
 
 void	*xrealloc(void *data, size_t newsize, size_t oldsize)
 {
-	void *newdata;
+	void	*newdata;
 
 	if (newsize == 0)
 	{
@@ -27,7 +27,7 @@ void	*xrealloc(void *data, size_t newsize, size_t oldsize)
 	if (newsize == oldsize)
 		return (data);
 	newdata = xmalloc(newsize);
-	ft_memcpy(newdata, data, ft_umin(newsize, oldsize));
+	ft_memcpy(newdata, data, umin(newsize, oldsize));
 	free(data);
 	return (newdata);
 }

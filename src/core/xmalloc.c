@@ -17,7 +17,7 @@
 
 void	*xmalloc(size_t size)
 {
-	void *data;
+	void	*data;
 
 	if (size == 0)
 		panic("malloc: invalid argument");

@@ -12,19 +12,17 @@
 
 #include <stddef.h>
 
-#include "bigint.h"
+#include "bigintdecl.h"
 #include "libft.h"
 
-/*
-** FIXME unsigned overflow check
-*/
+// FIXME unsigned overflow check
 
 void	bi_sub(const t_bigint *a, const t_bigint *b, t_bigint *c)
 {
-	size_t size;
-	size_t k;
+	size_t	size;
+	size_t	k;
 
-	size = ft_umax(a->size, b->size);
+	size = umax(a->size, b->size);
 	k = 0;
 	while (k < size)
 	{

@@ -14,7 +14,7 @@
 
 uint32_t	fnv1a32s(const char *s)
 {
-	uint32_t ret;
+	uint32_t	ret;
 
 	ret = FNV1A32_OFFSET_BASIS;
 	while (*s)

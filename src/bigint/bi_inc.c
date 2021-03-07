@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bigint.h"
+#include "bigintdecl.h"
 
 void	bi_inc(t_bigint *bi)
 {
